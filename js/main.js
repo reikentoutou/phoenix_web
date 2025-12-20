@@ -17,9 +17,10 @@ document.addEventListener("DOMContentLoaded", () => {
   // ============================================
   const navLinks = document.querySelector(".nav_links"); // 导航链接容器
   const navToggle = document.querySelector(".nav_toggle"); // 移动端菜单切换按钮
-  const heroSection = document.querySelector(".begining"); // Hero 区域
-  const heroMessage = document.querySelector(".begining_message"); // Hero 消息容器
-  // 获取所有需要滚动动画的文字行
+  const heroSection = document.querySelector(".hero-section"); // Hero 区域 (新结构)
+  const oldHeroSection = document.querySelector(".begining"); // 旧 Hero 区域 (兼容性检查)
+  const heroMessage = document.querySelector(".begining_message"); // 旧 Hero 消息容器 (兼容性检查)
+  // 获取所有需要滚动动画的文字行 (旧结构，用于兼容)
   const heroLines = heroMessage
     ? heroMessage.querySelectorAll(".scroll-slide-right, .scroll-slide-left")
     : [];
@@ -96,39 +97,45 @@ document.addEventListener("DOMContentLoaded", () => {
    * 同时更新 CSS 变量用于控制后续内容的堆叠效果
    */
   const updateHeroProgress = () => {
-    if (!heroSection || !heroMessage) return; // 安全检查
-    const heroHeight = Math.max(heroSection.offsetHeight, 1); // Hero 区域高度
+    // 使用新的 hero-section 或旧的 begining 结构
+    const currentHeroSection = heroSection || oldHeroSection;
+    if (!currentHeroSection) return; // 安全检查
+
+    const heroHeight = Math.max(currentHeroSection.offsetHeight, 1); // Hero 区域高度
     // 计算滚动进度，范围 0-1
     const progress = Math.min(Math.max(window.scrollY / heroHeight, 0), 1);
 
-    // 如果滚动很少（接近顶部），重置所有动画效果
-    if (progress <= 0.02) {
-      heroMessage.classList.remove("is-sliding-out");
-      heroLines.forEach((el) => {
-        el.style.transform = "";
-        el.style.opacity = "";
-      });
-      return;
+    // 旧结构的动画逻辑（仅当旧结构存在时执行）
+    if (heroMessage && heroLines.length > 0) {
+      // 如果滚动很少（接近顶部），重置所有动画效果
+      if (progress <= 0.02) {
+        heroMessage.classList.remove("is-sliding-out");
+        heroLines.forEach((el) => {
+          el.style.transform = "";
+          el.style.opacity = "";
+        });
+      } else {
+        // 当进度超过 12% 时，添加滑出效果类
+        heroMessage.classList.toggle("is-sliding-out", progress > 0.12);
+
+        // 为每个文字行应用滚动动画
+        heroLines.forEach((el) => {
+          const dir = el.classList.contains("scroll-slide-left") ? -1 : 1; // 确定滑动方向
+          const offset = Math.min(90 * progress, 90); // 水平偏移量（最大 90px）
+          const yShift = -32 * progress; // 垂直偏移量
+          const scale = 1 - progress * 0.1; // 缩放比例（最小 0.9）
+          // 应用变换：垂直移动、水平移动、缩放
+          el.style.transform = `translateY(${yShift}px) translateX(${
+            dir * offset
+          }px) scale(${scale})`;
+          // 透明度随进度递减
+          el.style.opacity = `${Math.max(0, 1 - progress * 1.4)}`;
+        });
+      }
     }
 
-    // 当进度超过 12% 时，添加滑出效果类
-    heroMessage.classList.toggle("is-sliding-out", progress > 0.12);
-
-    // 为每个文字行应用滚动动画
-    heroLines.forEach((el) => {
-      const dir = el.classList.contains("scroll-slide-left") ? -1 : 1; // 确定滑动方向
-      const offset = Math.min(90 * progress, 90); // 水平偏移量（最大 90px）
-      const yShift = -32 * progress; // 垂直偏移量
-      const scale = 1 - progress * 0.1; // 缩放比例（最小 0.9）
-      // 应用变换：垂直移动、水平移动、缩放
-      el.style.transform = `translateY(${yShift}px) translateX(${
-        dir * offset
-      }px) scale(${scale})`;
-      // 透明度随进度递减
-      el.style.opacity = `${Math.max(0, 1 - progress * 1.4)}`;
-    });
-
     // 计算缓动后的堆叠进度值（使用幂函数实现缓动效果）
+    // 这个变量用于控制环境区域的堆叠效果，需要保留
     const easedStack = Math.pow(progress, 0.75);
     // 更新 CSS 变量，用于控制后续内容的动态堆叠效果
     document.documentElement.style.setProperty(
@@ -156,18 +163,27 @@ document.addEventListener("DOMContentLoaded", () => {
       return;
     }
 
+    // --- New Header Scroll Logic ---
+    // 滚动超过50px变黑
+    if (currentY > 50) {
+      header?.classList.add("scrolled");
+    } else {
+      header?.classList.remove("scrolled");
+    }
+
     // 判断滚动方向
-    // 向下滚动：当前位置大于上次位置 + 10px，且已滚动超过 80px
-    const scrolledDown = currentY > lastScrollY + 10 && currentY > 80;
-    // 向上滚动：当前位置小于上次位置 - 10px
+    const scrolledDown = currentY > lastScrollY + 10;
     const scrolledUp = currentY < lastScrollY - 10;
 
-    // 根据滚动方向显示/隐藏导航栏
-    if (scrolledDown) {
-      header?.classList.add("nav-hidden"); // 向下滚动时隐藏
-    } else if (scrolledUp) {
-      header?.classList.remove("nav-hidden"); // 向上滚动时显示
+    // 导航栏显示逻辑：只有向上滚动时才显示
+    if (scrolledUp) {
+      // 向上滚动：显示导航栏
+      header?.classList.remove("nav-hidden");
+    } else if (scrolledDown && currentY > 50) {
+      // 向下滚动且超过50px：隐藏导航栏
+      header?.classList.add("nav-hidden");
     }
+    // 如果是在页面顶部（currentY <= 50），保持显示（或根据需求决定）
 
     lastScrollY = currentY; // 更新上次滚动位置
     ticking = false; // 重置节流标志
@@ -183,6 +199,13 @@ document.addEventListener("DOMContentLoaded", () => {
   // 初始化：页面加载时执行一次
   updateHeroProgress();
   updateParallax();
+
+  // 初始化导航栏状态：在页面顶部时显示，否则隐藏（等待向上滚动时显示）
+  if (window.scrollY <= 50) {
+    header?.classList.remove("nav-hidden");
+  } else {
+    header?.classList.add("nav-hidden");
+  }
   // 窗口大小改变时重新计算视差效果
   window.addEventListener("resize", updateParallax);
 
@@ -242,6 +265,108 @@ document.addEventListener("DOMContentLoaded", () => {
 
       // 开始观察所有目标元素
       targets.forEach((el) => observer.observe(el));
+    }
+  }
+
+  // ============================================
+  // New Cinematic Hero Animations
+  // ============================================
+  if (typeof gsap !== "undefined" && typeof ScrollTrigger !== "undefined") {
+    gsap.registerPlugin(ScrollTrigger);
+
+    // 1. 背景图视差缩放 (Cinematic Parallax Zoom)
+    const heroImg = document.querySelector(".hero-bg img");
+    const heroSec = document.querySelector(".hero-section");
+
+    if (heroImg && heroSec) {
+      gsap.to(heroImg, {
+        scale: 1.15, // 向下滚动时缓慢放大
+        yPercent: 10, // 同时微微向下移动
+        ease: "none", // 线性动画，保证跟手感
+        scrollTrigger: {
+          trigger: heroSec,
+          start: "top top",
+          end: "bottom top",
+          scrub: true,
+        },
+      });
+    }
+
+    // 2. 文字进场动画 (使用 autoAlpha 防止消失 Bug)
+    const heroTimeline = gsap.timeline({ defaults: { ease: "power3.out" } });
+
+    // 标签淡入
+    const labelBox = document.querySelector(".hero-section .label-box");
+    if (labelBox) {
+      // 先设置初始状态
+      gsap.set(labelBox, { y: 20, autoAlpha: 0 });
+      heroTimeline.to(labelBox, {
+        y: 0,
+        autoAlpha: 1,
+        duration: 1,
+        delay: 0.5,
+      });
+    }
+
+    // 标题文字逐行浮现
+    const titleLines = document.querySelectorAll(".hero-title .line");
+    if (titleLines.length > 0) {
+      // 先设置初始状态
+      gsap.set(titleLines, {
+        y: 100,
+        autoAlpha: 0,
+        skewY: 5,
+      });
+      heroTimeline.to(
+        titleLines,
+        {
+          y: 0,
+          autoAlpha: 1,
+          skewY: 0,
+          duration: 1.4,
+          stagger: 0.15,
+          ease: "power4.out",
+        },
+        "-=0.8"
+      );
+    }
+
+    // 底部内容浮现
+    const bottomRow = document.querySelector(".hero-section .bottom-row");
+    if (bottomRow) {
+      // 先设置初始状态
+      gsap.set(bottomRow, { y: 30, autoAlpha: 0 });
+      heroTimeline.to(bottomRow, { y: 0, autoAlpha: 1, duration: 1 }, "-=0.6");
+    }
+  } else if (typeof gsap !== "undefined") {
+    // Fallback: 如果没有 ScrollTrigger，使用基础 GSAP 动画
+    const heroTimeline = gsap.timeline({ defaults: { ease: "power3.out" } });
+
+    const labelBox = document.querySelector(".hero-section .label-box");
+    if (labelBox) {
+      gsap.set(labelBox, { y: 20, autoAlpha: 0 });
+      heroTimeline.to(labelBox, {
+        y: 0,
+        autoAlpha: 1,
+        duration: 1,
+        delay: 0.5,
+      });
+    }
+
+    const titleLines = document.querySelectorAll(".hero-title .line");
+    if (titleLines.length > 0) {
+      gsap.set(titleLines, { y: 100, autoAlpha: 0, skewY: 5 });
+      heroTimeline.to(
+        titleLines,
+        { y: 0, autoAlpha: 1, skewY: 0, duration: 1.2, stagger: 0.2 },
+        "-=0.8"
+      );
+    }
+
+    const bottomRow = document.querySelector(".hero-section .bottom-row");
+    if (bottomRow) {
+      gsap.set(bottomRow, { y: 30, autoAlpha: 0 });
+      heroTimeline.to(bottomRow, { y: 0, autoAlpha: 1, duration: 1 }, "-=0.8");
     }
   }
 

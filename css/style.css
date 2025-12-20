@@ -5,9 +5,14 @@
 
 body {
   margin: 0;
-  font-family: "Outfit", "Noto Sans JP", system-ui, sans-serif;
+  font-family: "Noto Sans JP", sans-serif;
+  font-weight: 400;
   background-color: #020202;
-  color: #f0f0f0;
+  color: #f5f5f0;
+  line-height: 1.8;
+  letter-spacing: 0.02em;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 @media (max-width: 640px) {
   body {
@@ -15,14 +20,33 @@ body {
   }
 }
 
-h1, h2, h3, h4, h5, h6 {
-  font-weight: 300;
-  letter-spacing: 0.12em;
-  color: #f5f5f5;
+h1, h2, h3, h4, h5, h6,
+.nav-link, .nav_logo,
+.eyebrow, .label-box span,
+.cta-btn, .btn-primary, .store-link,
+.store-number, .pricing-item-price, .pricing-store-number,
+.spec-label, .spec-value,
+.env-tag, .env-sub, .env-tag-vertical, .slide-number, .env-info h3 {
+  font-family: "Clash Display", sans-serif !important;
+  font-weight: 600;
+  letter-spacing: 0.04em;
 }
 
-p, li, span {
-  letter-spacing: 0.08em;
+h1 {
+  font-weight: 700;
+  letter-spacing: 0.04em !important;
+  text-transform: uppercase;
+}
+
+.eyebrow, .nav-link, .spec-label, .env-sub, .store-info-label, .pricing-item-type {
+  letter-spacing: 0.15em !important;
+  text-transform: uppercase;
+  font-weight: 500;
+}
+
+.pricing-item-price, .store-number, .spec-value {
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.02em;
 }
 
 header {
@@ -294,7 +318,7 @@ header.nav-hidden {
   margin: 0;
   letter-spacing: 0.5em;
   font-size: 1.3rem;
-  font-family: "Zen Old Mincho", serif;
+  font-family: "Noto Sans JP", sans-serif;
   font-weight: 400;
 }
 @media (max-width: 640px) {
@@ -401,7 +425,7 @@ header.nav-hidden {
 }
 
 .yusei-magic-regular {
-  font-family: "Yusei Magic", sans-serif;
+  font-family: "Clash Display", sans-serif;
   font-weight: 400;
   font-style: normal;
 }
@@ -409,7 +433,7 @@ header.nav-hidden {
 .main-content-wrapper {
   position: relative;
   z-index: 10;
-  margin-top: 100vh;
+  margin-top: 0 !important;
   background-color: #050505;
   box-shadow: 0 -22px 40px rgba(0, 0, 0, 0.45);
 }
@@ -495,7 +519,7 @@ header.nav-hidden {
   overflow: visible;
 }
 .brand-concept .brand-jp-copy {
-  font-family: "Zen Old Mincho", serif;
+  font-family: "Noto Sans JP", sans-serif;
   font-size: clamp(2.8rem, 5vw, 4rem);
   color: #f6f1e5;
   letter-spacing: 0.22em;
@@ -724,7 +748,7 @@ header.nav-hidden {
   color: #f1f1f1;
 }
 .product.environment .env-tag-vertical {
-  font-family: "Zen Old Mincho", serif;
+  font-family: "Clash Display", sans-serif;
   writing-mode: vertical-rl;
   letter-spacing: 0.18em;
   font-size: 1.6rem;
@@ -1032,7 +1056,7 @@ header.nav-hidden {
   font-weight: 700;
   color: #ff4d4d;
   letter-spacing: 0.1em;
-  font-family: "Outfit", monospace;
+  font-family: "Clash Display", sans-serif;
 }
 .store-card .store-card-header h3 {
   margin: 0;
@@ -1087,7 +1111,7 @@ header.nav-hidden {
   color: rgba(255, 255, 255, 0.6);
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  font-family: "Outfit", sans-serif;
+  font-family: "Clash Display", sans-serif;
 }
 .store-card .store-card-content .store-info-value {
   font-size: 0.95rem;
@@ -1429,7 +1453,7 @@ header.nav-hidden {
   font-weight: 700;
   color: #ff4d4d;
   letter-spacing: 0.1em;
-  font-family: "Outfit", monospace;
+  font-family: "Clash Display", sans-serif;
   min-width: 48px;
   text-shadow: 0 0 20px rgba(255, 77, 77, 0.5);
   position: relative;
@@ -1540,7 +1564,7 @@ header.nav-hidden {
   color: rgba(255, 255, 255, 0.6);
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  font-family: "Outfit", sans-serif;
+  font-family: "Clash Display", sans-serif;
   font-weight: 500;
 }
 .pricing-card .pricing-item .pricing-item-price {
@@ -1548,7 +1572,7 @@ header.nav-hidden {
   color: #ff4d4d;
   font-weight: 700;
   letter-spacing: 0.02em;
-  font-family: "Outfit", monospace;
+  font-family: "Clash Display", sans-serif;
   display: flex;
   align-items: baseline;
   gap: 2px;
@@ -2042,14 +2066,14 @@ header.nav-hidden {
   font-size: 0.9rem;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  font-family: "Outfit", sans-serif;
+  font-family: "Clash Display", sans-serif;
 }
 .spec-card .spec-value {
   color: #f7f7f7;
   font-size: 1rem;
   font-weight: 500;
   letter-spacing: 0.08em;
-  font-family: "Outfit", monospace;
+  font-family: "Clash Display", sans-serif;
 }
 .spec-card .spec-value a {
   color: #ff4d4d;
@@ -2336,4 +2360,305 @@ header.nav-hidden {
     opacity: 0.6;
     transform: translate(-50%, -50%) scale(1.1);
   }
+}
+header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 100;
+  padding: 40px 60px;
+  transition: all 0.4s ease;
+  pointer-events: none;
+  background: transparent;
+  box-sizing: border-box;
+  overflow-x: hidden;
+}
+header.scrolled {
+  padding: 30px 60px;
+  background: rgba(10, 10, 10, 0.4);
+  backdrop-filter: blur(30px) saturate(180%);
+  -webkit-backdrop-filter: blur(30px) saturate(180%);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+header.nav-hidden {
+  transform: translateY(-120%);
+}
+@media (max-width: 768px) {
+  header {
+    padding: 30px 30px;
+  }
+  header.scrolled {
+    padding: 25px 30px;
+  }
+}
+@media (max-width: 480px) {
+  header {
+    padding: 25px 20px;
+  }
+  header.scrolled {
+    padding: 20px 20px;
+  }
+}
+
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  max-width: 1600px;
+  width: 100%;
+  margin: 0 auto;
+  pointer-events: auto;
+  box-sizing: border-box;
+  padding: 20px 40px;
+  gap: 40px;
+  background: transparent;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  border: none;
+  border-radius: 0;
+  box-shadow: none;
+}
+@media (max-width: 1200px) {
+  .navbar {
+    padding: 18px 30px;
+    gap: 30px;
+  }
+}
+@media (max-width: 768px) {
+  .navbar {
+    padding: 16px 24px;
+    gap: 20px;
+  }
+}
+@media (max-width: 480px) {
+  .navbar {
+    padding: 14px 20px;
+    gap: 15px;
+  }
+}
+.navbar .nav_logo {
+  flex-shrink: 0;
+}
+.navbar .nav_logo img {
+  height: 60px;
+  width: auto;
+  display: block;
+  transition: transform 0.3s ease;
+}
+@media (max-width: 768px) {
+  .navbar .nav_logo img {
+    height: 50px;
+  }
+}
+@media (max-width: 480px) {
+  .navbar .nav_logo img {
+    height: 40px;
+  }
+}
+.navbar .nav_logo img:hover {
+  transform: scale(1.05);
+}
+.navbar .nav_links {
+  display: flex;
+  gap: 40px;
+  flex-wrap: nowrap;
+  align-items: center;
+  flex-shrink: 1;
+  min-width: 0;
+}
+@media (max-width: 1200px) {
+  .navbar .nav_links {
+    gap: 30px;
+  }
+}
+@media (max-width: 1100px) {
+  .navbar .nav_links {
+    gap: 25px;
+  }
+}
+@media (max-width: 960px) {
+  .navbar .nav_links {
+    display: none;
+  }
+}
+.navbar .nav_links .nav-link {
+  font-family: "Clash Display", sans-serif;
+  font-size: 1rem;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  color: rgba(255, 255, 255, 0.85);
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  white-space: nowrap;
+  flex-shrink: 0;
+  padding: 8px 12px;
+  border-radius: 8px;
+  position: relative;
+}
+@media (max-width: 1200px) {
+  .navbar .nav_links .nav-link {
+    font-size: 0.9rem;
+    padding: 6px 10px;
+  }
+}
+.navbar .nav_links .nav-link:hover, .navbar .nav_links .nav-link.active {
+  color: #fff;
+  background: rgba(255, 255, 255, 0.1);
+}
+.navbar .nav_links .nav-link.active::after {
+  content: "";
+  position: absolute;
+  bottom: 4px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60%;
+  height: 2px;
+  background: rgba(255, 255, 255, 0.6);
+  border-radius: 2px;
+}
+
+.hero-section {
+  height: 100vh;
+  width: 100%;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  background: #000;
+  overflow: hidden;
+}
+.hero-section .hero-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+.hero-section .hero-bg img {
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+  opacity: 0.6;
+  will-change: transform;
+}
+.hero-section .hero-bg::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at center, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.8) 100%);
+}
+.hero-section .hero-content {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  padding: 0 8vw;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+.hero-section .hero-content .label-box {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 24px;
+  opacity: 1;
+  visibility: visible;
+}
+.hero-section .hero-content .label-box .line {
+  width: 40px;
+  height: 1px;
+  background: #ff4d4d;
+}
+.hero-section .hero-content .label-box span {
+  font-family: "Clash Display", sans-serif;
+  font-size: 0.9rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.8);
+}
+.hero-section .hero-content h1.hero-title {
+  font-family: "Clash Display", sans-serif;
+  font-weight: 700;
+  text-transform: uppercase;
+  line-height: 0.85;
+  margin-bottom: 40px;
+  display: flex;
+  flex-direction: column;
+}
+.hero-section .hero-content h1.hero-title .line {
+  display: block;
+  font-size: clamp(4rem, 11vw, 10rem);
+  transition: none;
+  opacity: 1;
+  visibility: visible;
+}
+.hero-section .hero-content h1.hero-title .solid {
+  color: #fff;
+  z-index: 2;
+}
+.hero-section .hero-content h1.hero-title .outline {
+  color: transparent;
+  -webkit-text-stroke: 1px rgba(255, 255, 255, 0.8);
+  z-index: 1;
+  transition: color 0.3s ease;
+}
+.hero-section .hero-content h1.hero-title .outline:hover {
+  color: rgba(255, 255, 255, 0.1);
+}
+.hero-section .hero-content h1.hero-title .shift-1 {
+  margin-left: 1.5em;
+  margin-top: -0.1em;
+}
+.hero-section .hero-content h1.hero-title .shift-2 {
+  margin-left: 3em;
+  margin-top: -0.1em;
+}
+@media (max-width: 768px) {
+  .hero-section .hero-content h1.hero-title .line {
+    font-size: 15vw;
+    line-height: 0.9;
+  }
+  .hero-section .hero-content h1.hero-title .shift-1 {
+    margin-left: 0.5em;
+  }
+  .hero-section .hero-content h1.hero-title .shift-2 {
+    margin-left: 1em;
+  }
+}
+.hero-section .hero-content .bottom-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 60px;
+  margin-top: 20px;
+  opacity: 1;
+  visibility: visible;
+}
+@media (max-width: 768px) {
+  .hero-section .hero-content .bottom-row {
+    flex-direction: column;
+    gap: 30px;
+  }
+}
+.hero-section .hero-content .bottom-row p {
+  max-width: 400px;
+  font-size: 1rem;
+  line-height: 1.7;
+  color: rgba(255, 255, 255, 0.6);
+  font-family: "Noto Sans JP", sans-serif;
+}
+.hero-section .hero-content .bottom-row .cta-btn {
+  padding: 18px 40px;
+  background: #fff;
+  color: #000;
+  font-family: "Clash Display", sans-serif;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-decoration: none;
+  border-radius: 4px;
+  transition: transform 0.3s ease, background 0.3s ease;
+}
+.hero-section .hero-content .bottom-row .cta-btn:hover {
+  transform: translateY(-5px);
+  background: rgba(255, 255, 255, 0.9);
 }/*# sourceMappingURL=style.css.map */

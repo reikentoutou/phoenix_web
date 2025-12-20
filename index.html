@@ -18,13 +18,17 @@
     <!-- Google Fonts 预连接，优化字体加载性能 -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preconnect" href="https://api.fontshare.com" crossorigin />
 
-    <!-- 引入 Google Fonts 字体库 -->
-    <!-- Outfit: 现代无衬线字体，用于英文内容 -->
-    <!-- Yusei Magic: 日文装饰字体，用于特殊标题 -->
-    <!-- Zen Old Mincho: 日文衬线字体，用于品牌文案 -->
+    <!-- 引入字体库 -->
+    <!-- Clash Display: 锋利未来感字体，用于英文/数字/标题 -->
     <link
-      href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&family=Yusei+Magic&family=Zen+Old+Mincho:wght@400;700&display=swap"
+      href="https://api.fontshare.com/v2/css?f[]=clash-display@400,500,600,700&display=swap"
+      rel="stylesheet"
+    />
+    <!-- Noto Sans JP: 日文正文字体 -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&display=swap"
       rel="stylesheet"
     />
 
@@ -43,18 +47,10 @@
     <!-- 页头导航区域 -->
     <!-- ============================================ -->
     <header>
-      <!-- 主导航栏 -->
       <nav class="navbar" aria-label="Primary">
-        <!-- Logo 链接，点击返回首页 -->
         <a class="nav_logo" href="#home" aria-label="PHOENIX">
-          <img
-            src="images/index/phoenixesports-logo.webp"
-            alt="PHOENIX logo"
-          />
+          <img src="images/index/phoenixesports-logo.webp" alt="PHOENIX logo" />
         </a>
-
-        <!-- 移动端导航菜单切换按钮 -->
-        <!-- 仅在移动设备上显示，用于展开/收起导航菜单 -->
         <button
           class="nav_toggle"
           aria-label="Toggle navigation"
@@ -62,9 +58,6 @@
         >
           <span class="nav_toggle_bar" aria-hidden="true"></span>
         </button>
-
-        <!-- 导航链接容器 -->
-        <!-- 包含所有主要页面的导航链接 -->
         <div class="nav_links" id="primary-nav">
           <a href="#home" class="nav-link active">home</a>
           <a href="store.html" class="nav-link">store</a>
@@ -82,26 +75,34 @@
       <!-- ============================================ -->
       <!-- 首页 Hero 区域（欢迎区域） -->
       <!-- ============================================ -->
-      <!-- 全屏固定背景，包含欢迎文字和品牌信息 -->
-      <section class="begining" id="home">
-        <!-- 欢迎消息容器 -->
-        <!-- 使用 Yusei Magic 字体显示日文标题 -->
-        <div class="begining_message yusei-magic-regular">
-          <!-- 欢迎语：ようこそ（欢迎） -->
-          <!-- 使用滚动动画效果，从右侧滑入 -->
-          <p class="greet heading-13 reveal-on-scroll scroll-slide-right">
-            ようこそ
-          </p>
-          <!-- 品牌名称：ESPORTS CAFE PHOENIX -->
-          <!-- 使用滚动动画效果，从左侧滑入 -->
-          <p class="midline reveal-on-scroll heading-13 scroll-slide-left">
-            ESPORTS CAFE PHOENIX
-          </p>
-          <!-- 品牌标语：アナタのサードプレイスへ（前往您的第三空间） -->
-          <!-- 使用滚动动画效果，从右侧滑入 -->
-          <p class="subline reveal-on-scroll heading-13 scroll-slide-right">
-            アナタのサードプレイスへ
-          </p>
+      <section class="hero-section" id="home">
+        <div class="hero-bg">
+          <img
+            src="images/index/begin_background.webp"
+            alt="Background"
+            class="parallax-img"
+            loading="eager"
+          />
+        </div>
+        <div class="hero-content">
+          <div class="label-box fade-up">
+            <div class="line"></div>
+            <span>Tokyo • Esports • Future</span>
+          </div>
+          <h1 class="hero-title">
+            <span class="line solid reveal-text">PHOENIX</span>
+
+            <span class="line outline shift-1 reveal-text">ESPORTS</span>
+
+            <span class="line outline shift-2 reveal-text">CAFE</span>
+          </h1>
+          <div class="bottom-row fade-up">
+            <p>
+              東京の中心で、最先端のeスポーツ体験を。<br />
+              プロ仕様の環境が、あなたの潜在能力を覚醒させる。
+            </p>
+            <a href="store.html" class="cta-btn">EXPLORE SPACE</a>
+          </div>
         </div>
       </section>
 
@@ -109,7 +110,7 @@
         <section class="brand-concept reveal-on-scroll fade-in-up">
           <div class="brand-inner">
             <div class="brand-vertical">
-              <span class="brand-jp-copy">日常を、置き去りにせよ。</span>
+              <span class="brand-jp-copy">ここでは、あなたの世界である。</span>
             </div>
             <div class="brand-en">
               <p class="brand-en-eyebrow">THE SANCTUARY FOR PRO GAMERS</p>
@@ -560,7 +561,12 @@
       </div>
     </main>
 
+    <!-- GSAP 动画库 -->
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+    <!-- Swiper 轮播图库 -->
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <!-- 主脚本 -->
     <script src="js/main.js?v=20241212"></script>
   </body>
 </html>
