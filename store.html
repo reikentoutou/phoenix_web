@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<!-- 
+  PHOENIX eSPORTS CAFE 店铺信息页面
+  展示两个店铺的详细信息和特色
+-->
+<html lang="ja">
+  <head>
+    <!-- 字符编码设置 -->
+    <meta charset="UTF-8" />
+
+    <!-- 响应式视口设置，确保移动端正确显示 -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- 页面标题 -->
+    <title>店舗情報 - eSports_cafe_PHOENIX</title>
+
+    <!-- Google Fonts 预连接，优化字体加载性能 -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+    <!-- 引入 Google Fonts 字体库 -->
+    <!-- Outfit: 现代无衬线字体，用于英文内容 -->
+    <!-- Yusei Magic: 日文装饰字体，用于特殊标题 -->
+    <!-- Zen Old Mincho: 日文衬线字体，用于品牌文案 -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&family=Yusei+Magic&family=Zen+Old+Mincho:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Swiper 轮播图库的 CSS 文件 -->
+    <!-- 用于实现店内环境图片的轮播展示效果 -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"
+    />
+
+    <!-- 主样式表，带版本号防止缓存 -->
+    <link rel="stylesheet" href="css/style.css?v=20241212" />
+  </head>
+  <body>
+    <!-- ============================================ -->
+    <!-- 页头导航区域 -->
+    <!-- ============================================ -->
+    <header>
+      <!-- 主导航栏 -->
+      <nav class="navbar" aria-label="Primary">
+        <!-- Logo 链接，点击返回首页 -->
+        <a class="nav_logo" href="index.html" aria-label="PHOENIX">
+          <img
+            src="images/begining/phoenixesports-logo.png"
+            alt="PHOENIX logo"
+          />
+        </a>
+
+        <!-- 移动端导航菜单切换按钮 -->
+        <!-- 仅在移动设备上显示，用于展开/收起导航菜单 -->
+        <button
+          class="nav_toggle"
+          aria-label="Toggle navigation"
+          aria-expanded="false"
+        >
+          <span class="nav_toggle_bar" aria-hidden="true"></span>
+        </button>
+
+        <!-- 导航链接容器 -->
+        <!-- 包含所有主要页面的导航链接 -->
+        <div class="nav_links" id="primary-nav">
+          <a href="index.html" class="nav-link">home</a>
+          <a href="store.html" class="nav-link active">store</a>
+          <a href="#calendar" class="nav-link">calendar</a>
+          <a href="#use" class="nav-link">初めてご利用の方</a>
+          <a href="#event" class="nav-link">オトクな情報</a>
+          <a href="#contact" class="nav-link">contact</a>
+        </div>
+      </nav>
+    </header>
+
+    <!-- ============================================ -->
+    <!-- 主要内容区域 -->
+    <!-- ============================================ -->
+    <main>
+      <!-- ============================================ -->
+      <!-- 店铺信息区域 (Store Section) -->
+      <!-- ============================================ -->
+      <!-- 展示两个店铺的详细信息和特色 -->
+      <section class="stores section-fade" id="stores">
+        <!-- 店铺区域标题 -->
+        <div class="stores-header reveal-on-scroll fade-in-up">
+          <p class="eyebrow">OUR STORES</p>
+          <h2>店舗情報</h2>
+          <div class="lead">
+            <p>
+              池袋に2店舗展開。どちらも駅近で24時間営業、最新設備を完備しています。
+            </p>
+            <p>
+              高性能PC、快適な個室、禁煙・喫煙エリアを完備し、eスポーツプレイヤーから作業利用まで幅広いニーズに対応。
+            </p>
+            <p>
+              最新のゲーミング環境と快適な空間で、最高の体験をお届けします。
+            </p>
+          </div>
+        </div>
+
+        <!-- 店铺卡片容器 -->
+        <div class="stores-grid">
+          <!-- 1号店卡片 -->
+          <article class="store-card reveal-on-scroll">
+            <div class="store-card-header">
+              <span class="store-number">01</span>
+              <h3>eSPORTS CAFE PHOENIX 池袋1号店</h3>
+            </div>
+            <div class="store-card-image">
+              <img
+                src="images/No_1_store/图片_20241024214913.jpg"
+                alt="1号店外観"
+                loading="lazy"
+              />
+            </div>
+            <div class="store-card-content">
+              <div class="store-info">
+                <div class="store-info-item">
+                  <span class="store-info-label">営業時間</span>
+                  <span class="store-info-value">24時間営業 / 無休</span>
+                </div>
+                <div class="store-info-item">
+                  <span class="store-info-label">住所</span>
+                  <span class="store-info-value">東京都豊島区池袋</span>
+                </div>
+                <div class="store-info-item">
+                  <span class="store-info-label">アクセス</span>
+                  <span class="store-info-value">JR池袋駅より徒歩5分</span>
+                </div>
+                <div class="store-info-item">
+                  <span class="store-info-label">特徴</span>
+                  <span class="store-info-value"
+                    >ホール全域禁煙、多彩な個室完備</span
+                  >
+                </div>
+              </div>
+              <div class="store-card-actions">
+                <a href="index.html#access" class="store-link"
+                  >アクセス詳細を見る</a
+                >
+                <a href="index.html#environment" class="store-link"
+                  >店内環境を見る</a
+                >
+              </div>
+            </div>
+          </article>
+
+          <!-- 2号店卡片 -->
+          <article class="store-card reveal-on-scroll">
+            <div class="store-card-header">
+              <span class="store-number">02</span>
+              <h3>eSPORTS CAFE PHOENIX 池袋2号店</h3>
+            </div>
+            <div class="store-card-image">
+              <img
+                src="images/store_2_exterior.jpg"
+                alt="2号店外観"
+                loading="lazy"
+              />
+            </div>
+            <div class="store-card-content">
+              <div class="store-info">
+                <div class="store-info-item">
+                  <span class="store-info-label">営業時間</span>
+                  <span class="store-info-value">24時間営業 / 無休</span>
+                </div>
+                <div class="store-info-item">
+                  <span class="store-info-label">住所</span>
+                  <span class="store-info-value"
+                    >東京都豊島区東池袋1-22-304</span
+                  >
+                </div>
+                <div class="store-info-item">
+                  <span class="store-info-label">アクセス</span>
+                  <span class="store-info-value">JR池袋駅より徒歩5分</span>
+                </div>
+                <div class="store-info-item">
+                  <span class="store-info-label">特徴</span>
+                  <span class="store-info-value"
+                    >赤を基調とした最新設備、禁煙ホール</span
+                  >
+                </div>
+              </div>
+              <div class="store-card-actions">
+                <a href="index.html#access" class="store-link"
+                  >アクセス詳細を見る</a
+                >
+                <a href="index.html#environment" class="store-link"
+                  >店内環境を見る</a
+                >
+              </div>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <!-- ============================================ -->
+      <!-- 区域料金信息 (Pricing Section) -->
+      <!-- ============================================ -->
+      <section class="pricing section-fade" id="pricing">
+        <!-- 料金区域标题 -->
+        <div class="pricing-header reveal-on-scroll fade-in-up">
+          <p class="eyebrow">PRICING</p>
+          <h2>料金表</h2>
+          <p class="lead">
+            各店舗・各エリアの料金をご確認ください。すべて税込価格です。
+          </p>
+        </div>
+
+        <!-- 料金卡片容器 -->
+        <div class="pricing-grid">
+          <!-- 1号店料金卡片 -->
+          <article class="pricing-card reveal-on-scroll">
+            <div class="liquid-wave"></div>
+            <div class="pricing-card-header">
+              <span class="pricing-store-number">01</span>
+              <h3>池袋1号店 料金</h3>
+            </div>
+            <div class="pricing-card-content">
+              <div class="pricing-list">
+                <!-- 3Fオープン席 -->
+                <div class="pricing-item">
+                  <div class="pricing-item-info">
+                    <span class="pricing-item-name">3Fオープン席</span>
+                    <span class="pricing-item-type">オープン席</span>
+                  </div>
+                  <span class="pricing-item-price"
+                    >¥499<span class="pricing-unit">/h</span></span
+                  >
+                </div>
+                <!-- 4Fオープン席 -->
+                <div class="pricing-item">
+                  <div class="pricing-item-info">
+                    <span class="pricing-item-name">4Fオープン席</span>
+                    <span class="pricing-item-type">オープン席</span>
+                  </div>
+                  <span class="pricing-item-price"
+                    >¥399<span class="pricing-unit">/h</span></span
+                  >
+                </div>
+                <!-- 5F 四人個室 -->
+                <div class="pricing-item">
+                  <div class="pricing-item-info">
+                    <span class="pricing-item-name">5F 四人ブース</span>
+                    <span class="pricing-item-type">ブース</span>
+                  </div>
+                  <span class="pricing-item-price"
+                    >¥499<span class="pricing-unit">/h</span></span
+                  >
+                </div>
+                <!-- 三人個室 -->
+                <div class="pricing-item">
+                  <div class="pricing-item-info">
+                    <span class="pricing-item-name">5F三人ブース</span>
+                    <span class="pricing-item-type">ブース</span>
+                  </div>
+                  <span class="pricing-item-price"
+                    >¥599<span class="pricing-unit">/h</span></span
+                  >
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <!-- 2号店料金卡片 -->
+          <article class="pricing-card reveal-on-scroll">
+            <div class="liquid-wave"></div>
+            <div class="pricing-card-header">
+              <span class="pricing-store-number">02</span>
+              <h3>池袋2号店 料金</h3>
+            </div>
+            <div class="pricing-card-content">
+              <div class="pricing-list">
+                <!-- オープン席 -->
+                <div class="pricing-item">
+                  <div class="pricing-item-info">
+                    <span class="pricing-item-name">オープン席</span>
+                    <span class="pricing-item-type">オープン席</span>
+                  </div>
+                  <span class="pricing-item-price"
+                    >¥550<span class="pricing-unit">/h</span></span
+                  >
+                </div>
+                <!-- 禁烟类包厢（5080） -->
+                <div class="pricing-item">
+                  <div class="pricing-item-info">
+                    <span class="pricing-item-name">禁煙多種個室（5080）</span>
+                    <span class="pricing-item-type">禁煙個室</span>
+                  </div>
+                  <span class="pricing-item-price"
+                    >¥750<span class="pricing-unit">/h</span></span
+                  >
+                </div>
+                <!-- 吸烟沙发椅包厢 -->
+                <div class="pricing-item">
+                  <div class="pricing-item-info">
+                    <span class="pricing-item-name">喫煙ソファー二人個室</span>
+                    <span class="pricing-item-type">喫煙個室</span>
+                  </div>
+                  <span class="pricing-item-price"
+                    >¥750<span class="pricing-unit">/h</span></span
+                  >
+                </div>
+                <!-- 吸烟包厢（5070） -->
+                <div class="pricing-item">
+                  <div class="pricing-item-info">
+                    <span class="pricing-item-name">喫煙多種個室（5070）</span>
+                    <span class="pricing-item-type">喫煙個室</span>
+                  </div>
+                  <span class="pricing-item-price"
+                    >¥750<span class="pricing-unit">/h</span></span
+                  >
+                </div>
+              </div>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <!-- ============================================ -->
+      <!-- 设备配置介绍 (Equipment Specs Section) -->
+      <!-- ============================================ -->
+      <section class="equipment-specs section-fade" id="equipment-specs">
+        <!-- 配置区域标题 -->
+        <div class="equipment-header reveal-on-scroll fade-in-up">
+          <p class="eyebrow">EQUIPMENT</p>
+          <h2>設備詳細</h2>
+          <div class="lead">
+            <p>
+              最高のゲーミング体験を提供する、プロ仕様の最新設備をご用意しています。
+            </p>
+            <p>
+              すべての席で統一された高性能な環境で、快適にプレイ・作業をお楽しみください。
+            </p>
+          </div>
+        </div>
+
+        <!-- 设备展示网格 -->
+        <div class="equipment-grid">
+          <!-- 显示器 -->
+          <article class="equipment-card reveal-on-scroll">
+            <div class="equipment-image">
+              <img
+                src="images/specs/zowie_monitor.jpg"
+                alt="Zowie ゲーミングモニター"
+                loading="lazy"
+              />
+            </div>
+            <div class="equipment-content">
+              <h3>Zowie ゲーミングモニター</h3>
+              <p class="equipment-description">
+                プロeスポーツ選手も使用する高品質モニター。低遅延・高リフレッシュレートで、最高のゲーミング体験を実現します。
+              </p>
+            </div>
+          </article>
+
+          <!-- 鼠标 -->
+          <article class="equipment-card reveal-on-scroll">
+            <div class="equipment-image">
+              <img
+                src="images/61r-cOXR-eL._AC_UF894,1000_QL80_.jpg"
+                alt="ワイヤレスゲーミングマウス"
+                loading="lazy"
+              />
+            </div>
+            <div class="equipment-content">
+              <h3>ワイヤレスゲーミングマウス</h3>
+              <p class="equipment-description">
+                高精度センサーと低遅延接続を備えたワイヤレスマウス。長時間のプレイでも快適な操作性を提供します。
+              </p>
+            </div>
+          </article>
+
+          <!-- 耳机 -->
+          <article class="equipment-card reveal-on-scroll">
+            <div class="equipment-image">
+              <img
+                src="images/specs/hyperx_cloud_3.jpg"
+                alt="HyperX Cloud III ヘッドセット"
+                loading="lazy"
+              />
+            </div>
+            <div class="equipment-content">
+              <h3>HyperX Cloud III ヘッドセット</h3>
+              <p class="equipment-description">
+                レジェンダリーなサウンド品質と快適な装着感。メモリーフォームと53mmドライバーで、没入感のある音響体験を。
+              </p>
+            </div>
+          </article>
+
+          <!-- 椅子 -->
+          <article class="equipment-card reveal-on-scroll">
+            <div class="equipment-image">
+              <img
+                src="images/specs/chair.jpg"
+                alt="DXRACER ゲーミングチェア"
+                loading="lazy"
+              />
+            </div>
+            <div class="equipment-content">
+              <h3>DXRACER ゲーミングチェア</h3>
+              <p class="equipment-description">
+                長時間のプレイや作業でも疲れにくい、エルゴノミクス設計のゲーミングチェア。快適な姿勢をサポートします。
+              </p>
+            </div>
+          </article>
+
+          <!-- 鼠标垫 -->
+          <article class="equipment-card reveal-on-scroll">
+            <div class="equipment-image">
+              <img
+                src="images/specs/mousepad.jpg"
+                alt="高品質ゲーミングマウスパッド"
+                loading="lazy"
+              />
+            </div>
+            <div class="equipment-content">
+              <h3>高品質ゲーミングマウスパッド</h3>
+              <p class="equipment-description">
+                滑らかな操作感と正確なトラッキングを実現する、プロ仕様のマウスパッド。あらゆるゲームタイトルに対応。
+              </p>
+            </div>
+          </article>
+        </div>
+      </section>
+    </main>
+
+    <!-- ============================================ -->
+    <!-- 页脚区域 -->
+    <!-- ============================================ -->
+    <footer class="footer section-fade">
+      <div class="footer-inner">
+        <div class="footer-brand">
+          <img
+            src="images/begining/phoenixesports-logo.png"
+            alt="PHOENIX logo"
+          />
+          <p class="footer-copy">ESPORTS CAFE PHOENIX</p>
+          <p class="footer-hours">24時間営業 / 無休</p>
+        </div>
+        <div class="footer-nav">
+          <p class="footer-title">SITE</p>
+          <a href="index.html">Home</a>
+          <a href="store.html">Stores</a>
+          <a href="index.html#environment">Environment</a>
+          <a href="index.html#specs">Specs</a>
+          <a href="index.html#access">Access</a>
+        </div>
+        <div class="footer-contact">
+          <p class="footer-title">CONTACT</p>
+          <p class="footer-text">TEL: 000-0000-0000</p>
+          <p class="footer-text">Mail: info@phoenix.jp</p>
+          <p class="footer-text">東京都豊島区池袋</p>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>© 2024 ESports Cafe PHOENIX</p>
+      </div>
+    </footer>
+
+    <!-- JavaScript 文件 -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script src="js/main.js?v=20241212"></script>
+  </body>
+</html>

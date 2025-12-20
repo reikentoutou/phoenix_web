@@ -1,36 +1,60 @@
-// Hero background for the landing section
+// ============================================
+// CSS 变量定义区域
+// ============================================
+// 定义用于控制页面堆叠效果的 CSS 变量
+// 该变量用于实现页面滚动时的动态效果
 :root
-  --stack-progress: 0
+  --stack-progress: 0  // 堆叠进度值，范围 0-1，用于控制环境区域的动态变化
 
+// ============================================
+// 基础样式定义
+// ============================================
+// 页面主体样式
 body
-  margin: 0
-  font-family: "Outfit", "Noto Sans JP", system-ui, sans-serif
-  background-color: #020202
-  color: #f0f0f0
+  margin: 0  // 移除默认边距
+  font-family: "Outfit", "Noto Sans JP", system-ui, sans-serif  // 设置字体族，优先使用 Outfit，回退到系统字体
+  background-color: #020202  // 深色背景色
+  color: #f0f0f0  // 浅色文字颜色
 
+  // 移动端字体大小调整
+  @media (max-width: 640px)
+    font-size: 15px  // 小屏幕设备上使用较小的基础字体
+
+// 标题元素统一样式
 h1, h2, h3, h4, h5, h6
-  font-weight: 300
-  letter-spacing: 0.12em
-  color: #f5f5f5
+  font-weight: 300  // 使用较细的字体粗细
+  letter-spacing: 0.12em  // 增加字母间距，提升可读性
+  color: #f5f5f5  // 接近白色的文字颜色
 
+// 段落和文本元素样式
 p, li, span
-  letter-spacing: 0.08em
+  letter-spacing: 0.08em  // 适中的字母间距
 
+// ============================================
+// 页头与导航栏样式
+// ============================================
+// 固定定位的页头容器
 header
-  position: fixed
+  position: fixed  // 固定定位，始终显示在页面顶部
   top: 0
   left: 0
   right: 0
-  z-index: 30
-  transition: transform 0.25s ease
-  padding: 20px 20px 0
-  pointer-events: none
+  z-index: 30  // 确保页头在其他内容之上
+  transition: transform 0.25s ease  // 平滑的变换动画
+  padding: 20px 20px 0  // 上边距和内边距
+  pointer-events: none  // 默认不接收鼠标事件，子元素可接收
 
+  // 中等屏幕适配
   @media (max-width: 768px)
-    padding: 10px
+    padding: 10px  // 减少内边距
 
-header.nav-hidden
-  transform: translateY(-120%)
+  // 小屏幕适配
+  @media (max-width: 640px)
+    padding: 12px 12px 0  // 进一步调整内边距
+
+  // 导航栏隐藏状态（滚动时自动隐藏）
+  &.nav-hidden
+    transform: translateY(-120%)  // 向上移动，完全隐藏导航栏
 
 .navbar
   position: relative
@@ -51,19 +75,24 @@ header.nav-hidden
   pointer-events: auto
   transition: box-shadow 0.3s ease, filter 0.3s ease
 
+  @media (max-width: 640px)
+    padding: 10px 14px
+    gap: 12px
+
   &:hover
     box-shadow: 0 14px 34px rgba(255, 77, 77, 0.32), 0 20px 36px rgba(0, 0, 0, 0.65), inset 0 1px 0 rgba(255, 255, 255, 0.1)
 
-  .nav_logo img
-    height: 80px
-    width: auto
-    display: block
-    transition: filter 0.3s ease, transform 0.3s ease
-    filter: drop-shadow(0 0 2px rgba(255, 77, 77, 0.3))
+  .nav_logo
+    img
+      height: 80px
+      width: auto
+      display: block
+      transition: filter 0.3s ease, transform 0.3s ease
+      filter: drop-shadow(0 0 2px rgba(255, 77, 77, 0.3))
 
-  .nav_logo:hover img
-    transform: scale(1.05)
-    filter: drop-shadow(0 0 8px rgba(255, 77, 77, 0.8))
+    &:hover img
+      transform: scale(1.05)
+      filter: drop-shadow(0 0 8px rgba(255, 77, 77, 0.8))
 
   .nav_toggle
     margin-left: auto
@@ -80,6 +109,9 @@ header.nav-hidden
     align-items: center
     justify-content: center
     transition: background 0.2s ease, color 0.2s ease, transform 0.2s ease, border-color 0.2s ease
+
+    @media (min-width: 960px)
+      display: none
 
     &:hover
       background: rgba(255, 77, 77, 0.16)
@@ -133,6 +165,21 @@ header.nav-hidden
     pointer-events: none
     transition: opacity 0.25s ease, transform 0.25s ease
 
+    @media (min-width: 960px)
+      position: static
+      display: flex !important
+      flex-direction: row
+      align-items: center
+      gap: 18px
+      padding: 0
+      margin: 0
+      background: transparent
+      border: none
+      box-shadow: none
+      opacity: 1
+      transform: none
+      pointer-events: auto
+
     &.open
       display: flex
       opacity: 1
@@ -171,26 +218,9 @@ header.nav-hidden
       border-radius: 2px
       box-shadow: 0 0 16px rgba(255, 77, 77, 0.6)
 
-@media (min-width: 960px)
-  .navbar
-    .nav_toggle
-      display: none
-
-    .nav_links
-      position: static
-      display: flex !important
-      flex-direction: row
-      align-items: center
-      gap: 18px
-      padding: 0
-      margin: 0
-      background: transparent
-      border: none
-      box-shadow: none
-      opacity: 1
-      transform: none
-      pointer-events: auto
-
+// ============================================
+// Hero Section (Begining)
+// ============================================
 .begining
   position: fixed
   top: 0
@@ -206,6 +236,9 @@ header.nav-hidden
   background: linear-gradient(180deg, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.85)), url("../images/begining/begin_background.webp") center/cover no-repeat
   overflow: hidden
   z-index: 0
+
+  @media (max-width: 640px)
+    padding: 100px 14px 120px
 
   &::before
     content: ""
@@ -241,6 +274,11 @@ header.nav-hidden
   max-width: 720px
   margin-bottom: 24px
   text-shadow: 0 6px 18px rgba(0, 0, 0, 0.45)
+  transition: transform 0.45s ease, opacity 0.45s ease
+
+  @media (max-width: 640px)
+    gap: 24px
+    max-width: 580px
 
   .greet
     margin: 0
@@ -261,6 +299,10 @@ header.nav-hidden
     font-family: "Zen Old Mincho", serif
     font-weight: 400
 
+    @media (max-width: 640px)
+      letter-spacing: 0.32em
+      font-size: 1.2rem
+
   .subline
     margin: 0
     letter-spacing: 0.08em
@@ -268,10 +310,24 @@ header.nav-hidden
     font-size: 1.4rem
     color: #dcdcdc
 
-.begin_logo img
-  width: min(320px, 60vw)
-  height: auto
-  opacity: 0.9
+    @media (max-width: 640px)
+      font-size: 1.3rem
+
+  .scroll-slide-right,
+  .scroll-slide-left
+    transition: transform 0.5s ease, opacity 0.5s ease
+
+  &.is-sliding-out
+    opacity: 0.3
+    transform: translateY(-20px)
+
+    .scroll-slide-right
+      transform: translateY(-32px) translateX(90px) scale(0.9)
+      opacity: 0
+
+    .scroll-slide-left
+      transform: translateY(-32px) translateX(-90px) scale(0.9)
+      opacity: 0
 
 @keyframes hero-scroll
   0%
@@ -286,6 +342,62 @@ header.nav-hidden
     transform: translate(-50%, -6px)
     opacity: 0
 
+// ============================================
+// Scroll Animations
+// ============================================
+.scroll-slide-right
+  transform: translateY(22px) translateX(0) scale(1)
+
+  &.is-visible
+    transform: translateY(0) translateX(60px) scale(0.85)
+
+.scroll-slide-left
+  transform: translateY(22px) translateX(0) scale(1)
+
+  &.is-visible
+    transform: translateY(0) translateX(-60px) scale(0.85)
+
+.reveal-on-scroll
+  opacity: 0
+  transform: translateY(22px)
+  transition: opacity 3.5s ease, transform 3.5s ease
+
+  &.is-visible
+    opacity: 1
+    transform: translateY(0)
+
+.fade-in-up
+  opacity: 0
+  transform: translateY(28px)
+  transition: opacity 0.8s ease, transform 0.8s ease
+
+  &.is-visible
+    opacity: 1
+    transform: translateY(0)
+
+.section-fade
+  opacity: 0
+  transform: translateY(40px)
+  transition: opacity 0.8s ease, transform 0.8s ease
+
+  &.is-visible
+    opacity: 1
+    transform: translateY(0)
+
+.heading-13
+  position: relative
+  color: #f5f5f5
+  display: inline-block
+  -webkit-box-reflect: below -10px -webkit-linear-gradient(top, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0) 60%, rgba(0, 0, 0, 0.35))
+
+.yusei-magic-regular
+  font-family: "Yusei Magic", sans-serif
+  font-weight: 400
+  font-style: normal
+
+// ============================================
+// Main Content Wrapper
+// ============================================
 .main-content-wrapper
   position: relative
   z-index: 10
@@ -293,6 +405,20 @@ header.nav-hidden
   background-color: #050505
   box-shadow: 0 -22px 40px rgba(0, 0, 0, 0.45)
 
+  .product.environment
+    position: relative
+
+    &::before
+      content: ""
+      position: absolute
+      inset: 0
+      background: linear-gradient(180deg, rgba(5, 5, 5, 0.98), rgba(5, 5, 5, 0))
+      pointer-events: none
+      z-index: -1
+
+// ============================================
+// Brand Concept Section
+// ============================================
 .brand-concept
   position: relative
   background: #050505
@@ -300,6 +426,45 @@ header.nav-hidden
   display: flex
   justify-content: center
   overflow: hidden
+
+  @media (max-width: 900px)
+    .brand-inner
+      grid-template-columns: 1fr
+      gap: 36px
+
+    .brand-vertical
+      justify-content: flex-start
+      border-right: none
+      padding-inline: 0
+
+    .brand-jp-copy
+      font-size: clamp(2.4rem, 8vw, 3rem)
+
+  @media (max-width: 600px)
+    padding: 90px 16px 110px
+
+    .brand-vertical
+      justify-content: center
+
+    .brand-en-desc
+      font-size: 1rem
+
+  @media (max-width: 640px)
+    padding: 80px 14px 90px
+
+    .brand-inner
+      grid-template-columns: 1fr
+      gap: 28px
+
+    .brand-vertical
+      justify-content: center
+
+    .brand-jp-copy
+      font-size: clamp(2rem, 8vw, 2.6rem)
+
+    .brand-en
+      max-width: 100%
+      gap: 14px
 
   .brand-inner
     width: 100%
@@ -316,6 +481,7 @@ header.nav-hidden
     padding-inline: clamp(8px, 1vw, 16px)
     border-left: 1px solid rgba(255, 255, 255, 0.08)
     border-right: 1px solid rgba(255, 255, 255, 0.08)
+    overflow: visible
 
   .brand-jp-copy
     font-family: "Zen Old Mincho", serif
@@ -326,7 +492,11 @@ header.nav-hidden
     text-orientation: mixed
     line-height: 1.8
     text-shadow: 0 12px 36px rgba(0, 0, 0, 0.4)
+    display: inline-flex
+    align-items: center
+    justify-content: center
     white-space: nowrap
+    min-height: 100%
 
   .brand-en
     display: flex
@@ -359,164 +529,9 @@ header.nav-hidden
     font-size: 1.08rem
     color: #d9d7d0
 
-.fade-in-up
-  opacity: 0
-  transform: translateY(28px)
-  transition: opacity 0.8s ease, transform 0.8s ease
-
-  &.is-visible
-    opacity: 1
-    transform: translateY(0)
-
-.main-content-wrapper .product.environment
-  position: relative
-
-  &::before
-    content: ""
-    position: absolute
-    inset: 0
-    background: linear-gradient(180deg, rgba(5, 5, 5, 0.98), rgba(5, 5, 5, 0))
-    pointer-events: none
-    z-index: -1
-
-@media (max-width: 900px)
-  .brand-concept .brand-inner
-    grid-template-columns: 1fr
-    gap: 36px
-
-  .brand-concept .brand-vertical
-    justify-content: flex-start
-    border-right: none
-    padding-inline: 0
-
-  .brand-concept .brand-jp-copy
-    font-size: clamp(2.4rem, 8vw, 3rem)
-
-@media (max-width: 600px)
-  .brand-concept
-    padding: 90px 16px 110px
-
-  .brand-concept .brand-vertical
-    justify-content: center
-
-  .brand-concept .brand-en-desc
-    font-size: 1rem
-
-.scroll-slide-right
-  transform: translateY(22px) translateX(0) scale(1)
-  &.is-visible
-    transform: translateY(0) translateX(60px) scale(0.85)
-
-.scroll-slide-left
-  transform: translateY(22px) translateX(0) scale(1)
-  &.is-visible
-    transform: translateY(0) translateX(-60px) scale(0.85)
-
-.begining_message
-  transition: transform 0.45s ease, opacity 0.45s ease
-
-  .scroll-slide-right,
-  .scroll-slide-left
-    transition: transform 0.5s ease, opacity 0.5s ease
-
-  &.is-sliding-out
-    opacity: 0.3
-    transform: translateY(-20px)
-
-    .scroll-slide-right
-      transform: translateY(-32px) translateX(90px) scale(0.9)
-      opacity: 0
-
-    .scroll-slide-left
-      transform: translateY(-32px) translateX(-90px) scale(0.9)
-      opacity: 0
-
-.stack-top
-  position: relative
-  z-index: 2
-
-.stacked-section
-  position: relative
-  margin-top: -80px
-  padding-top: 140px
-  border-radius: 24px 24px 0 0
-  z-index: 3
-  isolation: isolate
-  box-shadow: 0 -18px 40px rgba(0, 0, 0, 0.35)
-
-  &::before
-    content: ""
-    position: absolute
-    top: -80px
-    left: 0
-    right: 0
-    height: 80px
-    background: linear-gradient(180deg, rgba(5, 5, 5, 0.92), rgba(5, 5, 5, 0))
-    z-index: -1
-
-.reveal-on-scroll
-  opacity: 0
-  transform: translateY(22px)
-  transition: opacity 3.5s ease, transform 3.5s ease
-
-  &.is-visible
-    opacity: 1
-    transform: translateY(0)
-
-.heading-13
-  position: relative
-  color: #f5f5f5
-  display: inline-block
-  -webkit-box-reflect: below -10px -webkit-linear-gradient(top, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0) 60%, rgba(0, 0, 0, 0.35))
-
-.yusei-magic-regular
-  font-family: "Yusei Magic", sans-serif
-  font-weight: 400
-  font-style: normal
-
-.lates_mews
-  padding: 40px 16px 70px
-  display: flex
-  flex-direction: column
-  align-items: center
-  gap: 20px
-  background: #050505
-
-  h1
-    margin: 0
-    letter-spacing: 0.12em
-    font-size: 1.4rem
-    text-transform: uppercase
-
-  .news-card
-    display: flex
-    flex-direction: column
-    align-items: center
-    gap: 14px
-
-    img
-      width: min(420px, 90vw)
-      height: auto
-      object-fit: contain
-      display: block
-      border-radius: 10px
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35)
-
-    .news-link
-      color: #ffd166
-      text-decoration: none
-      font-weight: 600
-      letter-spacing: 0.08em
-      padding: 8px 16px
-      border: 1px solid rgba(255, 209, 102, 0.4)
-      border-radius: 999px
-      transition: background 0.2s ease, color 0.2s ease, transform 0.2s ease
-
-      &:hover
-        background: rgba(255, 209, 102, 0.15)
-        color: #fff7da
-        transform: translateY(-1px)
-
+// ============================================
+// Product Environment Section
+// ============================================
 .product.environment
   padding: 90px 16px 110px
   display: flex
@@ -530,6 +545,71 @@ header.nav-hidden
   border-radius: calc(26px * var(--stack-progress)) calc(26px * var(--stack-progress)) 0 0
   box-shadow: 0 -24px 50px rgba(0, 0, 0, 0.38)
   transition: margin-top 0.25s linear, padding-top 0.25s linear, border-radius 0.25s linear
+
+  @media (max-width: 1024px)
+    padding: 80px 16px 100px
+    padding-top: calc(80px + 90px * var(--stack-progress))
+
+    .env-slide-grid
+      grid-template-columns: minmax(180px, 0.8fr) minmax(0, 1.6fr)
+
+  @media (max-width: 900px)
+    .env-slide-grid
+      grid-template-columns: 1fr
+      min-height: auto
+
+    .env-slide-copy
+      grid-template-columns: auto 1fr
+
+    .env-image-frame
+      width: 100%
+
+    .env-pagination
+      flex-direction: column
+      align-items: flex-start
+      gap: 12px
+
+  @media (max-width: 600px)
+    &
+      padding: 70px 14px 90px
+      padding-top: calc(70px + 90px * var(--stack-progress))
+
+    .env-swiper-shell
+      padding: 18px 14px 22px
+
+    .env-slide-copy
+      grid-template-columns: 1fr
+      gap: 12px
+
+    .env-tag-vertical
+      justify-self: flex-start
+
+    .env-fraction
+      width: 100%
+      justify-content: space-between
+
+  @media (max-width: 640px)
+    &
+      padding: 64px 12px 80px
+
+    .env-swiper-shell
+      padding: 14px 12px 18px
+
+    .env-slide-grid
+      grid-template-columns: 1fr
+      min-height: auto
+      gap: 18px
+
+    .env-image-frame
+      min-height: 240px
+      aspect-ratio: 4 / 3
+
+    .env-slide-copy
+      grid-template-columns: auto 1fr
+
+  @media (max-width: 720px)
+    .env-carousel
+      border-radius: 10px
 
   .env-header
     text-align: left
@@ -571,14 +651,40 @@ header.nav-hidden
   .environment-slider
     width: 100%
 
-  .environment-slider .swiper-wrapper
-    align-items: stretch
+    .swiper-wrapper
+      align-items: stretch
 
-  .environment-slider .swiper-slide
-    height: auto
-    display: flex
-    align-items: stretch
-    transition: opacity 0.35s ease
+    .swiper-slide
+      height: auto
+      display: flex
+      align-items: stretch
+      transition: opacity 0.35s ease
+
+      .env-tag-vertical,
+      .env-sub,
+      .env-slide-grid h3,
+      .env-desc
+        opacity: 0
+        transform: translateY(14px)
+        transition: opacity 0.65s ease, transform 0.65s ease
+
+      .env-text-block > *:nth-child(1)
+        transition-delay: 0.05s
+
+      .env-text-block > *:nth-child(2)
+        transition-delay: 0.12s
+
+      .env-text-block > *:nth-child(3)
+        transition-delay: 0.18s
+
+      &.is-active,
+      &.swiper-slide-active
+        .env-tag-vertical,
+        .env-sub,
+        .env-slide-grid h3,
+        .env-desc
+          opacity: 1
+          transform: translateY(0)
 
   .env-slide-grid
     display: grid
@@ -587,6 +693,12 @@ header.nav-hidden
     gap: clamp(28px, 6vw, 80px)
     width: 100%
     min-height: 420px
+
+    h3
+      margin: 0
+      font-size: clamp(1.6rem, 3vw, 2rem)
+      letter-spacing: 0.06em
+      color: #ffffff
 
   .env-slide-copy
     display: grid
@@ -626,12 +738,6 @@ header.nav-hidden
     line-height: 1.8
     letter-spacing: 0.02em
 
-  .env-slide-grid h3
-    margin: 0
-    font-size: clamp(1.6rem, 3vw, 2rem)
-    letter-spacing: 0.06em
-    color: #ffffff
-
   .env-slide-visual
     display: flex
     justify-content: center
@@ -662,33 +768,6 @@ header.nav-hidden
     &:hover img
       transform: scale(1.05)
 
-  .environment-slider .swiper-slide
-    .env-tag-vertical,
-    .env-sub,
-    .env-slide-grid h3,
-    .env-desc
-      opacity: 0
-      transform: translateY(14px)
-      transition: opacity 0.65s ease, transform 0.65s ease
-
-    .env-text-block > *:nth-child(1)
-      transition-delay: 0.05s
-
-    .env-text-block > *:nth-child(2)
-      transition-delay: 0.12s
-
-    .env-text-block > *:nth-child(3)
-      transition-delay: 0.18s
-
-  .environment-slider .swiper-slide.is-active,
-  .environment-slider .swiper-slide.swiper-slide-active
-    .env-tag-vertical,
-    .env-sub,
-    .env-slide-grid h3,
-    .env-desc
-      opacity: 1
-      transform: translateY(0)
-
   .env-pagination
     position: relative
     margin-top: clamp(18px, 3vw, 30px)
@@ -697,12 +776,12 @@ header.nav-hidden
     border-radius: 999px
     overflow: hidden
 
-  .env-pagination.swiper-pagination-progressbar
-    background: rgba(255, 255, 255, 0.12)
+    &.swiper-pagination-progressbar
+      background: rgba(255, 255, 255, 0.12)
 
-  .env-pagination .swiper-pagination-progressbar-fill
-    background: #ff4d4d
-    border-radius: 999px
+    .swiper-pagination-progressbar-fill
+      background: #ff4d4d
+      border-radius: 999px
 
   .env-nav
     position: absolute
@@ -730,140 +809,1070 @@ header.nav-hidden
       border-color: #ff4d4d
       background: rgba(0, 0, 0, 0.7)
 
-@media (max-width: 1024px)
-  .product.environment
-    padding: 80px 16px 100px
-    padding-top: calc(80px + 90px * var(--stack-progress))
+// ============================================
+// Stores Section (店铺信息区域)
+// ============================================
+.stores
+  padding: 90px 16px 110px
+  display: flex
+  flex-direction: column
+  align-items: center
+  gap: clamp(40px, 6vw, 80px)
+  background: #050505
+  position: relative
+  margin-top: 80px  // 为固定导航栏留出空间
 
-  .product.environment .env-slide-grid
-    grid-template-columns: minmax(180px, 0.8fr) minmax(0, 1.6fr)
-
-@media (max-width: 900px)
-  .product.environment .env-slide-grid
-    grid-template-columns: 1fr
-    min-height: auto
-
-  .product.environment .env-slide-copy
-    grid-template-columns: auto 1fr
-
-  .product.environment .env-image-frame
-    width: 100%
-
-  .product.environment .env-pagination
-    flex-direction: column
-    align-items: flex-start
-    gap: 12px
-
-@media (max-width: 600px)
-  .product.environment
+  @media (max-width: 640px)
     padding: 70px 14px 90px
-    padding-top: calc(70px + 90px * var(--stack-progress))
+    gap: 32px
+    margin-top: 60px
 
-  .product.environment .env-swiper-shell
-    padding: 18px 14px 22px
-
-  .product.environment .env-slide-copy
-    grid-template-columns: 1fr
-    gap: 12px
-
-  .product.environment .env-tag-vertical
-    justify-self: flex-start
-
-  .product.environment .env-fraction
-    width: 100%
-    justify-content: space-between
-
-.footer
-  padding: 100px 20px
-
-@media (max-width: 640px)
-  body
-    font-size: 15px
-
-  header
-    padding: 12px 12px 0
-
-  .navbar
-    padding: 10px 14px
-    gap: 12px
-
-  .begining
-    padding: 100px 14px 120px
-
-  .begining_message
+  .stores-header
+    text-align: center
+    max-width: 900px
+    margin: 0 auto
+    padding: 60px 20px 40px
+    position: relative
+    display: flex
+    flex-direction: column
     gap: 24px
-    max-width: 580px
 
-    .midline
-      letter-spacing: 0.32em
-      font-size: 1.2rem
+    @media (max-width: 640px)
+      padding: 50px 16px 30px
+      gap: 20px
 
-    .subline
-      font-size: 1.3rem
+    // 顶部装饰线条
+    &::before
+      content: ""
+      position: absolute
+      top: 0
+      left: 50%
+      transform: translateX(-50%)
+      width: 120px
+      height: 1px
+      background: linear-gradient(90deg, transparent, rgba(255, 77, 77, 0.6), transparent)
+      box-shadow: 0 0 20px rgba(255, 77, 77, 0.4)
 
-  .brand-concept
-    padding: 80px 14px 90px
+    // 底部装饰线条
+    &::after
+      content: ""
+      position: absolute
+      bottom: 0
+      left: 50%
+      transform: translateX(-50%)
+      width: 200px
+      height: 1px
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), rgba(255, 77, 77, 0.3), rgba(255, 255, 255, 0.2), transparent)
+      animation: line-expand 3s ease-in-out infinite
 
-    .brand-inner
+    .eyebrow
+      letter-spacing: 0.25em
+      font-size: 0.75rem
+      font-weight: 500
+      margin: 0
+      text-transform: uppercase
+      position: relative
+      display: inline-block
+      align-self: center
+      // 渐变文字效果
+      background: linear-gradient(135deg, #ff4d4d, #ff6b6b, #ff8c8c, #ff4d4d)
+      -webkit-background-clip: text
+      background-clip: text
+      -webkit-text-fill-color: transparent
+      background-size: 300% 300%
+      animation: gradient-shift 5s ease infinite
+      // 文字发光
+      filter: drop-shadow(0 0 12px rgba(255, 77, 77, 0.6))
+      // 左右装饰点
+      padding: 0 40px
+      &::before, &::after
+        content: "•"
+        position: absolute
+        top: 50%
+        transform: translateY(-50%)
+        color: rgba(255, 77, 77, 0.5)
+        font-size: 1.2rem
+        animation: dot-pulse 2s ease-in-out infinite
+      &::before
+        left: 0
+        animation-delay: 0s
+      &::after
+        right: 0
+        animation-delay: 1s
+
+      @media (max-width: 640px)
+        padding: 0 30px
+        font-size: 0.7rem
+
+    h2
+      margin: 0
+      font-size: clamp(2rem, 5vw, 3.5rem)
+      letter-spacing: 0.15em
+      font-weight: 200
+      position: relative
+      // 精致文字效果 - 使用多层阴影营造立体感和发光
+      color: #ffffff
+      text-shadow: 0 0 20px rgba(255, 77, 77, 0.3), 0 0 40px rgba(255, 77, 77, 0.2), 0 2px 4px rgba(0, 0, 0, 0.5), 0 4px 8px rgba(0, 0, 0, 0.3)
+      // 背景光晕层
+      &::before
+        content: ""
+        position: absolute
+        top: 50%
+        left: 50%
+        transform: translate(-50%, -50%)
+        width: 120%
+        height: 120%
+        background: radial-gradient(ellipse at center, rgba(255, 77, 77, 0.15) 0%, transparent 70%)
+        z-index: -1
+        animation: text-glow 4s ease-in-out infinite
+      // 下划线装饰
+      padding: 20px 0
+      &::after
+        content: ""
+        position: absolute
+        left: 50%
+        bottom: 0
+        transform: translateX(-50%)
+        width: 80px
+        height: 2px
+        background: linear-gradient(90deg, transparent, rgba(255, 77, 77, 0.8), transparent)
+        box-shadow: 0 0 15px rgba(255, 77, 77, 0.6)
+        animation: underline-glow 2.5s ease-in-out infinite
+
+      @media (max-width: 640px)
+        padding: 16px 0
+        letter-spacing: 0.1em
+
+    .lead
+      margin: 8px auto 0
+      position: relative
+      max-width: 700px
+      display: flex
+      flex-direction: column
+      gap: 12px
+
+      @media (max-width: 640px)
+        max-width: 100%
+        gap: 10px
+
+      p
+        margin: 0
+        color: rgba(255, 255, 255, 0.75)
+        line-height: 1.8
+        font-size: clamp(0.9rem, 2.5vw, 1.05rem)
+        font-weight: 300
+        letter-spacing: 0.05em
+        text-align: center
+        // 文字微光
+        text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3)
+
+        @media (max-width: 640px)
+          line-height: 1.7
+          font-size: 0.9rem
+
+  .stores-grid
+    width: 100%
+    max-width: 1180px
+    display: grid
+    gap: clamp(24px, 4vw, 40px)
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr))
+
+    @media (max-width: 640px)
       grid-template-columns: 1fr
-      gap: 28px
+      gap: 24px
 
-    .brand-vertical
+.store-card
+  background: #0a0a0a
+  border: 1px solid rgba(255, 77, 77, 0.2)
+  border-radius: 18px
+  overflow: hidden
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease
+  display: flex
+  flex-direction: column
+
+  &:hover
+    transform: translateY(-4px)
+    box-shadow: 0 24px 48px rgba(255, 77, 77, 0.15), 0 12px 24px rgba(0, 0, 0, 0.4)
+    border-color: rgba(255, 77, 77, 0.4)
+
+  .store-card-header
+    padding: 24px 24px 16px
+    display: flex
+    align-items: center
+    gap: 16px
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08)
+
+    .store-number
+      font-size: 1.8rem
+      font-weight: 700
+      color: #ff4d4d
+      letter-spacing: 0.1em
+      font-family: "Outfit", monospace
+
+    h3
+      margin: 0
+      font-size: 1.3rem
+      letter-spacing: 0.06em
+      color: #f5f5f5
+      font-weight: 400
+      flex: 1
+
+  .store-card-image
+    width: 100%
+    aspect-ratio: 16 / 9
+    overflow: hidden
+    background: #020202
+
+    img
+      width: 100%
+      height: 100%
+      object-fit: cover
+      display: block
+      transition: transform 0.5s ease
+
+    &:hover img
+      transform: scale(1.05)
+
+  .store-card-content
+    padding: 24px
+    display: flex
+    flex-direction: column
+    gap: 20px
+    flex: 1
+
+    .store-info
+      display: flex
+      flex-direction: column
+      gap: 12px
+
+    .store-info-item
+      display: flex
+      flex-direction: column
+      gap: 4px
+      padding-bottom: 12px
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06)
+
+      &:last-child
+        border-bottom: none
+        padding-bottom: 0
+
+    .store-info-label
+      font-size: 0.85rem
+      color: rgba(255, 255, 255, 0.6)
+      letter-spacing: 0.1em
+      text-transform: uppercase
+      font-family: "Outfit", sans-serif
+
+    .store-info-value
+      font-size: 0.95rem
+      color: #f5f5f5
+      letter-spacing: 0.04em
+      line-height: 1.5
+
+    .store-card-actions
+      display: flex
+      flex-direction: column
+      gap: 10px
+      margin-top: auto
+      padding-top: 16px
+      border-top: 1px solid rgba(255, 255, 255, 0.08)
+
+    .store-link
+      display: inline-flex
+      align-items: center
+      justify-content: center
+      padding: 10px 16px
+      color: #ff4d4d
+      text-decoration: none
+      border: 1px solid rgba(255, 77, 77, 0.3)
+      border-radius: 8px
+      font-size: 0.9rem
+      letter-spacing: 0.08em
+      transition: all 0.2s ease
+      text-align: center
+
+      &:hover
+        background: rgba(255, 77, 77, 0.1)
+        border-color: rgba(255, 77, 77, 0.5)
+        color: #ffa0a0
+        transform: translateY(-1px)
+
+// ============================================
+// Pricing Section (区域料金信息)
+// ============================================
+.pricing
+  padding: 90px 16px 110px
+  display: flex
+  flex-direction: column
+  align-items: center
+  gap: clamp(40px, 6vw, 80px)
+  background: linear-gradient(180deg, rgba(4, 4, 4, 0.5), rgba(4, 4, 4, 0.65)), url("../images/bg_1.jpg") center/cover no-repeat
+  position: relative
+  overflow: hidden
+
+  // 背景遮罩层，确保文字可读性（降低不透明度让背景更明显）
+  &::before
+    content: ""
+    position: absolute
+    inset: 0
+    background: linear-gradient(180deg, rgba(4, 4, 4, 0.3), rgba(4, 4, 4, 0.5))
+    z-index: 0
+
+  > *
+    position: relative
+    z-index: 1
+
+  @media (max-width: 640px)
+    padding: 70px 14px 90px
+    gap: 32px
+
+  .pricing-header
+    text-align: center
+    max-width: 900px
+    margin: 0 auto
+    padding: 60px 20px 40px
+    position: relative
+    display: flex
+    flex-direction: column
+    gap: 24px
+
+    @media (max-width: 640px)
+      padding: 50px 16px 30px
+      gap: 20px
+
+    // 顶部装饰线条
+    &::before
+      content: ""
+      position: absolute
+      top: 0
+      left: 50%
+      transform: translateX(-50%)
+      width: 120px
+      height: 1px
+      background: linear-gradient(90deg, transparent, rgba(255, 77, 77, 0.6), transparent)
+      box-shadow: 0 0 20px rgba(255, 77, 77, 0.4)
+
+    // 底部装饰线条
+    &::after
+      content: ""
+      position: absolute
+      bottom: 0
+      left: 50%
+      transform: translateX(-50%)
+      width: 200px
+      height: 1px
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), rgba(255, 77, 77, 0.3), rgba(255, 255, 255, 0.2), transparent)
+      animation: line-expand 3s ease-in-out infinite
+
+    .eyebrow
+      letter-spacing: 0.25em
+      font-size: 0.75rem
+      font-weight: 500
+      margin: 0
+      text-transform: uppercase
+      position: relative
+      display: inline-block
+      align-self: center
+      // 渐变文字效果
+      background: linear-gradient(135deg, #ff4d4d, #ff6b6b, #ff8c8c, #ff4d4d)
+      -webkit-background-clip: text
+      background-clip: text
+      -webkit-text-fill-color: transparent
+      background-size: 300% 300%
+      animation: gradient-shift 5s ease infinite
+      // 文字发光
+      filter: drop-shadow(0 0 12px rgba(255, 77, 77, 0.6))
+      // 左右装饰点
+      padding: 0 40px
+      &::before, &::after
+        content: "•"
+        position: absolute
+        top: 50%
+        transform: translateY(-50%)
+        color: rgba(255, 77, 77, 0.5)
+        font-size: 1.2rem
+        animation: dot-pulse 2s ease-in-out infinite
+      &::before
+        left: 0
+        animation-delay: 0s
+      &::after
+        right: 0
+        animation-delay: 1s
+
+      @media (max-width: 640px)
+        padding: 0 30px
+        font-size: 0.7rem
+
+    h2
+      margin: 0
+      font-size: clamp(2rem, 5vw, 3.5rem)
+      letter-spacing: 0.15em
+      font-weight: 200
+      position: relative
+      // 精致文字效果 - 使用多层阴影营造立体感和发光
+      color: #ffffff
+      text-shadow: 0 0 20px rgba(255, 77, 77, 0.3), 0 0 40px rgba(255, 77, 77, 0.2), 0 2px 4px rgba(0, 0, 0, 0.5), 0 4px 8px rgba(0, 0, 0, 0.3)
+      // 背景光晕层
+      &::before
+        content: ""
+        position: absolute
+        top: 50%
+        left: 50%
+        transform: translate(-50%, -50%)
+        width: 120%
+        height: 120%
+        background: radial-gradient(ellipse at center, rgba(255, 77, 77, 0.15) 0%, transparent 70%)
+        z-index: -1
+        animation: text-glow 4s ease-in-out infinite
+      // 下划线装饰
+      padding: 20px 0
+      &::after
+        content: ""
+        position: absolute
+        left: 50%
+        bottom: 0
+        transform: translateX(-50%)
+        width: 80px
+        height: 2px
+        background: linear-gradient(90deg, transparent, rgba(255, 77, 77, 0.8), transparent)
+        box-shadow: 0 0 15px rgba(255, 77, 77, 0.6)
+        animation: underline-glow 2.5s ease-in-out infinite
+
+      @media (max-width: 640px)
+        padding: 16px 0
+        letter-spacing: 0.1em
+
+    .lead
+      margin: 8px auto 0
+      position: relative
+      max-width: 700px
+      display: flex
+      flex-direction: column
+      gap: 12px
+
+      @media (max-width: 640px)
+        max-width: 100%
+        gap: 10px
+
+      p
+        margin: 0
+        color: rgba(255, 255, 255, 0.75)
+        line-height: 1.8
+        font-size: clamp(0.9rem, 2.5vw, 1.05rem)
+        font-weight: 300
+        letter-spacing: 0.05em
+        text-align: center
+        // 文字微光
+        text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3)
+
+        @media (max-width: 640px)
+          line-height: 1.7
+          font-size: 0.9rem
+
+  .pricing-grid
+    width: 100%
+    max-width: 1180px
+    display: grid
+    gap: clamp(24px, 4vw, 40px)
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr))
+
+    @media (max-width: 640px)
+      grid-template-columns: 1fr
+      gap: 24px
+
+.pricing-card
+  // 透明玻璃液体质感背景
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.03), rgba(255, 255, 255, 0.05))
+  backdrop-filter: blur(30px) saturate(180%)
+  -webkit-backdrop-filter: blur(30px) saturate(180%)
+  border: 1px solid rgba(255, 255, 255, 0.18)
+  border-radius: 24px
+  overflow: hidden
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1)
+  display: flex
+  flex-direction: column
+  position: relative
+  // 多层阴影营造玻璃质感
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3), 0 0 0 1px rgba(255, 255, 255, 0.1) inset, 0 2px 8px rgba(0, 0, 0, 0.2) inset
+
+  // 顶部高光反射（模拟玻璃表面）
+  &::before
+    content: ""
+    position: absolute
+    top: 0
+    left: 0
+    right: 0
+    height: 40%
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.15) 0%, rgba(255, 255, 255, 0.05) 50%, transparent 100%)
+    border-radius: 24px 24px 0 0
+    opacity: 0.6
+    z-index: 1
+    pointer-events: none
+    animation: liquid-shimmer 8s ease-in-out infinite
+
+  // 液体流动效果层
+  &::after
+    content: ""
+    position: absolute
+    top: -100%
+    left: -50%
+    width: 200%
+    height: 200%
+    background: radial-gradient(ellipse at center, rgba(255, 77, 77, 0.12) 0%, rgba(255, 77, 77, 0.04) 40%, transparent 70%)
+    opacity: 0
+    transition: opacity 0.6s ease, transform 0.6s ease
+    pointer-events: none
+    z-index: 0
+    animation: liquid-flow 12s ease-in-out infinite
+    filter: blur(40px)
+
+  // 内部液体波纹效果
+  .liquid-wave
+    position: absolute
+    bottom: 0
+    left: 0
+    right: 0
+    height: 30%
+    background: linear-gradient(180deg, transparent, rgba(255, 77, 77, 0.08))
+    border-radius: 0 0 24px 24px
+    opacity: 0.3
+    z-index: 0
+    animation: wave-motion 6s ease-in-out infinite
+    filter: blur(20px)
+
+  &:hover
+    transform: translateY(-8px) scale(1.015)
+    // 悬停时增强玻璃反射效果
+    box-shadow: 0 24px 80px rgba(255, 77, 77, 0.2), 0 12px 32px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(255, 255, 255, 0.2) inset, 0 4px 16px rgba(0, 0, 0, 0.3) inset, 0 0 60px rgba(255, 77, 77, 0.15)
+    border-color: rgba(255, 255, 255, 0.3)
+    backdrop-filter: blur(35px) saturate(200%)
+    -webkit-backdrop-filter: blur(35px) saturate(200%)
+
+    &::before
+      opacity: 0.9
+      animation: liquid-shimmer-fast 4s ease-in-out infinite
+
+    &::after
+      opacity: 1
+      transform: translate(20%, 20%) scale(1.2)
+
+    .liquid-wave
+      opacity: 0.5
+      animation: wave-motion-fast 3s ease-in-out infinite
+
+  .pricing-card-header
+    padding: 28px 28px 24px
+    display: flex
+    align-items: center
+    gap: 18px
+    border-bottom: 1px solid rgba(255, 255, 255, 0.15)
+    // 玻璃液体质感背景
+    background: linear-gradient(135deg, rgba(255, 77, 77, 0.12), rgba(255, 77, 77, 0.04), transparent)
+    backdrop-filter: blur(10px)
+    -webkit-backdrop-filter: blur(10px)
+    position: relative
+    z-index: 1
+    overflow: hidden
+
+    // 液体流动效果
+    &::before
+      content: ""
+      position: absolute
+      top: -50%
+      left: -50%
+      width: 200%
+      height: 200%
+      background: radial-gradient(circle, rgba(255, 77, 77, 0.1) 0%, transparent 60%)
+      opacity: 0
+      animation: header-liquid 10s ease-in-out infinite
+      z-index: 0
+
+    // 头部装饰线（液体质感）
+    &::after
+      content: ""
+      position: absolute
+      bottom: 0
+      left: 0
+      right: 0
+      height: 2px
+      background: linear-gradient(90deg, transparent, rgba(255, 77, 77, 0.5), rgba(255, 255, 255, 0.3), rgba(255, 77, 77, 0.5), transparent)
+      opacity: 0.6
+      box-shadow: 0 0 10px rgba(255, 77, 77, 0.3)
+      animation: liquid-line 4s ease-in-out infinite
+
+    .pricing-store-number
+      font-size: 2rem
+      font-weight: 700
+      color: #ff4d4d
+      letter-spacing: 0.1em
+      font-family: "Outfit", monospace
+      min-width: 48px
+      text-shadow: 0 0 20px rgba(255, 77, 77, 0.5)
+      position: relative
+      display: flex
+      align-items: center
       justify-content: center
 
-    .brand-jp-copy
-      font-size: clamp(2rem, 8vw, 2.6rem)
+      // 数字背景光效
+      &::before
+        content: ""
+        position: absolute
+        inset: -8px
+        background: radial-gradient(circle, rgba(255, 77, 77, 0.2) 0%, transparent 70%)
+        border-radius: 50%
+        opacity: 0.6
+        z-index: -1
 
-    .brand-en
-      max-width: 100%
-      gap: 14px
+    h3
+      margin: 0
+      font-size: 1.35rem
+      letter-spacing: 0.08em
+      color: #f5f5f5
+      font-weight: 400
+      flex: 1
+      text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3)
 
-  .product.environment
-    padding: 64px 12px 80px
+  .pricing-card-content
+    padding: 28px
+    position: relative
+    z-index: 1
 
-    .env-swiper-shell
-      padding: 14px 12px 18px
+  .pricing-list
+    display: flex
+    flex-direction: column
+    gap: 14px
 
-    .env-slide-grid
-      grid-template-columns: 1fr
-      min-height: auto
-      gap: 18px
+  .pricing-item
+    display: flex
+    justify-content: space-between
+    align-items: center
+    padding: 18px 20px
+    // 透明玻璃液体质感
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.02), rgba(255, 255, 255, 0.04))
+    backdrop-filter: blur(15px) saturate(150%)
+    -webkit-backdrop-filter: blur(15px) saturate(150%)
+    border: 1px solid rgba(255, 255, 255, 0.12)
+    border-radius: 16px
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1)
+    position: relative
+    overflow: hidden
+    // 玻璃表面反射
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15), 0 0 0 1px rgba(255, 255, 255, 0.08) inset, 0 1px 4px rgba(255, 255, 255, 0.1) inset
 
-    .env-image-frame
-      min-height: 240px
-      aspect-ratio: 4 / 3
+    // 左侧装饰条
+    &::before
+      content: ""
+      position: absolute
+      left: 0
+      top: 0
+      bottom: 0
+      width: 3px
+      background: linear-gradient(180deg, rgba(255, 77, 77, 0.6), rgba(255, 77, 77, 0.2))
+      opacity: 0
+      transition: opacity 0.3s ease
 
-    .env-slide-copy
-      grid-template-columns: auto 1fr
+    // 悬停时的背景光效
+    &::after
+      content: ""
+      position: absolute
+      top: 50%
+      left: 50%
+      transform: translate(-50%, -50%) scale(0)
+      width: 120%
+      height: 120%
+      background: radial-gradient(circle, rgba(255, 77, 77, 0.1) 0%, transparent 70%)
+      opacity: 0
+      transition: all 0.4s ease
+      pointer-events: none
+      z-index: 0
 
-  .specs
-    padding: 60px 12px 80px
+    &:hover
+      // 悬停时增强玻璃液体质感
+      background: linear-gradient(135deg, rgba(255, 77, 77, 0.12), rgba(255, 77, 77, 0.05), rgba(255, 255, 255, 0.06))
+      backdrop-filter: blur(20px) saturate(180%)
+      -webkit-backdrop-filter: blur(20px) saturate(180%)
+      border-color: rgba(255, 255, 255, 0.25)
+      transform: translateX(6px) scale(1.02)
+      box-shadow: 0 8px 32px rgba(255, 77, 77, 0.2), 0 4px 16px rgba(0, 0, 0, 0.3), 0 0 0 1px rgba(255, 255, 255, 0.15) inset, 0 2px 8px rgba(255, 255, 255, 0.15) inset
 
-    .specs-header h2
-      font-size: 1.7rem
+      &::before
+        opacity: 1
 
-    .spec-card
-      padding: 14px 0 14px
+      &::after
+        transform: translate(-50%, -50%) scale(1)
+        opacity: 1
 
-    .spec-line
-      gap: 10px
+    .pricing-item-info
+      display: flex
+      flex-direction: column
+      gap: 6px
+      flex: 1
+      position: relative
+      z-index: 1
 
-  .access
-    padding: 50px 12px 70px
+    .pricing-item-name
+      font-size: 1.05rem
+      color: #f5f5f5
+      letter-spacing: 0.04em
+      font-weight: 500
+      text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3)
 
-    .access-header h2
-      font-size: 1.7rem
-
-    .access-map-frame
-      min-height: 260px
-
-    .button_solid012 a
+    .pricing-item-type
+      font-size: 0.75rem
+      color: rgba(255, 255, 255, 0.6)
       letter-spacing: 0.1em
+      text-transform: uppercase
+      font-family: "Outfit", sans-serif
+      font-weight: 500
 
-  .footer
-    padding: 70px 14px 60px
-    .footer-inner
-      gap: 14px
+    .pricing-item-price
+      font-size: 1.6rem
+      color: #ff4d4d
+      font-weight: 700
+      letter-spacing: 0.02em
+      font-family: "Outfit", monospace
+      display: flex
+      align-items: baseline
+      gap: 2px
+      position: relative
+      z-index: 1
+      text-shadow: 0 0 20px rgba(255, 77, 77, 0.4), 0 2px 8px rgba(0, 0, 0, 0.3)
+
+      // 价格光效
+      &::before
+        content: ""
+        position: absolute
+        inset: -4px
+        background: radial-gradient(circle, rgba(255, 77, 77, 0.15) 0%, transparent 70%)
+        border-radius: 8px
+        opacity: 0
+        transition: opacity 0.3s ease
+        z-index: -1
+
+    &:hover .pricing-item-price::before
+      opacity: 1
+
+    .pricing-unit
+      font-size: 0.9rem
+      color: rgba(255, 77, 77, 0.8)
+      font-weight: 500
+      text-shadow: 0 0 10px rgba(255, 77, 77, 0.3)
+
+// ============================================
+// Equipment Specs Section (设备配置介绍)
+// ============================================
+.equipment-specs
+  padding: 90px 16px 110px
+  display: flex
+  flex-direction: column
+  align-items: center
+  gap: clamp(40px, 6vw, 80px)
+  background: #020202
+  position: relative
+
+  @media (max-width: 640px)
+    padding: 70px 14px 90px
+    gap: 32px
+
+  .equipment-header
+    text-align: center
+    max-width: 900px
+    margin: 0 auto
+    padding: 60px 20px 40px
+    position: relative
+    display: flex
+    flex-direction: column
+    gap: 24px
+
+    @media (max-width: 640px)
+      padding: 50px 16px 30px
+      gap: 20px
+
+    // 顶部装饰线条
+    &::before
+      content: ""
+      position: absolute
+      top: 0
+      left: 50%
+      transform: translateX(-50%)
+      width: 120px
+      height: 1px
+      background: linear-gradient(90deg, transparent, rgba(255, 77, 77, 0.6), transparent)
+      box-shadow: 0 0 20px rgba(255, 77, 77, 0.4)
+
+    // 底部装饰线条
+    &::after
+      content: ""
+      position: absolute
+      bottom: 0
+      left: 50%
+      transform: translateX(-50%)
+      width: 200px
+      height: 1px
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), rgba(255, 77, 77, 0.3), rgba(255, 255, 255, 0.2), transparent)
+      animation: line-expand 3s ease-in-out infinite
+
+    .eyebrow
+      letter-spacing: 0.25em
+      font-size: 0.75rem
+      font-weight: 500
+      margin: 0
+      text-transform: uppercase
+      position: relative
+      display: inline-block
+      align-self: center
+      background: linear-gradient(135deg, #ff4d4d, #ff6b6b, #ff8c8c, #ff4d4d)
+      -webkit-background-clip: text
+      background-clip: text
+      -webkit-text-fill-color: transparent
+      background-size: 300% 300%
+      animation: gradient-shift 5s ease infinite
+      filter: drop-shadow(0 0 12px rgba(255, 77, 77, 0.6))
+      padding: 0 40px
+      &::before, &::after
+        content: "•"
+        position: absolute
+        top: 50%
+        transform: translateY(-50%)
+        color: rgba(255, 77, 77, 0.5)
+        font-size: 1.2rem
+        animation: dot-pulse 2s ease-in-out infinite
+      &::before
+        left: 0
+        animation-delay: 0s
+      &::after
+        right: 0
+        animation-delay: 1s
+
+      @media (max-width: 640px)
+        padding: 0 30px
+        font-size: 0.7rem
+
+    h2
+      margin: 0
+      font-size: clamp(2rem, 5vw, 3.5rem)
+      letter-spacing: 0.15em
+      font-weight: 200
+      position: relative
+      color: #ffffff
+      text-shadow: 0 0 20px rgba(255, 77, 77, 0.3), 0 0 40px rgba(255, 77, 77, 0.2), 0 2px 4px rgba(0, 0, 0, 0.5), 0 4px 8px rgba(0, 0, 0, 0.3)
+      &::before
+        content: ""
+        position: absolute
+        top: 50%
+        left: 50%
+        transform: translate(-50%, -50%)
+        width: 120%
+        height: 120%
+        background: radial-gradient(ellipse at center, rgba(255, 77, 77, 0.15) 0%, transparent 70%)
+        z-index: -1
+        animation: text-glow 4s ease-in-out infinite
+      padding: 20px 0
+      &::after
+        content: ""
+        position: absolute
+        left: 50%
+        bottom: 0
+        transform: translateX(-50%)
+        width: 80px
+        height: 2px
+        background: linear-gradient(90deg, transparent, rgba(255, 77, 77, 0.8), transparent)
+        box-shadow: 0 0 15px rgba(255, 77, 77, 0.6)
+        animation: underline-glow 2.5s ease-in-out infinite
+
+      @media (max-width: 640px)
+        padding: 16px 0
+        letter-spacing: 0.1em
+
+    .lead
+      margin: 8px auto 0
+      position: relative
+      max-width: 700px
+      display: flex
+      flex-direction: column
+      gap: 12px
+
+      @media (max-width: 640px)
+        max-width: 100%
+        gap: 10px
+
+      p
+        margin: 0
+        color: rgba(255, 255, 255, 0.75)
+        line-height: 1.8
+        font-size: clamp(0.9rem, 2.5vw, 1.05rem)
+        font-weight: 300
+        letter-spacing: 0.05em
+        text-align: center
+        text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3)
+
+        @media (max-width: 640px)
+          line-height: 1.7
+          font-size: 0.9rem
+
+  .equipment-grid
+    width: 100%
+    max-width: 1400px
+    display: grid
+    gap: clamp(24px, 4vw, 40px)
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr))
+
+    @media (max-width: 768px)
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr))
+      gap: 24px
+
+    @media (max-width: 640px)
+      grid-template-columns: 1fr
+      gap: 20px
+
+  .equipment-card
+    background: linear-gradient(135deg, rgba(10, 10, 10, 0.95), rgba(15, 15, 15, 0.9))
+    backdrop-filter: blur(20px)
+    -webkit-backdrop-filter: blur(20px)
+    border: 1px solid rgba(255, 77, 77, 0.2)
+    border-radius: 20px
+    overflow: hidden
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1)
+    display: flex
+    flex-direction: column
+    position: relative
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(255, 77, 77, 0.1) inset
+
+    &:hover
+      transform: translateY(-8px)
+      border-color: rgba(255, 77, 77, 0.4)
+      box-shadow: 0 16px 48px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(255, 77, 77, 0.2) inset, 0 0 40px rgba(255, 77, 77, 0.2)
+
+    .equipment-image
+      width: 100%
+      height: 280px
+      overflow: hidden
+      position: relative
+      background: linear-gradient(135deg, rgba(20, 20, 20, 0.8), rgba(10, 10, 10, 0.9))
+
+      @media (max-width: 640px)
+        height: 240px
+
+      img
+        width: 100%
+        height: 100%
+        object-fit: cover
+        object-position: center
+        transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1)
+
+      &::after
+        content: ""
+        position: absolute
+        inset: 0
+        background: linear-gradient(180deg, transparent 0%, rgba(0, 0, 0, 0.3) 100%)
+        pointer-events: none
+
+    &:hover .equipment-image img
+      transform: scale(1.1)
+
+    .equipment-content
+      padding: 24px
+      display: flex
+      flex-direction: column
+      gap: 12px
+      flex: 1
+
+      @media (max-width: 640px)
+        padding: 20px
+        gap: 10px
+
+      h3
+        margin: 0
+        font-size: 1.3rem
+        font-weight: 400
+        letter-spacing: 0.08em
+        color: #ffffff
+        text-shadow: 0 0 10px rgba(255, 77, 77, 0.3)
+
+        @media (max-width: 640px)
+          font-size: 1.15rem
+
+      .equipment-description
+        margin: 0
+        color: rgba(255, 255, 255, 0.75)
+        line-height: 1.7
+        font-size: 0.95rem
+        letter-spacing: 0.04em
+        font-weight: 300
+
+        @media (max-width: 640px)
+          font-size: 0.9rem
+          line-height: 1.6
+
+// ============================================
+// 玻璃液体质感动画
+// ============================================
+@keyframes liquid-shimmer
+  0%, 100%
+    transform: translateY(0) scaleY(1)
+    opacity: 0.6
+  50%
+    transform: translateY(-2px) scaleY(1.05)
+    opacity: 0.8
+
+@keyframes liquid-shimmer-fast
+  0%, 100%
+    transform: translateY(0) scaleY(1)
+    opacity: 0.8
+  50%
+    transform: translateY(-3px) scaleY(1.1)
+    opacity: 1
+
+@keyframes liquid-flow
+  0%
+    transform: translate(-50%, -50%) rotate(0deg) scale(1)
+    opacity: 0.3
+  25%
+    transform: translate(-40%, -40%) rotate(90deg) scale(1.1)
+    opacity: 0.5
+  50%
+    transform: translate(-60%, -30%) rotate(180deg) scale(0.9)
+    opacity: 0.4
+  75%
+    transform: translate(-45%, -55%) rotate(270deg) scale(1.05)
+    opacity: 0.6
+  100%
+    transform: translate(-50%, -50%) rotate(360deg) scale(1)
+    opacity: 0.3
+
+@keyframes wave-motion
+  0%, 100%
+    transform: translateX(0) scaleY(1)
+    opacity: 0.3
+  25%
+    transform: translateX(10px) scaleY(1.1)
+    opacity: 0.4
+  50%
+    transform: translateX(-5px) scaleY(0.95)
+    opacity: 0.35
+  75%
+    transform: translateX(8px) scaleY(1.05)
+    opacity: 0.4
+
+@keyframes wave-motion-fast
+  0%, 100%
+    transform: translateX(0) scaleY(1)
+    opacity: 0.4
+  50%
+    transform: translateX(15px) scaleY(1.15)
+    opacity: 0.6
+
+@keyframes header-liquid
+  0%, 100%
+    transform: translate(-50%, -50%) rotate(0deg)
+    opacity: 0
+  50%
+    transform: translate(-40%, -40%) rotate(180deg)
+    opacity: 0.3
+
+// ============================================
+// Specs & Access Wrapper
+// ============================================
 .specs-access-wrap
   background: #040404
   background-size: cover
@@ -882,12 +1891,27 @@ header.nav-hidden
     background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.6), transparent)
     opacity: 0.8
 
+// ============================================
+// Specs Section
+// ============================================
 .specs
   padding: 70px 16px 90px
   display: flex
   flex-direction: column
   align-items: center
   gap: 32px
+
+  @media (max-width: 640px)
+    padding: 60px 12px 80px
+
+    .specs-header h2
+      font-size: 1.7rem
+
+    .spec-card
+      padding: 14px 0 14px
+
+    .spec-line
+      gap: 10px
 
   .specs-header
     text-align: center
@@ -978,12 +2002,27 @@ header.nav-hidden
       &:hover
         color: #ffa0a0
 
+// ============================================
+// Access Section
+// ============================================
 .access
   padding: 60px 16px 80px
   display: flex
   flex-direction: column
   align-items: center
   gap: 28px
+
+  @media (max-width: 640px)
+    padding: 50px 12px 70px
+
+    .access-header h2
+      font-size: 1.7rem
+
+    .access-map-frame
+      min-height: 260px
+
+    .button_solid012 a
+      letter-spacing: 0.1em
 
   .access-header
     text-align: center
@@ -1064,6 +2103,7 @@ header.nav-hidden
     margin-top: 10px
     align-self: center
     text-decoration: none
+
   .button_solid012
     width: 100%
     display: flex
@@ -1105,12 +2145,21 @@ header.nav-hidden
           transform: scaleX(1)
           opacity: 1
 
+// ============================================
+// Footer
+// ============================================
 .footer
   background: linear-gradient(135deg, rgba(100, 20, 20, 0.8), rgba(60, 10, 10, 0.7))
   padding: 105px 20px 95px
   border-top: 1px solid rgba(255, 255, 255, 0.1)
   margin-top: 20px
   position: relative
+
+  @media (max-width: 640px)
+    padding: 70px 14px 60px
+
+    .footer-inner
+      gap: 14px
 
   &::before
     content: ""
@@ -1159,7 +2208,8 @@ header.nav-hidden
     flex-direction: column
     gap: 6px
 
-  .footer-nav a
+  .footer-nav
+    a
     color: #f5f5f5
     text-decoration: none
     transition: color 0.2s ease
@@ -1167,7 +2217,8 @@ header.nav-hidden
     &:hover
       color: #ff4d4d
 
-  .footer-contact .footer-text
+  .footer-contact
+    .footer-text
     margin: 0
     color: #dcdcdc
 
@@ -1181,15 +2232,50 @@ header.nav-hidden
     border-top: 1px solid rgba(255, 255, 255, 0.08)
     padding-top: 12px
 
-.section-fade
-  opacity: 0
-  transform: translateY(40px)
-  transition: opacity 0.8s ease, transform 0.8s ease
+// ============================================
+// 标题动画关键帧
+// ============================================
+// 渐变文字流动动画
+@keyframes gradient-shift
+  0%, 100%
+    background-position: 0% 50%
+  50%
+    background-position: 100% 50%
 
-  &.is-visible
+// 装饰点脉冲动画
+@keyframes dot-pulse
+  0%, 100%
+    opacity: 0.3
+    transform: translateY(-50%) scale(1)
+  50%
+    opacity: 0.8
+    transform: translateY(-50%) scale(1.2)
+
+// 下划线发光动画
+@keyframes underline-glow
+  0%, 100%
+    opacity: 0.6
+    width: 80px
+    box-shadow: 0 0 15px rgba(255, 77, 77, 0.6)
+  50%
     opacity: 1
-    transform: translateY(0)
+    width: 100px
+    box-shadow: 0 0 25px rgba(255, 77, 77, 0.9)
 
-@media (max-width: 720px)
-  .product.environment .env-carousel
-    border-radius: 10px
+// 底部线条扩展动画
+@keyframes line-expand
+  0%, 100%
+    width: 200px
+    opacity: 0.6
+  50%
+    width: 300px
+    opacity: 1
+
+// 文字光晕动画
+@keyframes text-glow
+  0%, 100%
+    opacity: 0.3
+    transform: translate(-50%, -50%) scale(1)
+  50%
+    opacity: 0.6
+    transform: translate(-50%, -50%) scale(1.1)

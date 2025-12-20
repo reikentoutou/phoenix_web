@@ -1,36 +1,60 @@
 <!DOCTYPE html>
+<!-- 
+  PHOENIX eSPORTS CAFE 官方网站
+  这是一个单页面应用，展示电竞咖啡厅的环境、设备规格和位置信息
+  使用现代 Web 技术实现流畅的滚动动画和响应式设计
+-->
 <html lang="ja">
   <head>
+    <!-- 字符编码设置 -->
     <meta charset="UTF-8" />
+
+    <!-- 响应式视口设置，确保移动端正确显示 -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- 页面标题 -->
     <title>eSports_cafe_PHOENIX</title>
-    <meta
-      http-equiv="Cache-Control"
-      content="no-cache, no-store, must-revalidate"
-    />
-    <meta http-equiv="Pragma" content="no-cache" />
-    <meta http-equiv="Expires" content="0" />
+
+    <!-- Google Fonts 预连接，优化字体加载性能 -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+    <!-- 引入 Google Fonts 字体库 -->
+    <!-- Outfit: 现代无衬线字体，用于英文内容 -->
+    <!-- Yusei Magic: 日文装饰字体，用于特殊标题 -->
+    <!-- Zen Old Mincho: 日文衬线字体，用于品牌文案 -->
     <link
-      href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&family=Zen+Old+Mincho:wght@400;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&family=Yusei+Magic&family=Zen+Old+Mincho:wght@400;700&display=swap"
       rel="stylesheet"
     />
+
+    <!-- Swiper 轮播图库的 CSS 文件 -->
+    <!-- 用于实现店内环境图片的轮播展示效果 -->
     <link
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"
     />
+
+    <!-- 主样式表，带版本号防止缓存 -->
     <link rel="stylesheet" href="css/style.css?v=20241212" />
   </head>
   <body>
+    <!-- ============================================ -->
+    <!-- 页头导航区域 -->
+    <!-- ============================================ -->
     <header>
+      <!-- 主导航栏 -->
       <nav class="navbar" aria-label="Primary">
+        <!-- Logo 链接，点击返回首页 -->
         <a class="nav_logo" href="#home" aria-label="PHOENIX">
           <img
             src="images/begining/phoenixesports-logo.png"
             alt="PHOENIX logo"
           />
         </a>
+
+        <!-- 移动端导航菜单切换按钮 -->
+        <!-- 仅在移动设备上显示，用于展开/收起导航菜单 -->
         <button
           class="nav_toggle"
           aria-label="Toggle navigation"
@@ -38,30 +62,49 @@
         >
           <span class="nav_toggle_bar" aria-hidden="true"></span>
         </button>
+
+        <!-- 导航链接容器 -->
+        <!-- 包含所有主要页面的导航链接 -->
         <div class="nav_links" id="primary-nav">
           <a href="#home" class="nav-link active">home</a>
-          <a href="#stores" class="nav-link">store</a>
-          <a href="#calender" class="nav-link">calendar</a>
+          <a href="store.html" class="nav-link">store</a>
+          <a href="#calendar" class="nav-link">calendar</a>
           <a href="#use" class="nav-link">初めてご利用の方</a>
-          <a href="#evemt" class="nav-link">オトクな情報</a>
+          <a href="#event" class="nav-link">オトクな情報</a>
           <a href="#contact" class="nav-link">contact</a>
         </div>
       </nav>
     </header>
+    <!-- ============================================ -->
+    <!-- 主要内容区域 -->
+    <!-- ============================================ -->
     <main>
+      <!-- ============================================ -->
+      <!-- 首页 Hero 区域（欢迎区域） -->
+      <!-- ============================================ -->
+      <!-- 全屏固定背景，包含欢迎文字和品牌信息 -->
       <section class="begining" id="home">
+        <!-- 欢迎消息容器 -->
+        <!-- 使用 Yusei Magic 字体显示日文标题 -->
         <div class="begining_message yusei-magic-regular">
+          <!-- 欢迎语：ようこそ（欢迎） -->
+          <!-- 使用滚动动画效果，从右侧滑入 -->
           <p class="greet heading-13 reveal-on-scroll scroll-slide-right">
             ようこそ
           </p>
+          <!-- 品牌名称：ESPORTS CAFE PHOENIX -->
+          <!-- 使用滚动动画效果，从左侧滑入 -->
           <p class="midline reveal-on-scroll heading-13 scroll-slide-left">
             ESPORTS CAFE PHOENIX
           </p>
+          <!-- 品牌标语：アナタのサードプレイスへ（前往您的第三空间） -->
+          <!-- 使用滚动动画效果，从右侧滑入 -->
           <p class="subline reveal-on-scroll heading-13 scroll-slide-right">
             アナタのサードプレイスへ
           </p>
         </div>
       </section>
+
       <div class="main-content-wrapper">
         <section class="brand-concept reveal-on-scroll fade-in-up">
           <div class="brand-inner">
@@ -498,6 +541,7 @@
             <div class="footer-nav">
               <p class="footer-title">SITE</p>
               <a href="#home">Home</a>
+              <a href="store.html">Stores</a>
               <a href="#environment">Environment</a>
               <a href="#specs">Specs</a>
               <a href="#access">Access</a>
