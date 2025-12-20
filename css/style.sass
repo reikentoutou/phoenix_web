@@ -4,57 +4,57 @@
 // 定义用于控制页面堆叠效果的 CSS 变量
 // 该变量用于实现页面滚动时的动态效果
 :root
-  --stack-progress: 0  // 堆叠进度值，范围 0-1，用于控制环境区域的动态变化
+  --stack-progress: 0 // 堆叠进度值，范围 0-1，用于控制环境区域的动态变化
 
 // ============================================
 // 基础样式定义
 // ============================================
 // 页面主体样式
 body
-  margin: 0  // 移除默认边距
-  font-family: "Outfit", "Noto Sans JP", system-ui, sans-serif  // 设置字体族，优先使用 Outfit，回退到系统字体
-  background-color: #020202  // 深色背景色
-  color: #f0f0f0  // 浅色文字颜色
+  margin: 0 // 移除默认边距
+  font-family: "Outfit", "Noto Sans JP", system-ui, sans-serif // 设置字体族，优先使用 Outfit，回退到系统字体
+  background-color: #020202 // 深色背景色
+  color: #f0f0f0 // 浅色文字颜色
 
   // 移动端字体大小调整
   @media (max-width: 640px)
-    font-size: 15px  // 小屏幕设备上使用较小的基础字体
+    font-size: 15px // 小屏幕设备上使用较小的基础字体
 
 // 标题元素统一样式
 h1, h2, h3, h4, h5, h6
-  font-weight: 300  // 使用较细的字体粗细
-  letter-spacing: 0.12em  // 增加字母间距，提升可读性
-  color: #f5f5f5  // 接近白色的文字颜色
+  font-weight: 300 // 使用较细的字体粗细
+  letter-spacing: 0.12em // 增加字母间距，提升可读性
+  color: #f5f5f5 // 接近白色的文字颜色
 
 // 段落和文本元素样式
 p, li, span
-  letter-spacing: 0.08em  // 适中的字母间距
+  letter-spacing: 0.08em // 适中的字母间距
 
 // ============================================
 // 页头与导航栏样式
 // ============================================
 // 固定定位的页头容器
 header
-  position: fixed  // 固定定位，始终显示在页面顶部
+  position: fixed // 固定定位，始终显示在页面顶部
   top: 0
   left: 0
   right: 0
-  z-index: 30  // 确保页头在其他内容之上
-  transition: transform 0.25s ease  // 平滑的变换动画
-  padding: 20px 20px 0  // 上边距和内边距
-  pointer-events: none  // 默认不接收鼠标事件，子元素可接收
+  z-index: 30 // 确保页头在其他内容之上
+  transition: transform 0.25s ease // 平滑的变换动画
+  padding: 20px 20px 0 // 上边距和内边距
+  pointer-events: none // 默认不接收鼠标事件，子元素可接收
 
   // 中等屏幕适配
   @media (max-width: 768px)
-    padding: 10px  // 减少内边距
+    padding: 10px // 减少内边距
 
   // 小屏幕适配
   @media (max-width: 640px)
-    padding: 12px 12px 0  // 进一步调整内边距
+    padding: 12px 12px 0 // 进一步调整内边距
 
   // 导航栏隐藏状态（滚动时自动隐藏）
   &.nav-hidden
-    transform: translateY(-120%)  // 向上移动，完全隐藏导航栏
+    transform: translateY(-120%) // 向上移动，完全隐藏导航栏
 
 .navbar
   position: relative
@@ -233,7 +233,7 @@ header
   justify-content: center
   text-align: center
   padding: 120px 16px 160px
-  background: linear-gradient(180deg, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.85)), url("../images/begining/begin_background.webp") center/cover no-repeat
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.85)), url("../images/index/begin_background.webp") center/cover no-repeat
   overflow: hidden
   z-index: 0
 
@@ -820,7 +820,7 @@ header
   gap: clamp(40px, 6vw, 80px)
   background: #050505
   position: relative
-  margin-top: 80px  // 为固定导航栏留出空间
+  margin-top: 80px // 为固定导航栏留出空间
 
   @media (max-width: 640px)
     padding: 70px 14px 90px
@@ -926,7 +926,7 @@ header
         z-index: -1
         animation: text-glow 4s ease-in-out infinite
       // 下划线装饰
-      padding: 20px 0
+        padding: 20px 0
       &::after
         content: ""
         position: absolute
@@ -1106,7 +1106,7 @@ header
   flex-direction: column
   align-items: center
   gap: clamp(40px, 6vw, 80px)
-  background: linear-gradient(180deg, rgba(4, 4, 4, 0.5), rgba(4, 4, 4, 0.65)), url("../images/bg_1.jpg") center/cover no-repeat
+  background: linear-gradient(180deg, rgba(4, 4, 4, 0.5), rgba(4, 4, 4, 0.65)), url("../images/index/bg_1.webp") center/cover no-repeat
   position: relative
   overflow: hidden
 
@@ -1225,7 +1225,7 @@ header
         z-index: -1
         animation: text-glow 4s ease-in-out infinite
       // 下划线装饰
-      padding: 20px 0
+        padding: 20px 0
       &::after
         content: ""
         position: absolute
@@ -1667,7 +1667,7 @@ header
         background: radial-gradient(ellipse at center, rgba(255, 77, 77, 0.15) 0%, transparent 70%)
         z-index: -1
         animation: text-glow 4s ease-in-out infinite
-      padding: 20px 0
+        padding: 20px 0
       &::after
         content: ""
         position: absolute
@@ -2210,17 +2210,17 @@ header
 
   .footer-nav
     a
-    color: #f5f5f5
-    text-decoration: none
-    transition: color 0.2s ease
+      color: #f5f5f5
+      text-decoration: none
+      transition: color 0.2s ease
 
     &:hover
       color: #ff4d4d
 
   .footer-contact
     .footer-text
-    margin: 0
-    color: #dcdcdc
+      margin: 0
+      color: #dcdcdc
 
   .footer-bottom
     max-width: 1180px

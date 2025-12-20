@@ -1,0 +1,14 @@
+# 忽略 Python 虚拟环境
+venv/
+.venv/
+env/
+
+# 忽略 Mac 系统缓存
+.DS_Store
+
+# 忽略 Python 缓存
+__pycache__/
+*.pyc
+
+# 忽略 Cursor/VSCode 配置 (可选)
+.vscode/
