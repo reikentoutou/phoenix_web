@@ -7,6 +7,14 @@
   --stack-progress: 0 // 堆叠进度值，范围 0-1，用于控制环境区域的动态变化
 
 // ============================================
+// Global Overflow Fix - Prevent Horizontal Scrolling
+// ============================================
+html, body
+  width: 100%
+  overflow-x: hidden !important // Critical: Stops the page from swaying sideways
+  position: relative
+
+// ============================================
 // Typography System (Scheme A: Sharp Future)
 // ============================================
 
@@ -26,8 +34,8 @@ body
   @media (max-width: 640px)
     font-size: 15px
 
-// 2. 标题 & 英文数字系统 (Clash Display)
-// 核心：强制所有 标题、导航、按钮、价格、数字 使用 Clash Display
+// 2. 标题 & 英文数字系统 (Oswald - 替代 Clash Display，避免 CORS 问题)
+// 核心：强制所有 标题、导航、按钮、价格、数字 使用 Oswald
 h1, h2, h3, h4, h5, h6,
 .nav-link, .nav_logo,
 .eyebrow, .label-box span,
@@ -35,7 +43,7 @@ h1, h2, h3, h4, h5, h6,
 .store-number, .pricing-item-price, .pricing-store-number,
 .spec-label, .spec-value,
 .env-tag, .env-sub, .env-tag-vertical, .slide-number, .env-info h3
-  font-family: 'Clash Display', sans-serif !important
+  font-family: 'Oswald', sans-serif !important
   font-weight: 600 // 默认加粗，增加力量感
   letter-spacing: 0.04em // 关键：微宽字间距 = 高级感
 
@@ -61,329 +69,10 @@ h1
 // ============================================
 // 页头与导航栏样式
 // ============================================
-// 固定定位的页头容器
-header
-  position: fixed // 固定定位，始终显示在页面顶部
-  top: 0
-  left: 0
-  right: 0
-  z-index: 30 // 确保页头在其他内容之上
-  transition: transform 0.25s ease // 平滑的变换动画
-  padding: 20px 20px 0 // 上边距和内边距
-  pointer-events: none // 默认不接收鼠标事件，子元素可接收
-
-  // 中等屏幕适配
-  @media (max-width: 768px)
-    padding: 10px // 减少内边距
-
-  // 小屏幕适配
-  @media (max-width: 640px)
-    padding: 12px 12px 0 // 进一步调整内边距
-
-  // 导航栏隐藏状态（滚动时自动隐藏）
-  &.nav-hidden
-    transform: translateY(-120%) // 向上移动，完全隐藏导航栏
-
-.navbar
-  position: relative
-  display: flex
-  align-items: center
-  justify-content: space-between
-  gap: 18px
-  padding: 14px 28px
-  background: linear-gradient(135deg, rgba(160, 40, 40, 0.9), rgba(110, 20, 20, 0.8))
-  background-clip: padding-box
-  backdrop-filter: blur(20px)
-  -webkit-backdrop-filter: blur(20px)
-  border: 1px solid transparent
-  border-radius: 14px
-  box-shadow: 0 12px 28px rgba(255, 77, 77, 0.24), 0 18px 32px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.08), 0 0 15px rgba(255, 77, 77, 0.2)
-  max-width: 1200px
-  margin: 0 auto
-  pointer-events: auto
-  transition: box-shadow 0.3s ease, filter 0.3s ease
-
-  @media (max-width: 640px)
-    padding: 10px 14px
-    gap: 12px
-
-  &:hover
-    box-shadow: 0 14px 34px rgba(255, 77, 77, 0.32), 0 20px 36px rgba(0, 0, 0, 0.65), inset 0 1px 0 rgba(255, 255, 255, 0.1)
-
-  .nav_logo
-    img
-      height: 80px
-      width: auto
-      display: block
-      transition: filter 0.3s ease, transform 0.3s ease
-      filter: drop-shadow(0 0 2px rgba(255, 77, 77, 0.3))
-
-    &:hover img
-      transform: scale(1.05)
-      filter: drop-shadow(0 0 8px rgba(255, 77, 77, 0.8))
-
-  .nav_toggle
-    margin-left: auto
-    position: relative
-    width: 46px
-    height: 44px
-    background: rgba(0, 0, 0, 0.65)
-    color: #f5f5f5
-    border: 1px solid rgba(255, 77, 77, 0.25)
-    border-radius: 10px
-    padding: 0
-    cursor: pointer
-    display: inline-flex
-    align-items: center
-    justify-content: center
-    transition: background 0.2s ease, color 0.2s ease, transform 0.2s ease, border-color 0.2s ease
-
-    @media (min-width: 960px)
-      display: none
-
-    &:hover
-      background: rgba(255, 77, 77, 0.16)
-      color: #ff4d4d
-      transform: translateY(-1px)
-      border-color: rgba(255, 77, 77, 0.5)
-
-    &:focus-visible
-      outline: 2px solid #6bb6ff
-      outline-offset: 4px
-
-    .nav_toggle_bar,
-    &::before,
-    &::after
-      content: ""
-      position: absolute
-      left: 50%
-      width: 18px
-      height: 2px
-      background: currentColor
-      border-radius: 999px
-      transform: translateX(-50%)
-      transition: transform 0.25s ease, opacity 0.25s ease, background 0.25s ease
-
-    .nav_toggle_bar
-      transform: translate(-50%, 0)
-
-    &::before
-      transform: translate(-50%, -6px)
-
-    &::after
-      transform: translate(-50%, 6px)
-
-  .nav_links
-    position: absolute
-    top: 100%
-    right: 0
-    display: flex
-    flex-direction: column
-    align-items: flex-end
-    gap: 10px
-    padding: 16px 18px
-    margin-top: 8px
-    background: rgba(10, 10, 10, 0.95)
-    border: 1px solid rgba(255, 77, 77, 0.3)
-    border-radius: 10px
-    z-index: 40
-    box-shadow: 0 28px 60px rgba(0, 0, 0, 0.55), 0 0 24px rgba(255, 77, 77, 0.12)
-    opacity: 0
-    transform: translateY(-6px)
-    pointer-events: none
-    transition: opacity 0.25s ease, transform 0.25s ease
-
-    @media (min-width: 960px)
-      position: static
-      display: flex !important
-      flex-direction: row
-      align-items: center
-      gap: 18px
-      padding: 0
-      margin: 0
-      background: transparent
-      border: none
-      box-shadow: none
-      opacity: 1
-      transform: none
-      pointer-events: auto
-
-    &.open
-      display: flex
-      opacity: 1
-      transform: translateY(6px)
-      pointer-events: auto
-
-  .nav-link
-    color: #f5f5f5
-    text-decoration: none
-    font-size: 0.95rem
-    letter-spacing: 0.05em
-    text-transform: uppercase
-    padding: 8px 10px
-    border-radius: 6px
-    transition: color 0.2s ease, text-shadow 0.2s ease
-    position: relative
-
-    &:hover,
-    &.active
-      color: #fff
-      text-shadow: 0 0 12px rgba(255, 77, 77, 0.8), 0 0 18px rgba(255, 77, 77, 0.45)
-
-      &::after
-        transform: translateX(-50%) scaleX(1)
-
-    &::after
-      content: ""
-      position: absolute
-      bottom: 0
-      left: 50%
-      width: 100%
-      height: 2px
-      background: linear-gradient(90deg, transparent, #ff4d4d, transparent)
-      transition: transform 0.3s ease
-      transform: translateX(-50%) scaleX(0)
-      border-radius: 2px
-      box-shadow: 0 0 16px rgba(255, 77, 77, 0.6)
-
-// ============================================
-// Hero Section (Begining)
-// ============================================
-.begining
-  position: fixed
-  top: 0
-  left: 0
-  width: 100%
-  height: 100vh
-  display: flex
-  flex-direction: column
-  align-items: center
-  justify-content: center
-  text-align: center
-  padding: 120px 16px 160px
-  background: linear-gradient(180deg, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.85)), url("../images/index/begin_background.webp") center/cover no-repeat
-  overflow: hidden
-  z-index: 0
-
-  @media (max-width: 640px)
-    padding: 100px 14px 120px
-
-  &::before
-    content: ""
-    position: absolute
-    inset: 0
-    background: rgba(0, 0, 0, 0.45)
-    backdrop-filter: blur(2px)
-    -webkit-backdrop-filter: blur(2px)
-
-  > *
-    position: relative
-    z-index: 1
-
-  &::after
-    content: ""
-    position: absolute
-    left: 50%
-    bottom: 34px
-    width: 1px
-    height: 60px
-    background: linear-gradient(180deg, rgba(255, 77, 77, 0), rgba(255, 77, 77, 0.8), rgba(255, 77, 77, 0))
-    transform: translateX(-50%)
-    animation: hero-scroll 2.2s ease-in-out infinite
-    pointer-events: none
-
-.begining_message
-  display: flex
-  flex-direction: column
-  align-items: center
-  gap: 40px
-  font-size: 1.6rem
-  line-height: 1.6
-  max-width: 720px
-  margin-bottom: 24px
-  text-shadow: 0 6px 18px rgba(0, 0, 0, 0.45)
-  transition: transform 0.45s ease, opacity 0.45s ease
-
-  @media (max-width: 640px)
-    gap: 24px
-    max-width: 580px
-
-  .greet
-    margin: 0
-    font-size: clamp(1.6rem, 2.6vw, 2.1rem)
-    letter-spacing: 0.12em
-    opacity: 0
-    transform: translateY(16px)
-    transition: opacity 2s ease, transform 2s ease
-
-    &.is-visible
-      opacity: 1
-      transform: translateY(0)
-
-  .midline
-    margin: 0
-    letter-spacing: 0.5em
-    font-size: 1.3rem
-    font-family: 'Noto Sans JP', sans-serif
-    font-weight: 400
-
-    @media (max-width: 640px)
-      letter-spacing: 0.32em
-      font-size: 1.2rem
-
-  .subline
-    margin: 0
-    letter-spacing: 0.08em
-    font-weight: 500
-    font-size: 1.4rem
-    color: #dcdcdc
-
-    @media (max-width: 640px)
-      font-size: 1.3rem
-
-  .scroll-slide-right,
-  .scroll-slide-left
-    transition: transform 0.5s ease, opacity 0.5s ease
-
-  &.is-sliding-out
-    opacity: 0.3
-    transform: translateY(-20px)
-
-    .scroll-slide-right
-      transform: translateY(-32px) translateX(90px) scale(0.9)
-      opacity: 0
-
-    .scroll-slide-left
-      transform: translateY(-32px) translateX(-90px) scale(0.9)
-      opacity: 0
-
-@keyframes hero-scroll
-  0%
-    transform: translate(-50%, -6px)
-    opacity: 0
-  20%
-    opacity: 1
-  50%
-    transform: translate(-50%, 6px)
-    opacity: 1
-  100%
-    transform: translate(-50%, -6px)
-    opacity: 0
 
 // ============================================
 // Scroll Animations
 // ============================================
-.scroll-slide-right
-  transform: translateY(22px) translateX(0) scale(1)
-
-  &.is-visible
-    transform: translateY(0) translateX(60px) scale(0.85)
-
-.scroll-slide-left
-  transform: translateY(22px) translateX(0) scale(1)
-
-  &.is-visible
-    transform: translateY(0) translateX(-60px) scale(0.85)
 
 .reveal-on-scroll
   opacity: 0
@@ -411,17 +100,6 @@ header
   &.is-visible
     opacity: 1
     transform: translateY(0)
-
-.heading-13
-  position: relative
-  color: #f5f5f5
-  display: inline-block
-  -webkit-box-reflect: below -10px -webkit-linear-gradient(top, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0) 60%, rgba(0, 0, 0, 0.35))
-
-.yusei-magic-regular
-  font-family: 'Clash Display', sans-serif
-  font-weight: 400
-  font-style: normal
 
 // ============================================
 // Main Content Wrapper
@@ -600,43 +278,106 @@ header
       align-items: flex-start
       gap: 12px
 
-  @media (max-width: 600px)
+  // Mobile Card Layout Fix (768px and below)
+  @media (max-width: 768px)
+    // 1. Adjust Section Padding
     &
-      padding: 70px 14px 90px
-      padding-top: calc(70px + 90px * var(--stack-progress))
+      padding: 60px 16px 80px
+      margin-top: 0 // Reset stack effect if needed
+      padding-top: calc(60px + 90px * var(--stack-progress))
 
+    // 2. Reset the Swiper Shell (Add bottom padding for Nav Buttons)
     .env-swiper-shell
-      padding: 18px 14px 22px
+      padding: 20px 16px 60px // Add bottom padding for Nav Buttons
+      height: auto // Let content dictate height
+      border-radius: 12px
 
-    .env-slide-copy
-      grid-template-columns: 1fr
-      gap: 12px
-
-    .env-tag-vertical
-      justify-self: flex-start
-
-    .env-fraction
-      width: 100%
-      justify-content: space-between
-
-  @media (max-width: 640px)
-    &
-      padding: 64px 12px 80px
-
-    .env-swiper-shell
-      padding: 14px 12px 18px
-
+    // 3. Force Flex Column Layout (Image Top, Text Bottom)
     .env-slide-grid
-      grid-template-columns: 1fr
-      min-height: auto
-      gap: 18px
+      display: flex !important
+      flex-direction: column-reverse !important // Image Top, Text Bottom
+      gap: 24px !important
+      min-height: auto !important
+      padding: 0 !important
+      // Reset grid columns if any
+      grid-template-columns: 1fr !important
 
+    // 4. Fix Image Container (Force Image to be 16:9 Card)
     .env-image-frame
-      min-height: 240px
-      aspect-ratio: 4 / 3
+      width: 100% !important
+      height: auto !important
+      aspect-ratio: 16 / 9
+      margin: 0 !important
+      max-width: none !important
+      flex-shrink: 0
+      border-radius: 12px
 
+      img
+        object-fit: cover
+        width: 100%
+        height: 100%
+
+    // 5. Fix Text Container
     .env-slide-copy
-      grid-template-columns: auto 1fr
+      display: flex !important
+      flex-direction: row // Keep Tag and Text side-by-side
+      align-items: flex-start
+      gap: 12px
+      width: 100%
+      padding: 0
+
+    // 6. Adjust Text Block
+    .env-text-block
+      flex: 1 // Take remaining width
+      gap: 10px
+
+    .env-slide-grid h3
+      font-size: 1.5rem !important
+      margin-bottom: 8px
+      line-height: 1.3
+
+    .env-sub
+      font-size: 0.75rem
+      letter-spacing: 0.2em
+
+    .env-desc
+      font-size: 0.9rem
+      line-height: 1.6
+      letter-spacing: 0.01em
+
+    // 7. Vertical Text Tag adjustment
+    .env-tag-vertical
+      writing-mode: vertical-rl
+      padding: 10px 6px
+      font-size: 1rem
+      align-self: stretch // Stretch to match text height
+      display: flex
+      align-items: center
+      justify-content: center
+      background: rgba(255, 255, 255, 0.05)
+      border: 1px solid rgba(255, 255, 255, 0.1)
+      border-radius: 8px
+      flex-shrink: 0
+
+    // 8. Swiper Slide Height
+    .swiper-slide
+      height: auto !important
+
+    // 9. Move Navigation Buttons to avoid blocking text
+    .env-nav
+      bottom: 16px
+      right: 16px
+      gap: 8px
+      z-index: 10
+
+    .env-nav-btn
+      width: 36px
+      height: 36px
+      font-size: 1.2rem
+
+    .env-pagination
+      margin-top: 16px
+      height: 2px
 
   @media (max-width: 720px)
     .env-carousel
@@ -650,6 +391,10 @@ header
     flex-direction: column
     gap: 10px
 
+    @media (max-width: 640px)
+      text-align: center
+      gap: 8px
+
     .eyebrow
       letter-spacing: 0.18em
       font-size: 0.85rem
@@ -657,15 +402,28 @@ header
       margin: 0
       text-transform: uppercase
 
+      @media (max-width: 640px)
+        font-size: 0.75rem
+        letter-spacing: 0.15em
+
     h2
       margin: 0
       font-size: 2rem
       letter-spacing: 0.08em
 
+      @media (max-width: 640px)
+        font-size: 1.5rem
+        letter-spacing: 0.06em
+
     .lead
       margin: 0
       color: #dcdcdc
       line-height: 1.6
+
+      @media (max-width: 640px)
+        font-size: 0.9rem
+        line-height: 1.5
+        padding: 0 8px
 
   .env-swiper-shell
     width: 100%
@@ -849,9 +607,23 @@ header
   flex-direction: column
   align-items: center
   gap: clamp(40px, 6vw, 80px)
-  background: #050505
+  background: linear-gradient(180deg, rgba(5, 5, 5, 0.7), rgba(5, 5, 5, 0.85)), url("../images/store/DSCF4959.webp") center/cover no-repeat
   position: relative
   margin-top: 80px // 为固定导航栏留出空间
+  overflow: hidden
+
+  // 背景遮罩层，确保文字可读性
+  &::before
+    content: ""
+    position: absolute
+    inset: 0
+    background: linear-gradient(180deg, rgba(5, 5, 5, 0.4), rgba(5, 5, 5, 0.6))
+    z-index: 0
+    pointer-events: none
+
+  > *
+    position: relative
+    z-index: 1
 
   @media (max-width: 640px)
     padding: 70px 14px 90px
@@ -2316,76 +2088,98 @@ header
 // ============================================
 
 // 1. 玻璃态导航 (完全透明玻璃化)
+// ============================================
+// New High-End Hero & Header
+// ============================================
+
+// 1. 玻璃态导航 (完全透明玻璃化)
 header
   position: fixed
   top: 0
   left: 0
   width: 100%
-  z-index: 100
-  padding: 40px 60px // 增大 padding
+  z-index: 9999 // 最高显示权重，确保导航栏始终在最顶层
+  padding: 20px 20px 0
   transition: all 0.4s ease
   pointer-events: none
-  background: transparent // 完全透明
+  background: transparent
   box-sizing: border-box
-  overflow-x: hidden // 防止横向溢出
+  overflow-x: hidden
 
   &.scrolled
-    padding: 30px 60px
-    background: rgba(10, 10, 10, 0.4) // 更透明的背景
-    backdrop-filter: blur(30px) saturate(180%) // 增强玻璃模糊效果
+    padding: 20px 20px 0
+    background: rgba(10, 10, 10, 0.4)
+    backdrop-filter: blur(30px) saturate(180%)
     -webkit-backdrop-filter: blur(30px) saturate(180%)
     border-bottom: 1px solid rgba(255, 255, 255, 0.08)
 
   &.nav-hidden
     transform: translateY(-120%)
 
+    // 移动端：即使导航栏隐藏，也保留菜单按钮区域可见
+    @media (max-width: 960px)
+      transform: translateY(calc(-100% + 70px)) // 只隐藏大部分，保留底部70px（菜单按钮区域）
+
+      .navbar
+        padding: 8px 14px // 减少 padding，让菜单按钮更紧凑
+        min-height: 60px // 确保有足够高度显示菜单按钮
+
   @media (max-width: 768px)
-    padding: 30px 30px
+    padding: 10px 10px 0
     &.scrolled
-      padding: 25px 30px
+      padding: 10px 10px 0
 
   @media (max-width: 480px)
-    padding: 25px 20px
+    padding: 12px 12px 0
     &.scrolled
-      padding: 20px 20px
+      padding: 12px 12px 0
 
 .navbar
+  position: relative
   display: flex
   align-items: center
   justify-content: space-between
-  max-width: 1600px // 增大最大宽度
+  max-width: 1200px
   width: 100%
   margin: 0 auto
   pointer-events: auto
   box-sizing: border-box
-  padding: 20px 40px // 增加内部 padding
-  gap: 40px // 增大间距
-  background: transparent // 完全透明，去除玻璃态
-  backdrop-filter: none // 去除模糊效果
-  -webkit-backdrop-filter: none
-  border: none // 去除边框
-  border-radius: 0 // 去除圆角
-  box-shadow: none // 去除阴影
+  padding: 14px 28px
+  gap: 18px
+  background: linear-gradient(135deg, rgba(160, 40, 40, 0.9), rgba(110, 20, 20, 0.8))
+  backdrop-filter: blur(20px)
+  -webkit-backdrop-filter: blur(20px)
+  border: 1px solid rgba(255, 77, 77, 0.2)
+  border-radius: 14px
+  box-shadow: 0 12px 28px rgba(255, 77, 77, 0.24), 0 18px 32px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.08), 0 0 15px rgba(255, 77, 77, 0.2)
+  transition: box-shadow 0.3s ease, filter 0.3s ease
+  z-index: 1
+  // 关键：确保菜单不被裁剪
+  overflow: visible !important
 
   @media (max-width: 1200px)
-    padding: 18px 30px
-    gap: 30px
+    padding: 12px 24px
+    gap: 16px
 
   @media (max-width: 768px)
-    padding: 16px 24px
-    gap: 20px
+    padding: 10px 16px
+    gap: 12px
 
   @media (max-width: 480px)
-    padding: 14px 20px
-    gap: 15px
+    padding: 10px 14px
+    gap: 10px
+
+  &:hover
+    box-shadow: 0 14px 34px rgba(255, 77, 77, 0.32), 0 20px 36px rgba(0, 0, 0, 0.65), inset 0 1px 0 rgba(255, 255, 255, 0.1)
 
   .nav_logo
-    flex-shrink: 0 // 防止 logo 被压缩
+    flex-shrink: 0
     img
-      height: 60px // 增大 logo 尺寸
+      height: 60px
       width: auto
       display: block
-      transition: transform 0.3s ease
+      transition: transform 0.3s ease, filter 0.3s ease
+      filter: drop-shadow(0 0 2px rgba(255, 77, 77, 0.3))
 
       @media (max-width: 768px)
         height: 50px
@@ -2395,58 +2189,231 @@ header
 
       &:hover
         transform: scale(1.05)
+        filter: drop-shadow(0 0 8px rgba(255, 77, 77, 0.8))
+
+  .nav_toggle
+    margin-left: auto
+    position: relative
+    width: 44px
+    height: 44px
+    background: transparent
+    color: #ffffff // 纯白色 (EVA/Cyberpunk)
+    border: 1px solid rgba(255, 255, 255, 0.2)
+    border-radius: 4px
+    padding: 0
+    cursor: pointer
+    display: none // 默认隐藏
+    align-items: center
+    justify-content: center
+    transition: all 0.3s ease
+    z-index: 10001
+
+    // 移动端显示汉堡按钮
+    @media (max-width: 768px)
+      display: flex
+
+    // 桌面端隐藏
+    @media (min-width: 769px)
+      display: none !important
+
+    &:hover
+      background: rgba(255, 255, 255, 0.1)
+      border-color: rgba(255, 255, 255, 0.4)
+      transform: scale(1.05)
+
+    &:active
+      transform: scale(0.95)
+
+    &:focus-visible
+      outline: 2px solid rgba(255, 255, 255, 0.5)
+      outline-offset: 2px
+
+    // 汉堡图标：3条横线
+    .nav_toggle_bar,
+    &::before,
+    &::after
+      content: ""
+      position: absolute
+      left: 50%
+      width: 20px
+      height: 2px
+      background: #ffffff
+      border-radius: 2px
+      transform: translateX(-50%)
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1)
+
+    .nav_toggle_bar
+      transform: translate(-50%, 0)
+      opacity: 1
+
+    &::before
+      transform: translate(-50%, -7px)
+
+    &::after
+      transform: translate(-50%, 7px)
+
+    // 展开状态：转换为 X 图标
+    &[aria-expanded="true"]
+      .nav_toggle_bar
+        opacity: 0
+        transform: translate(-50%, 0) rotate(180deg)
+
+      &::before
+        transform: translate(-50%, 0) rotate(45deg)
+
+      &::after
+        transform: translate(-50%, 0) rotate(-45deg)
 
   .nav_links
-    display: flex
-    gap: 40px // 增大链接间距
-    flex-wrap: nowrap
-    align-items: center
-    flex-shrink: 1
-    min-width: 0 // 允许 flex 子元素缩小
+    // 桌面端：始终显示，水平布局
+    @media (min-width: 769px)
+      position: static
+      display: flex !important
+      flex-direction: row
+      align-items: center
+      gap: 18px
+      padding: 0
+      margin: 0
+      background: transparent
+      backdrop-filter: none
+      -webkit-backdrop-filter: none
+      border: none
+      box-shadow: none
+      opacity: 1 !important
+      transform: none !important
+      pointer-events: auto !important
+      z-index: auto
+      max-height: none !important
+      overflow: visible !important
 
-    @media (max-width: 1200px)
-      gap: 30px
+    // 移动端：使用 max-height 和 transform 实现平滑滑下动画
+    @media (max-width: 768px)
+      // 关键：绝对定位，脱离文档流，覆盖在内容之上
+      position: absolute !important
+      top: 60px !important // 基于 header 高度调整
+      left: 0 !important
+      right: 0 !important
+      width: 100% !important
 
-    @media (max-width: 1100px)
-      gap: 25px
+      // Flex 布局：垂直排列
+      display: flex !important
+      flex-direction: column !important
+      align-items: center !important
+      gap: 20px !important
 
-    @media (max-width: 960px)
-      display: none // 移动端逻辑由 JS 控制
+      // 视觉样式：纯黑背景，确保可见
+      background-color: #000000 !important
+      background: #000000 !important // 双重确保
+      background-image: none !important // 禁止任何背景图片
+      padding: 20px 0 !important
+      margin: 0 !important
+      margin-top: 8px !important
+      border-top: 1px solid rgba(255, 255, 255, 0.15) !important
+      border-bottom: 1px solid rgba(255, 255, 255, 0.15) !important
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.95) !important
+
+      // 层级：确保在所有内容之上（超高 z-index）
+      z-index: 99999 !important
+
+      // 动画基础状态：完全隐藏
+      max-height: 0 !important
+      overflow: hidden !important
+      opacity: 0 !important
+      visibility: hidden !important
+      transform: translateY(0) !important // 不移出屏幕，保持在正确位置
+      pointer-events: none !important
+      transition: max-height 0.4s ease-in-out, opacity 0.4s ease-in-out, visibility 0s linear 0.4s
+
+      // 展开状态：完全可见
+      &.open
+        max-height: 500px !important // 足够大的值容纳所有链接
+        opacity: 1 !important
+        visibility: visible !important
+        transform: translateY(0) !important
+        pointer-events: auto !important
+        padding-bottom: 20px !important // 底部内边距
+        transition: max-height 0.4s ease-in-out, opacity 0.4s ease-in-out, visibility 0s linear 0s
+        // 确保背景在展开时也保持纯黑
+        background-color: #000000 !important
+        background: #000000 !important
+        background-image: none !important
+
+      // 强制移动端链接文字颜色为白色
+      .nav-link
+        color: #ffffff !important
+
+        &:hover,
+        &:active,
+        &.active
+          color: #ffffff !important
+          background: rgba(255, 255, 255, 0.1) !important
 
     .nav-link
       font-family: 'Clash Display', sans-serif
-      font-size: 1rem // 增大字体
-      font-weight: 500
-      letter-spacing: 0.15em
-      color: rgba(255, 255, 255, 0.85) // 更明显的文字颜色
-      text-transform: uppercase
+      color: #ffffff // 纯白色文字 (EVA/Cyberpunk)
       text-decoration: none
-      transition: all 0.3s ease
-      white-space: nowrap // 防止文字换行
-      flex-shrink: 0 // 防止链接被压缩
-      padding: 8px 12px // 增加点击区域
-      border-radius: 8px
+      font-size: 0.95rem
+      letter-spacing: 0.05em
+      text-transform: uppercase
+      padding: 8px 10px
+      border-radius: 6px
+      transition: color 0.2s ease, text-shadow 0.2s ease, background 0.2s ease
       position: relative
+      font-weight: 500
 
-      @media (max-width: 1200px)
-        font-size: 0.9rem
-        padding: 6px 10px
+      // 桌面端样式
+      @media (min-width: 769px)
+        font-size: 1rem
+        letter-spacing: 0.15em
+        padding: 8px 12px
 
-      &:hover, &.active
-        color: #fff
-        background: rgba(255, 255, 255, 0.1) // 悬停时的玻璃高光
+        &:hover,
+        &.active
+          color: #fff
+          text-shadow: 0 0 12px rgba(255, 77, 77, 0.8), 0 0 18px rgba(255, 77, 77, 0.45)
+          background: rgba(255, 255, 255, 0.1)
 
-      &.active
+          &::after
+            transform: translateX(-50%) scaleX(1)
+
         &::after
-          content: ''
+          content: ""
           position: absolute
-          bottom: 4px
+          bottom: 0
           left: 50%
-          transform: translateX(-50%)
-          width: 60%
+          width: 100%
           height: 2px
-          background: rgba(255, 255, 255, 0.6)
+          background: linear-gradient(90deg, transparent, #ff4d4d, transparent)
+          transition: transform 0.3s ease
+          transform: translateX(-50%) scaleX(0)
           border-radius: 2px
+          box-shadow: 0 0 16px rgba(255, 77, 77, 0.6)
+
+      // 移动端样式：全宽，带分隔线
+      @media (max-width: 768px)
+        display: block
+        width: 100%
+        padding: 16px 20px
+        text-align: left
+        border-bottom: 1px solid rgba(255, 255, 255, 0.05)
+        font-size: 1rem
+        letter-spacing: 0.1em
+        background: transparent
+        transition: background 0.2s ease, color 0.2s ease
+
+        &:last-child
+          border-bottom: none
+
+        &:hover,
+        &:active,
+        &.active
+          background: rgba(255, 255, 255, 0.05)
+          color: #ffffff
+          text-shadow: 0 0 8px rgba(255, 255, 255, 0.3)
+
+        // 移除桌面端的下划线效果
+        &::after
+          display: none
 
 // ============================================
 // New Cinematic Hero Styles
@@ -2459,7 +2426,8 @@ header
   align-items: center
   justify-content: flex-start
   background: #000
-  overflow: hidden // 关键：防止背景图放大时撑破容器
+  overflow: hidden
+  z-index: 1 // Ensure hero is below header (z-index: 1000) and mobile menu (z-index: 9999) // 关键：防止背景图放大时撑破容器
 
   // 背景图层
   .hero-bg
@@ -2593,3 +2561,263 @@ header
         &:hover
           transform: translateY(-5px)
           background: rgba(255, 255, 255, 0.9)
+
+// ============================================
+// NEW NAVIGATION SYSTEM: Floating HUD + Mobile Overlay
+// ============================================
+
+// --- Floating HUD Header ---
+.hud-header
+  position: fixed
+  top: 20px
+  left: 0
+  width: 100%
+  z-index: 1000
+  padding: 0 32px
+  pointer-events: none // Let clicks pass through the empty space
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1)
+
+  &.is-hidden
+    transform: translateY(-150%)
+
+.hud-container
+  max-width: 1400px
+  margin: 0 auto
+  display: flex
+  align-items: center
+  justify-content: space-between
+  pointer-events: auto // Re-enable clicks on the bar itself
+
+  // Enhanced Glassmorphism - Transparent Glass Effect with White Tint
+  // Layered background for better visibility while maintaining transparency
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.12), rgba(255, 255, 255, 0.08)), rgba(50, 50, 50, 0.3)
+  backdrop-filter: blur(40px) saturate(180%)
+  -webkit-backdrop-filter: blur(40px) saturate(180%)
+  border: 1px solid rgba(255, 255, 255, 0.25)
+  border-radius: 100px
+  padding: 18px 40px
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.2), inset 0 -1px 0 rgba(255, 255, 255, 0.05)
+
+  // Additional glass effect layers
+  &::before
+    content: ''
+    position: absolute
+    inset: 0
+    border-radius: 100px
+    padding: 1px
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0.08))
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)
+    -webkit-mask-composite: xor
+    mask-composite: exclude
+    pointer-events: none
+
+.hud-logo img
+  height: 56px
+  width: auto
+  display: block
+  transition: transform 0.3s ease
+
+  &:hover
+    transform: scale(1.05)
+
+// Desktop Links
+.hud-nav-desktop
+  display: flex
+  gap: 40px
+  align-items: center
+
+  .hud-link
+    font-family: 'Oswald', sans-serif
+    color: rgba(255, 255, 255, 0.8)
+    text-decoration: none
+    font-size: 1.05rem
+    letter-spacing: 0.12em
+    position: relative
+    transition: color 0.3s ease, transform 0.2s ease
+    padding: 8px 0
+    font-weight: 500
+
+    &::after
+      content: ''
+      position: absolute
+      bottom: 4px
+      left: 0
+      width: 0
+      height: 2px
+      background: linear-gradient(90deg, transparent, rgba(255, 77, 77, 0.8), transparent)
+      transition: width 0.3s ease
+      box-shadow: 0 0 8px rgba(255, 77, 77, 0.6)
+
+    &:hover,
+    &.active
+      color: #fff
+      transform: translateY(-2px)
+
+      &::after
+        width: 100%
+
+// Mobile Menu Button
+.hud-menu-btn
+  display: none // Hidden on desktop
+  align-items: center
+  gap: 14px
+  background: transparent
+  border: none
+  cursor: pointer
+  color: #fff
+  padding: 8px 0
+  transition: transform 0.2s ease
+
+  &:hover
+    transform: translateY(-2px)
+
+  .btn-text
+    font-family: 'Oswald', sans-serif
+    font-weight: 600
+    font-size: 1.05rem
+    letter-spacing: 0.12em
+
+  .btn-icon
+    width: 28px
+    height: 18px
+    position: relative
+    display: flex
+    flex-direction: column
+    justify-content: space-between
+
+    span
+      display: block
+      width: 100%
+      height: 2.5px
+      background: #fff
+      border-radius: 2px
+      transition: 0.3s ease
+
+  // Active State (X Icon)
+  &.is-active
+    .btn-icon
+      span:nth-child(1)
+        transform: translateY(8px) rotate(45deg)
+
+      span:nth-child(2)
+        transform: translateY(-8px) rotate(-45deg)
+
+@media (max-width: 900px)
+  .hud-header
+    padding: 0 24px
+
+  .hud-container
+    padding: 16px 32px
+
+  .hud-logo img
+    height: 52px
+
+  .hud-nav-desktop
+    display: none
+
+  .hud-menu-btn
+    display: flex
+
+@media (max-width: 640px)
+  .hud-header
+    padding: 0 16px
+
+  .hud-container
+    padding: 14px 24px
+
+  .hud-logo img
+    height: 48px
+
+  .hud-menu-btn
+    gap: 10px
+
+    .btn-text
+      font-size: 0.95rem
+
+    .btn-icon
+      width: 24px
+      height: 16px
+
+// --- Mobile Full Screen Overlay ---
+.mobile-menu-overlay
+  position: fixed
+  inset: 0
+  z-index: 9999 // Highest priority
+  pointer-events: none
+  opacity: 0
+  visibility: hidden
+  transition: opacity 0.4s, visibility 0.4s
+
+  &.is-open
+    pointer-events: auto
+    opacity: 1
+    visibility: visible
+
+.mm-bg
+  position: absolute
+  inset: 0
+  background: #000
+  transform: scaleY(0)
+  transform-origin: top
+  transition: transform 0.5s cubic-bezier(0.7, 0, 0.3, 1)
+  z-index: -1
+
+.mobile-menu-overlay.is-open .mm-bg
+  transform: scaleY(1)
+
+.mm-container
+  height: 100%
+  display: flex
+  flex-direction: column
+  justify-content: center
+  padding: 40px
+
+.mm-nav
+  display: flex
+  flex-direction: column
+  gap: 24px
+
+.mm-item
+  display: flex
+  align-items: baseline
+  gap: 16px
+  overflow: hidden
+
+.mm-num
+  color: #ff4d4d
+  font-family: 'Oswald', sans-serif
+  font-size: 1rem
+
+.mm-link
+  font-family: 'Oswald', sans-serif
+  font-size: 3rem
+  line-height: 1
+  color: #fff
+  text-decoration: none
+  font-weight: 700
+  text-transform: uppercase
+  transform: translateY(100%)
+  opacity: 0 // Hidden for GSAP
+
+.mm-footer
+  margin-top: auto
+  padding-top: 40px
+  text-align: center
+  color: rgba(255, 255, 255, 0.5)
+  font-family: 'Oswald', sans-serif
+  font-size: 0.9rem
+  letter-spacing: 0.1em
+
+  p
+    margin: 4px 0
+
+@media (max-width: 768px)
+  .mm-link
+    font-size: 2.5rem
+
+@media (max-width: 480px)
+  .mm-link
+    font-size: 2rem
+
+  .mm-container
+    padding: 20px

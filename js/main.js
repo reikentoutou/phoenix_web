@@ -10,129 +10,113 @@
  * 6. 店内环境轮播图的初始化
  */
 
+// FIX: Kill all ScrollTriggers before creating new ones to avoid DOM conflicts during reload
+// 在页面加载或热重载时，立即清理所有现有的 ScrollTrigger 实例
+if (typeof ScrollTrigger !== "undefined") {
+  ScrollTrigger.getAll().forEach((t) => t.kill());
+}
+
 // 等待 DOM 内容加载完成后执行
 document.addEventListener("DOMContentLoaded", () => {
   // ============================================
-  // 导航菜单相关元素选择
+  // NEW NAVIGATION SYSTEM: Floating HUD + Mobile Overlay
   // ============================================
-  const navLinks = document.querySelector(".nav_links"); // 导航链接容器
-  const navToggle = document.querySelector(".nav_toggle"); // 移动端菜单切换按钮
-  const heroSection = document.querySelector(".hero-section"); // Hero 区域 (新结构)
-  const oldHeroSection = document.querySelector(".begining"); // 旧 Hero 区域 (兼容性检查)
-  const heroMessage = document.querySelector(".begining_message"); // 旧 Hero 消息容器 (兼容性检查)
-  // 获取所有需要滚动动画的文字行 (旧结构，用于兼容)
-  const heroLines = heroMessage
-    ? heroMessage.querySelectorAll(".scroll-slide-right, .scroll-slide-left")
-    : [];
+  const hudHeader = document.querySelector(".hud-header");
+  const menuBtn = document.querySelector(".hud-menu-btn");
+  const mobileOverlay = document.querySelector(".mobile-menu-overlay");
+  const mobileLinks = document.querySelectorAll(".mm-link");
+  const heroSection = document.querySelector(".hero-section"); // Hero 区域
 
-  // ============================================
-  // 移动端导航菜单控制功能
-  // ============================================
-  if (navLinks && navToggle) {
-    /**
-     * 关闭导航菜单
-     * 移除 open 类并更新 aria-expanded 属性
-     */
-    const closeNav = () => {
-      navLinks.classList.remove("open");
-      navToggle.setAttribute("aria-expanded", "false");
-    };
+  // Global menu state for header auto-hide logic
+  let globalMenuState = { isOpen: false };
 
-    // 点击菜单切换按钮时，切换菜单的显示/隐藏状态
-    navToggle.addEventListener("click", () => {
-      const isOpen = navLinks.classList.toggle("open");
-      navToggle.setAttribute("aria-expanded", String(isOpen));
-    });
+  if (menuBtn && mobileOverlay) {
+    menuBtn.addEventListener("click", () => {
+      globalMenuState.isOpen = !globalMenuState.isOpen;
+      menuBtn.classList.toggle("is-active", globalMenuState.isOpen);
+      mobileOverlay.classList.toggle("is-open", globalMenuState.isOpen);
+      document.body.style.overflow = globalMenuState.isOpen ? "hidden" : ""; // Lock scroll
 
-    // 点击导航链接时，自动关闭菜单（移动端体验优化）
-    navLinks.addEventListener("click", (e) => {
-      if (e.target.classList.contains("nav-link")) {
-        closeNav();
+      if (globalMenuState.isOpen) {
+        // GSAP Enter Animation: Staggered reveal
+        if (typeof gsap !== "undefined" && mobileLinks.length > 0) {
+          gsap.to(mobileLinks, {
+            y: 0,
+            opacity: 1,
+            duration: 0.6,
+            stagger: 0.1,
+            ease: "power3.out",
+            delay: 0.2,
+          });
+        }
+      } else {
+        // GSAP Exit Animation
+        if (typeof gsap !== "undefined" && mobileLinks.length > 0) {
+          gsap.to(mobileLinks, {
+            y: "100%",
+            opacity: 0,
+            duration: 0.4,
+            ease: "power3.in",
+          });
+        }
       }
     });
 
-    // 点击菜单外部区域时，自动关闭菜单
-    document.addEventListener("click", (e) => {
-      if (!navLinks.contains(e.target) && !navToggle.contains(e.target)) {
-        closeNav();
+    // Close on link click
+    if (mobileLinks.length > 0) {
+      mobileLinks.forEach((link) => {
+        link.addEventListener("click", () => {
+          globalMenuState.isOpen = false;
+          menuBtn.classList.remove("is-active");
+          mobileOverlay.classList.remove("is-open");
+          document.body.style.overflow = "";
+
+          // Reset GSAP animation state
+          if (typeof gsap !== "undefined") {
+            gsap.set(mobileLinks, { y: "100%", opacity: 0 });
+          }
+        });
+      });
+    }
+  }
+
+  // Auto-hide header on scroll down
+  // CRITICAL FIX: Do NOT hide header when mobile menu is open
+  if (hudHeader) {
+    let lastScroll = 0;
+
+    window.addEventListener("scroll", () => {
+      // CRITICAL: Don't hide header if mobile menu is open
+      if (globalMenuState.isOpen) {
+        hudHeader.classList.remove("is-hidden");
+        return;
       }
+
+      const current = window.scrollY;
+      if (current > lastScroll && current > 50) {
+        hudHeader.classList.add("is-hidden");
+      } else {
+        hudHeader.classList.remove("is-hidden");
+      }
+      lastScroll = current;
     });
   }
 
   // ============================================
   // 页面滚动相关功能
   // ============================================
-  const header = document.querySelector("header"); // 页头元素
-  let lastScrollY = window.scrollY; // 记录上次滚动位置，用于判断滚动方向
   let ticking = false; // 节流标志，防止滚动事件过于频繁触发
-  // 获取所有需要视差效果的元素（当前代码中未使用，保留用于未来扩展）
-  const parallaxTargets = Array.from(document.querySelectorAll(".parallax-bg"));
-
-  /**
-   * 更新视差滚动效果
-   * 根据元素在视口中的位置，动态调整其垂直偏移量
-   * 实现元素随滚动速度不同而移动的视差效果
-   */
-  const updateParallax = () => {
-    if (!parallaxTargets.length) return; // 如果没有视差元素，直接返回
-    const viewportHeight = window.innerHeight || 1; // 视口高度
-    parallaxTargets.forEach((el) => {
-      const rect = el.getBoundingClientRect(); // 获取元素位置信息
-      const elementCenter = rect.top + rect.height / 2; // 元素中心点位置
-      const viewportCenter = viewportHeight / 2; // 视口中心点位置
-      const distanceFromCenter = elementCenter - viewportCenter; // 距离视口中心的距离
-      // 将距离标准化到 -1 到 1 之间
-      const clamped = Math.max(
-        -1,
-        Math.min(1, distanceFromCenter / viewportHeight)
-      );
-      const offset = -clamped * 35; // 计算偏移量（最大 35px）
-      el.style.transform = `translateY(${offset}px)`; // 应用变换
-    });
-  };
 
   /**
    * 更新 Hero 区域的滚动进度动画
-   * 根据滚动位置计算进度值，并更新文字的位置、透明度和缩放
-   * 同时更新 CSS 变量用于控制后续内容的堆叠效果
+   * 根据滚动位置计算进度值，更新 CSS 变量用于控制后续内容的堆叠效果
    */
   const updateHeroProgress = () => {
-    // 使用新的 hero-section 或旧的 begining 结构
-    const currentHeroSection = heroSection || oldHeroSection;
-    if (!currentHeroSection) return; // 安全检查
+    if (!heroSection) return; // 安全检查
 
-    const heroHeight = Math.max(currentHeroSection.offsetHeight, 1); // Hero 区域高度
+    const heroHeight = Math.max(heroSection.offsetHeight, 1); // Hero 区域高度
     // 计算滚动进度，范围 0-1
     const progress = Math.min(Math.max(window.scrollY / heroHeight, 0), 1);
-
-    // 旧结构的动画逻辑（仅当旧结构存在时执行）
-    if (heroMessage && heroLines.length > 0) {
-      // 如果滚动很少（接近顶部），重置所有动画效果
-      if (progress <= 0.02) {
-        heroMessage.classList.remove("is-sliding-out");
-        heroLines.forEach((el) => {
-          el.style.transform = "";
-          el.style.opacity = "";
-        });
-      } else {
-        // 当进度超过 12% 时，添加滑出效果类
-        heroMessage.classList.toggle("is-sliding-out", progress > 0.12);
-
-        // 为每个文字行应用滚动动画
-        heroLines.forEach((el) => {
-          const dir = el.classList.contains("scroll-slide-left") ? -1 : 1; // 确定滑动方向
-          const offset = Math.min(90 * progress, 90); // 水平偏移量（最大 90px）
-          const yShift = -32 * progress; // 垂直偏移量
-          const scale = 1 - progress * 0.1; // 缩放比例（最小 0.9）
-          // 应用变换：垂直移动、水平移动、缩放
-          el.style.transform = `translateY(${yShift}px) translateX(${
-            dir * offset
-          }px) scale(${scale})`;
-          // 透明度随进度递减
-          el.style.opacity = `${Math.max(0, 1 - progress * 1.4)}`;
-        });
-      }
-    }
 
     // 计算缓动后的堆叠进度值（使用幂函数实现缓动效果）
     // 这个变量用于控制环境区域的堆叠效果，需要保留
@@ -146,46 +130,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
   /**
    * 处理滚动事件的主函数
-   * 整合所有滚动相关的更新操作，并控制导航栏的显示/隐藏
+   * 更新 Hero 区域的滚动进度动画
    */
   const handleScroll = () => {
     updateHeroProgress(); // 更新 Hero 动画
-    updateParallax(); // 更新视差效果
-
-    const currentY = window.scrollY; // 当前滚动位置
-    const navIsOpen = navLinks?.classList.contains("open"); // 检查菜单是否打开
-
-    // 如果菜单打开，保持导航栏可见（不隐藏）
-    if (navIsOpen) {
-      header?.classList.remove("nav-hidden");
-      lastScrollY = currentY;
-      ticking = false;
-      return;
-    }
-
-    // --- New Header Scroll Logic ---
-    // 滚动超过50px变黑
-    if (currentY > 50) {
-      header?.classList.add("scrolled");
-    } else {
-      header?.classList.remove("scrolled");
-    }
-
-    // 判断滚动方向
-    const scrolledDown = currentY > lastScrollY + 10;
-    const scrolledUp = currentY < lastScrollY - 10;
-
-    // 导航栏显示逻辑：只有向上滚动时才显示
-    if (scrolledUp) {
-      // 向上滚动：显示导航栏
-      header?.classList.remove("nav-hidden");
-    } else if (scrolledDown && currentY > 50) {
-      // 向下滚动且超过50px：隐藏导航栏
-      header?.classList.add("nav-hidden");
-    }
-    // 如果是在页面顶部（currentY <= 50），保持显示（或根据需求决定）
-
-    lastScrollY = currentY; // 更新上次滚动位置
     ticking = false; // 重置节流标志
   };
 
@@ -198,16 +146,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // 初始化：页面加载时执行一次
   updateHeroProgress();
-  updateParallax();
-
-  // 初始化导航栏状态：在页面顶部时显示，否则隐藏（等待向上滚动时显示）
-  if (window.scrollY <= 50) {
-    header?.classList.remove("nav-hidden");
-  } else {
-    header?.classList.add("nav-hidden");
-  }
-  // 窗口大小改变时重新计算视差效果
-  window.addEventListener("resize", updateParallax);
 
   // ============================================
   // 元素进入视口时的渐显动画
@@ -218,18 +156,6 @@ document.addEventListener("DOMContentLoaded", () => {
   const targets = [...revealTargets, ...fadeTargets]; // 合并所有目标元素
 
   if (targets.length) {
-    /**
-     * Hero 区域的文字行初始渐显动画
-     * 使用错开的时间延迟，让文字依次出现，营造层次感
-     */
-    const revealLines = document.querySelectorAll(
-      ".scroll-slide-right, .scroll-slide-left"
-    );
-    revealLines.forEach((el, idx) => {
-      // 每个元素延迟 200ms 显示，实现错开效果
-      setTimeout(() => el.classList.add("is-visible"), idx * 200);
-    });
-
     /**
      * 显示元素的辅助函数
      * 添加 is-visible 类以触发 CSS 动画
@@ -272,6 +198,10 @@ document.addEventListener("DOMContentLoaded", () => {
   // New Cinematic Hero Animations
   // ============================================
   if (typeof gsap !== "undefined" && typeof ScrollTrigger !== "undefined") {
+    // 清理所有现有的 ScrollTrigger 实例（防止热重载时的 removeChild 错误）
+    ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
+
+    // 注册 ScrollTrigger 插件
     gsap.registerPlugin(ScrollTrigger);
 
     // 1. 背景图视差缩放 (Cinematic Parallax Zoom)
@@ -279,6 +209,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const heroSec = document.querySelector(".hero-section");
 
     if (heroImg && heroSec) {
+      // 确保元素存在且已渲染
       gsap.to(heroImg, {
         scale: 1.15, // 向下滚动时缓慢放大
         yPercent: 10, // 同时微微向下移动
@@ -288,9 +219,17 @@ document.addEventListener("DOMContentLoaded", () => {
           start: "top top",
           end: "bottom top",
           scrub: true,
+          invalidateOnRefresh: true, // 刷新时重新计算
         },
       });
+    } else {
+      console.warn("Hero image or section not found for parallax effect");
     }
+
+    // 页面加载完成后刷新 ScrollTrigger（确保所有元素都已渲染）
+    window.addEventListener("load", () => {
+      ScrollTrigger.refresh();
+    });
 
     // 2. 文字进场动画 (使用 autoAlpha 防止消失 Bug)
     const heroTimeline = gsap.timeline({ defaults: { ease: "power3.out" } });
@@ -306,6 +245,8 @@ document.addEventListener("DOMContentLoaded", () => {
         duration: 1,
         delay: 0.5,
       });
+    } else {
+      console.warn("Hero label-box not found");
     }
 
     // 标题文字逐行浮现
@@ -329,6 +270,8 @@ document.addEventListener("DOMContentLoaded", () => {
         },
         "-=0.8"
       );
+    } else {
+      console.warn("Hero title lines not found");
     }
 
     // 底部内容浮现
@@ -337,6 +280,8 @@ document.addEventListener("DOMContentLoaded", () => {
       // 先设置初始状态
       gsap.set(bottomRow, { y: 30, autoAlpha: 0 });
       heroTimeline.to(bottomRow, { y: 0, autoAlpha: 1, duration: 1 }, "-=0.6");
+    } else {
+      console.warn("Hero bottom-row not found");
     }
   } else if (typeof gsap !== "undefined") {
     // Fallback: 如果没有 ScrollTrigger，使用基础 GSAP 动画
@@ -379,24 +324,48 @@ document.addEventListener("DOMContentLoaded", () => {
    */
   const envSwiperEl = document.querySelector(".environment-slider");
   if (envSwiperEl && window.Swiper) {
+    // 检测是否为移动设备
+    const isMobile = window.innerWidth <= 640;
+
+    // Null safety: Check pagination and navigation elements exist
+    const paginationEl = document.querySelector(".env-pagination");
+    const nextBtn = document.querySelector(".env-next");
+    const prevBtn = document.querySelector(".env-prev");
+
     const swiper = new Swiper(envSwiperEl, {
       effect: "fade", // 使用淡入淡出切换效果
       fadeEffect: { crossFade: true }, // 启用交叉淡入淡出
-      speed: 1000, // 切换动画时长 1 秒
-      parallax: true, // 启用视差效果
+      speed: isMobile ? 600 : 1000, // 移动端更快切换
+      parallax: !isMobile, // 移动端禁用视差效果以提升性能
+      slidesPerView: 1,
+      spaceBetween: 0,
       autoplay: {
-        delay: 5000, // 每 5 秒自动切换
+        delay: isMobile ? 4000 : 5000, // 移动端更快切换
         disableOnInteraction: false, // 用户交互后不停止自动播放
-        pauseOnMouseEnter: true, // 鼠标悬停时暂停
+        pauseOnMouseEnter: !isMobile, // 移动端不暂停
       },
-      pagination: {
-        el: ".env-pagination", // 进度条容器
-        type: "progressbar", // 使用进度条样式
-      },
-      navigation: {
-        nextEl: ".env-next", // 下一个按钮
-        prevEl: ".env-prev", // 上一个按钮
-      },
+      pagination: paginationEl
+        ? {
+            el: paginationEl, // 进度条容器
+            type: "progressbar", // 使用进度条样式
+          }
+        : false,
+      navigation:
+        nextBtn && prevBtn
+          ? {
+              nextEl: nextBtn, // 下一个按钮
+              prevEl: prevBtn, // 上一个按钮
+            }
+          : false,
+      // 移动端触摸设置
+      touchEventsTarget: "container",
+      touchRatio: 1,
+      touchAngle: 45,
+      grabCursor: true,
+      // 移动端优化
+      watchOverflow: true,
+      preventClicks: true,
+      preventClicksPropagation: true,
       // Swiper 生命周期回调
       on: {
         // 初始化时，为当前活动幻灯片添加 is-active 类
