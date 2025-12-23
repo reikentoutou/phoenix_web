@@ -15,6 +15,12 @@ html, body
   position: relative
 
 // ============================================
+// Global Box Sizing (Fix subtle right-clipping / “aligned right” issues)
+// ============================================
+*, *::before, *::after
+  box-sizing: border-box
+
+// ============================================
 // Typography System (Scheme A: Sharp Future)
 // ============================================
 
@@ -37,7 +43,6 @@ body
 // 2. 标题 & 英文数字系统 (Oswald - 替代 Clash Display，避免 CORS 问题)
 // 核心：强制所有 标题、导航、按钮、价格、数字 使用 Oswald
 h1, h2, h3, h4, h5, h6,
-.nav-link, .nav_logo,
 .eyebrow, .label-box span,
 .cta-btn, .btn-primary, .store-link,
 .store-number, .pricing-item-price, .pricing-store-number,
@@ -56,7 +61,7 @@ h1
   text-transform: uppercase
 
 // 全大写的小标签 (需要极宽间距)
-.eyebrow, .nav-link, .spec-label, .env-sub, .store-info-label, .pricing-item-type
+.eyebrow, .spec-label, .env-sub, .store-info-label, .pricing-item-type
   letter-spacing: 0.15em !important
   text-transform: uppercase
   font-weight: 500
@@ -429,6 +434,7 @@ h1
     width: 100%
     max-width: 1220px
     margin: 0 auto
+    box-sizing: border-box
     border: 1px solid rgba(255, 255, 255, 0.06)
     border-radius: 18px
     padding: clamp(24px, 4vw, 36px) clamp(18px, 4vw, 28px) clamp(22px, 3vw, 32px)
@@ -497,7 +503,7 @@ h1
     color: #f1f1f1
 
   .env-tag-vertical
-    font-family: 'Clash Display', sans-serif
+    font-family: 'Oswald', sans-serif
     writing-mode: vertical-rl
     letter-spacing: 0.18em
     font-size: 1.6rem
@@ -597,308 +603,6 @@ h1
       box-shadow: 0 12px 24px rgba(0, 0, 0, 0.35)
       border-color: #ff4d4d
       background: rgba(0, 0, 0, 0.7)
-
-// ============================================
-// Stores Section (店铺信息区域)
-// ============================================
-.stores
-  padding: 90px 16px 110px
-  display: flex
-  flex-direction: column
-  align-items: center
-  gap: clamp(40px, 6vw, 80px)
-  background: linear-gradient(180deg, rgba(5, 5, 5, 0.7), rgba(5, 5, 5, 0.85)), url("../images/store/DSCF4959.webp") center/cover no-repeat
-  position: relative
-  margin-top: 80px // 为固定导航栏留出空间
-  overflow: hidden
-
-  // 背景遮罩层，确保文字可读性
-  &::before
-    content: ""
-    position: absolute
-    inset: 0
-    background: linear-gradient(180deg, rgba(5, 5, 5, 0.4), rgba(5, 5, 5, 0.6))
-    z-index: 0
-    pointer-events: none
-
-  > *
-    position: relative
-    z-index: 1
-
-  @media (max-width: 640px)
-    padding: 70px 14px 90px
-    gap: 32px
-    margin-top: 60px
-
-  .stores-header
-    text-align: center
-    max-width: 900px
-    margin: 0 auto
-    padding: 60px 20px 40px
-    position: relative
-    display: flex
-    flex-direction: column
-    gap: 24px
-
-    @media (max-width: 640px)
-      padding: 50px 16px 30px
-      gap: 20px
-
-    // 顶部装饰线条
-    &::before
-      content: ""
-      position: absolute
-      top: 0
-      left: 50%
-      transform: translateX(-50%)
-      width: 120px
-      height: 1px
-      background: linear-gradient(90deg, transparent, rgba(255, 77, 77, 0.6), transparent)
-      box-shadow: 0 0 20px rgba(255, 77, 77, 0.4)
-
-    // 底部装饰线条
-    &::after
-      content: ""
-      position: absolute
-      bottom: 0
-      left: 50%
-      transform: translateX(-50%)
-      width: 200px
-      height: 1px
-      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), rgba(255, 77, 77, 0.3), rgba(255, 255, 255, 0.2), transparent)
-      animation: line-expand 3s ease-in-out infinite
-
-    .eyebrow
-      letter-spacing: 0.25em
-      font-size: 0.75rem
-      font-weight: 500
-      margin: 0
-      text-transform: uppercase
-      position: relative
-      display: inline-block
-      align-self: center
-      // 渐变文字效果
-      background: linear-gradient(135deg, #ff4d4d, #ff6b6b, #ff8c8c, #ff4d4d)
-      -webkit-background-clip: text
-      background-clip: text
-      -webkit-text-fill-color: transparent
-      background-size: 300% 300%
-      animation: gradient-shift 5s ease infinite
-      // 文字发光
-      filter: drop-shadow(0 0 12px rgba(255, 77, 77, 0.6))
-      // 左右装饰点
-      padding: 0 40px
-      &::before, &::after
-        content: "•"
-        position: absolute
-        top: 50%
-        transform: translateY(-50%)
-        color: rgba(255, 77, 77, 0.5)
-        font-size: 1.2rem
-        animation: dot-pulse 2s ease-in-out infinite
-      &::before
-        left: 0
-        animation-delay: 0s
-      &::after
-        right: 0
-        animation-delay: 1s
-
-      @media (max-width: 640px)
-        padding: 0 30px
-        font-size: 0.7rem
-
-    h2
-      margin: 0
-      font-size: clamp(2rem, 5vw, 3.5rem)
-      letter-spacing: 0.15em
-      font-weight: 200
-      position: relative
-      // 精致文字效果 - 使用多层阴影营造立体感和发光
-      color: #ffffff
-      text-shadow: 0 0 20px rgba(255, 77, 77, 0.3), 0 0 40px rgba(255, 77, 77, 0.2), 0 2px 4px rgba(0, 0, 0, 0.5), 0 4px 8px rgba(0, 0, 0, 0.3)
-      // 背景光晕层
-      &::before
-        content: ""
-        position: absolute
-        top: 50%
-        left: 50%
-        transform: translate(-50%, -50%)
-        width: 120%
-        height: 120%
-        background: radial-gradient(ellipse at center, rgba(255, 77, 77, 0.15) 0%, transparent 70%)
-        z-index: -1
-        animation: text-glow 4s ease-in-out infinite
-      // 下划线装饰
-        padding: 20px 0
-      &::after
-        content: ""
-        position: absolute
-        left: 50%
-        bottom: 0
-        transform: translateX(-50%)
-        width: 80px
-        height: 2px
-        background: linear-gradient(90deg, transparent, rgba(255, 77, 77, 0.8), transparent)
-        box-shadow: 0 0 15px rgba(255, 77, 77, 0.6)
-        animation: underline-glow 2.5s ease-in-out infinite
-
-      @media (max-width: 640px)
-        padding: 16px 0
-        letter-spacing: 0.1em
-
-    .lead
-      margin: 8px auto 0
-      position: relative
-      max-width: 700px
-      display: flex
-      flex-direction: column
-      gap: 12px
-
-      @media (max-width: 640px)
-        max-width: 100%
-        gap: 10px
-
-      p
-        margin: 0
-        color: rgba(255, 255, 255, 0.75)
-        line-height: 1.8
-        font-size: clamp(0.9rem, 2.5vw, 1.05rem)
-        font-weight: 300
-        letter-spacing: 0.05em
-        text-align: center
-        // 文字微光
-        text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3)
-
-        @media (max-width: 640px)
-          line-height: 1.7
-          font-size: 0.9rem
-
-  .stores-grid
-    width: 100%
-    max-width: 1180px
-    display: grid
-    gap: clamp(24px, 4vw, 40px)
-    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr))
-
-    @media (max-width: 640px)
-      grid-template-columns: 1fr
-      gap: 24px
-
-.store-card
-  background: #0a0a0a
-  border: 1px solid rgba(255, 77, 77, 0.2)
-  border-radius: 18px
-  overflow: hidden
-  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease
-  display: flex
-  flex-direction: column
-
-  &:hover
-    transform: translateY(-4px)
-    box-shadow: 0 24px 48px rgba(255, 77, 77, 0.15), 0 12px 24px rgba(0, 0, 0, 0.4)
-    border-color: rgba(255, 77, 77, 0.4)
-
-  .store-card-header
-    padding: 24px 24px 16px
-    display: flex
-    align-items: center
-    gap: 16px
-    border-bottom: 1px solid rgba(255, 255, 255, 0.08)
-
-    .store-number
-      font-size: 1.8rem
-      font-weight: 700
-      color: #ff4d4d
-      letter-spacing: 0.1em
-      font-family: 'Clash Display', sans-serif
-
-    h3
-      margin: 0
-      font-size: 1.3rem
-      letter-spacing: 0.06em
-      color: #f5f5f5
-      font-weight: 400
-      flex: 1
-
-  .store-card-image
-    width: 100%
-    aspect-ratio: 16 / 9
-    overflow: hidden
-    background: #020202
-
-    img
-      width: 100%
-      height: 100%
-      object-fit: cover
-      display: block
-      transition: transform 0.5s ease
-
-    &:hover img
-      transform: scale(1.05)
-
-  .store-card-content
-    padding: 24px
-    display: flex
-    flex-direction: column
-    gap: 20px
-    flex: 1
-
-    .store-info
-      display: flex
-      flex-direction: column
-      gap: 12px
-
-    .store-info-item
-      display: flex
-      flex-direction: column
-      gap: 4px
-      padding-bottom: 12px
-      border-bottom: 1px solid rgba(255, 255, 255, 0.06)
-
-      &:last-child
-        border-bottom: none
-        padding-bottom: 0
-
-    .store-info-label
-      font-size: 0.85rem
-      color: rgba(255, 255, 255, 0.6)
-      letter-spacing: 0.1em
-      text-transform: uppercase
-      font-family: 'Clash Display', sans-serif
-
-    .store-info-value
-      font-size: 0.95rem
-      color: #f5f5f5
-      letter-spacing: 0.04em
-      line-height: 1.5
-
-    .store-card-actions
-      display: flex
-      flex-direction: column
-      gap: 10px
-      margin-top: auto
-      padding-top: 16px
-      border-top: 1px solid rgba(255, 255, 255, 0.08)
-
-    .store-link
-      display: inline-flex
-      align-items: center
-      justify-content: center
-      padding: 10px 16px
-      color: #ff4d4d
-      text-decoration: none
-      border: 1px solid rgba(255, 77, 77, 0.3)
-      border-radius: 8px
-      font-size: 0.9rem
-      letter-spacing: 0.08em
-      transition: all 0.2s ease
-      text-align: center
-
-      &:hover
-        background: rgba(255, 77, 77, 0.1)
-        border-color: rgba(255, 77, 77, 0.5)
-        color: #ffa0a0
-        transform: translateY(-1px)
 
 // ============================================
 // Pricing Section (区域料金信息)
@@ -1208,7 +912,7 @@ h1
       font-weight: 700
       color: #ff4d4d
       letter-spacing: 0.1em
-      font-family: 'Clash Display', sans-serif
+      font-family: 'Oswald', sans-serif
       min-width: 48px
       text-shadow: 0 0 20px rgba(255, 77, 77, 0.5)
       position: relative
@@ -1325,7 +1029,7 @@ h1
       color: rgba(255, 255, 255, 0.6)
       letter-spacing: 0.1em
       text-transform: uppercase
-      font-family: 'Clash Display', sans-serif
+      font-family: 'Oswald', sans-serif
       font-weight: 500
 
     .pricing-item-price
@@ -1333,7 +1037,7 @@ h1
       color: #ff4d4d
       font-weight: 700
       letter-spacing: 0.02em
-      font-family: 'Clash Display', sans-serif
+      font-family: 'Oswald', sans-serif
       display: flex
       align-items: baseline
       gap: 2px
@@ -1788,14 +1492,14 @@ h1
     font-size: 0.9rem
     letter-spacing: 0.12em
     text-transform: uppercase
-    font-family: 'Clash Display', sans-serif
+    font-family: 'Oswald', sans-serif
 
   .spec-value
     color: #f7f7f7
     font-size: 1rem
     font-weight: 500
     letter-spacing: 0.08em
-    font-family: 'Clash Display', sans-serif
+    font-family: 'Oswald', sans-serif
 
     a
       color: #ff4d4d
@@ -2084,338 +1788,6 @@ h1
     transform: translate(-50%, -50%) scale(1.1)
 
 // ============================================
-// New High-End Hero & Header
-// ============================================
-
-// 1. 玻璃态导航 (完全透明玻璃化)
-// ============================================
-// New High-End Hero & Header
-// ============================================
-
-// 1. 玻璃态导航 (完全透明玻璃化)
-header
-  position: fixed
-  top: 0
-  left: 0
-  width: 100%
-  z-index: 9999 // 最高显示权重，确保导航栏始终在最顶层
-  padding: 20px 20px 0
-  transition: all 0.4s ease
-  pointer-events: none
-  background: transparent
-  box-sizing: border-box
-  overflow-x: hidden
-
-  &.scrolled
-    padding: 20px 20px 0
-    background: rgba(10, 10, 10, 0.4)
-    backdrop-filter: blur(30px) saturate(180%)
-    -webkit-backdrop-filter: blur(30px) saturate(180%)
-    border-bottom: 1px solid rgba(255, 255, 255, 0.08)
-
-  &.nav-hidden
-    transform: translateY(-120%)
-
-    // 移动端：即使导航栏隐藏，也保留菜单按钮区域可见
-    @media (max-width: 960px)
-      transform: translateY(calc(-100% + 70px)) // 只隐藏大部分，保留底部70px（菜单按钮区域）
-
-      .navbar
-        padding: 8px 14px // 减少 padding，让菜单按钮更紧凑
-        min-height: 60px // 确保有足够高度显示菜单按钮
-
-  @media (max-width: 768px)
-    padding: 10px 10px 0
-    &.scrolled
-      padding: 10px 10px 0
-
-  @media (max-width: 480px)
-    padding: 12px 12px 0
-    &.scrolled
-      padding: 12px 12px 0
-
-.navbar
-  position: relative
-  display: flex
-  align-items: center
-  justify-content: space-between
-  max-width: 1200px
-  width: 100%
-  margin: 0 auto
-  pointer-events: auto
-  box-sizing: border-box
-  padding: 14px 28px
-  gap: 18px
-  background: linear-gradient(135deg, rgba(160, 40, 40, 0.9), rgba(110, 20, 20, 0.8))
-  backdrop-filter: blur(20px)
-  -webkit-backdrop-filter: blur(20px)
-  border: 1px solid rgba(255, 77, 77, 0.2)
-  border-radius: 14px
-  box-shadow: 0 12px 28px rgba(255, 77, 77, 0.24), 0 18px 32px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.08), 0 0 15px rgba(255, 77, 77, 0.2)
-  transition: box-shadow 0.3s ease, filter 0.3s ease
-  z-index: 1
-  // 关键：确保菜单不被裁剪
-  overflow: visible !important
-
-  @media (max-width: 1200px)
-    padding: 12px 24px
-    gap: 16px
-
-  @media (max-width: 768px)
-    padding: 10px 16px
-    gap: 12px
-
-  @media (max-width: 480px)
-    padding: 10px 14px
-    gap: 10px
-
-  &:hover
-    box-shadow: 0 14px 34px rgba(255, 77, 77, 0.32), 0 20px 36px rgba(0, 0, 0, 0.65), inset 0 1px 0 rgba(255, 255, 255, 0.1)
-
-  .nav_logo
-    flex-shrink: 0
-    img
-      height: 60px
-      width: auto
-      display: block
-      transition: transform 0.3s ease, filter 0.3s ease
-      filter: drop-shadow(0 0 2px rgba(255, 77, 77, 0.3))
-
-      @media (max-width: 768px)
-        height: 50px
-
-      @media (max-width: 480px)
-        height: 40px
-
-      &:hover
-        transform: scale(1.05)
-        filter: drop-shadow(0 0 8px rgba(255, 77, 77, 0.8))
-
-  .nav_toggle
-    margin-left: auto
-    position: relative
-    width: 44px
-    height: 44px
-    background: transparent
-    color: #ffffff // 纯白色 (EVA/Cyberpunk)
-    border: 1px solid rgba(255, 255, 255, 0.2)
-    border-radius: 4px
-    padding: 0
-    cursor: pointer
-    display: none // 默认隐藏
-    align-items: center
-    justify-content: center
-    transition: all 0.3s ease
-    z-index: 10001
-
-    // 移动端显示汉堡按钮
-    @media (max-width: 768px)
-      display: flex
-
-    // 桌面端隐藏
-    @media (min-width: 769px)
-      display: none !important
-
-    &:hover
-      background: rgba(255, 255, 255, 0.1)
-      border-color: rgba(255, 255, 255, 0.4)
-      transform: scale(1.05)
-
-    &:active
-      transform: scale(0.95)
-
-    &:focus-visible
-      outline: 2px solid rgba(255, 255, 255, 0.5)
-      outline-offset: 2px
-
-    // 汉堡图标：3条横线
-    .nav_toggle_bar,
-    &::before,
-    &::after
-      content: ""
-      position: absolute
-      left: 50%
-      width: 20px
-      height: 2px
-      background: #ffffff
-      border-radius: 2px
-      transform: translateX(-50%)
-      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1)
-
-    .nav_toggle_bar
-      transform: translate(-50%, 0)
-      opacity: 1
-
-    &::before
-      transform: translate(-50%, -7px)
-
-    &::after
-      transform: translate(-50%, 7px)
-
-    // 展开状态：转换为 X 图标
-    &[aria-expanded="true"]
-      .nav_toggle_bar
-        opacity: 0
-        transform: translate(-50%, 0) rotate(180deg)
-
-      &::before
-        transform: translate(-50%, 0) rotate(45deg)
-
-      &::after
-        transform: translate(-50%, 0) rotate(-45deg)
-
-  .nav_links
-    // 桌面端：始终显示，水平布局
-    @media (min-width: 769px)
-      position: static
-      display: flex !important
-      flex-direction: row
-      align-items: center
-      gap: 18px
-      padding: 0
-      margin: 0
-      background: transparent
-      backdrop-filter: none
-      -webkit-backdrop-filter: none
-      border: none
-      box-shadow: none
-      opacity: 1 !important
-      transform: none !important
-      pointer-events: auto !important
-      z-index: auto
-      max-height: none !important
-      overflow: visible !important
-
-    // 移动端：使用 max-height 和 transform 实现平滑滑下动画
-    @media (max-width: 768px)
-      // 关键：绝对定位，脱离文档流，覆盖在内容之上
-      position: absolute !important
-      top: 60px !important // 基于 header 高度调整
-      left: 0 !important
-      right: 0 !important
-      width: 100% !important
-
-      // Flex 布局：垂直排列
-      display: flex !important
-      flex-direction: column !important
-      align-items: center !important
-      gap: 20px !important
-
-      // 视觉样式：纯黑背景，确保可见
-      background-color: #000000 !important
-      background: #000000 !important // 双重确保
-      background-image: none !important // 禁止任何背景图片
-      padding: 20px 0 !important
-      margin: 0 !important
-      margin-top: 8px !important
-      border-top: 1px solid rgba(255, 255, 255, 0.15) !important
-      border-bottom: 1px solid rgba(255, 255, 255, 0.15) !important
-      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.95) !important
-
-      // 层级：确保在所有内容之上（超高 z-index）
-      z-index: 99999 !important
-
-      // 动画基础状态：完全隐藏
-      max-height: 0 !important
-      overflow: hidden !important
-      opacity: 0 !important
-      visibility: hidden !important
-      transform: translateY(0) !important // 不移出屏幕，保持在正确位置
-      pointer-events: none !important
-      transition: max-height 0.4s ease-in-out, opacity 0.4s ease-in-out, visibility 0s linear 0.4s
-
-      // 展开状态：完全可见
-      &.open
-        max-height: 500px !important // 足够大的值容纳所有链接
-        opacity: 1 !important
-        visibility: visible !important
-        transform: translateY(0) !important
-        pointer-events: auto !important
-        padding-bottom: 20px !important // 底部内边距
-        transition: max-height 0.4s ease-in-out, opacity 0.4s ease-in-out, visibility 0s linear 0s
-        // 确保背景在展开时也保持纯黑
-        background-color: #000000 !important
-        background: #000000 !important
-        background-image: none !important
-
-      // 强制移动端链接文字颜色为白色
-      .nav-link
-        color: #ffffff !important
-
-        &:hover,
-        &:active,
-        &.active
-          color: #ffffff !important
-          background: rgba(255, 255, 255, 0.1) !important
-
-    .nav-link
-      font-family: 'Clash Display', sans-serif
-      color: #ffffff // 纯白色文字 (EVA/Cyberpunk)
-      text-decoration: none
-      font-size: 0.95rem
-      letter-spacing: 0.05em
-      text-transform: uppercase
-      padding: 8px 10px
-      border-radius: 6px
-      transition: color 0.2s ease, text-shadow 0.2s ease, background 0.2s ease
-      position: relative
-      font-weight: 500
-
-      // 桌面端样式
-      @media (min-width: 769px)
-        font-size: 1rem
-        letter-spacing: 0.15em
-        padding: 8px 12px
-
-        &:hover,
-        &.active
-          color: #fff
-          text-shadow: 0 0 12px rgba(255, 77, 77, 0.8), 0 0 18px rgba(255, 77, 77, 0.45)
-          background: rgba(255, 255, 255, 0.1)
-
-          &::after
-            transform: translateX(-50%) scaleX(1)
-
-        &::after
-          content: ""
-          position: absolute
-          bottom: 0
-          left: 50%
-          width: 100%
-          height: 2px
-          background: linear-gradient(90deg, transparent, #ff4d4d, transparent)
-          transition: transform 0.3s ease
-          transform: translateX(-50%) scaleX(0)
-          border-radius: 2px
-          box-shadow: 0 0 16px rgba(255, 77, 77, 0.6)
-
-      // 移动端样式：全宽，带分隔线
-      @media (max-width: 768px)
-        display: block
-        width: 100%
-        padding: 16px 20px
-        text-align: left
-        border-bottom: 1px solid rgba(255, 255, 255, 0.05)
-        font-size: 1rem
-        letter-spacing: 0.1em
-        background: transparent
-        transition: background 0.2s ease, color 0.2s ease
-
-        &:last-child
-          border-bottom: none
-
-        &:hover,
-        &:active,
-        &.active
-          background: rgba(255, 255, 255, 0.05)
-          color: #ffffff
-          text-shadow: 0 0 8px rgba(255, 255, 255, 0.3)
-
-        // 移除桌面端的下划线效果
-        &::after
-          display: none
-
-// ============================================
 // New Cinematic Hero Styles
 // ============================================
 .hero-section
@@ -2471,7 +1843,7 @@ header
         height: 1px
         background: #ff4d4d
       span
-        font-family: 'Clash Display', sans-serif
+        font-family: 'Oswald', sans-serif
         font-size: 0.9rem
         letter-spacing: 0.3em
         text-transform: uppercase
@@ -2479,7 +1851,7 @@ header
 
     // 杂志级大标题排版
     h1.hero-title
-      font-family: 'Clash Display', sans-serif
+      font-family: 'Oswald', sans-serif
       font-weight: 700
       text-transform: uppercase
       line-height: 0.85
@@ -2552,7 +1924,7 @@ header
         padding: 18px 40px
         background: #fff
         color: #000
-        font-family: 'Clash Display', sans-serif
+        font-family: 'Oswald', sans-serif
         font-weight: 600
         letter-spacing: 0.1em
         text-decoration: none
@@ -2574,6 +1946,7 @@ header
   width: 100%
   z-index: 1000
   padding: 0 32px
+  box-sizing: border-box
   pointer-events: none // Let clicks pass through the empty space
   transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1)
 
@@ -2583,9 +1956,12 @@ header
 .hud-container
   max-width: 1400px
   margin: 0 auto
+  // Keep the HUD “card” centered, but align content: logo left + nav right
+  position: relative
   display: flex
   align-items: center
   justify-content: space-between
+  box-sizing: border-box
   pointer-events: auto // Re-enable clicks on the bar itself
 
   // Enhanced Glassmorphism - Transparent Glass Effect with White Tint
@@ -2594,7 +1970,8 @@ header
   backdrop-filter: blur(40px) saturate(180%)
   -webkit-backdrop-filter: blur(40px) saturate(180%)
   border: 1px solid rgba(255, 255, 255, 0.25)
-  border-radius: 100px
+  // Rectangular glass card (was capsule)
+  border-radius: 18px
   padding: 18px 40px
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.2), inset 0 -1px 0 rgba(255, 255, 255, 0.05)
 
@@ -2603,7 +1980,7 @@ header
     content: ''
     position: absolute
     inset: 0
-    border-radius: 100px
+    border-radius: 18px
     padding: 1px
     background: linear-gradient(135deg, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0.08))
     // Standard mask property for compatibility
@@ -2824,3 +2201,450 @@ header
 
   .mm-container
     padding: 20px
+
+// ============================================
+// Immersive Access Page Styles
+// ============================================
+.access-page-header
+  padding: 140px 20px 60px
+  text-align: center
+  background: #020202
+
+  .eyebrow
+    color: #ff4d4d
+    margin-bottom: 12px
+
+  h1
+    font-family: 'Oswald', sans-serif
+    font-size: clamp(3rem, 6vw, 5rem)
+    color: #fff
+    margin: 0
+    line-height: 1
+    letter-spacing: 0.05em
+
+.immersive-store
+  position: relative
+  width: 100%
+  height: 100vh
+  min-height: 700px
+  overflow: hidden
+  display: flex
+  align-items: center
+
+  @media (max-width: 768px)
+    height: auto
+    padding: 100px 0
+    min-height: auto
+
+  .store-bg-layer
+    position: absolute
+    top: 0
+    left: 0
+    width: 100%
+    height: 120% // Extra height for parallax
+    z-index: 0
+    will-change: transform
+
+    .parallax-img
+      width: 100%
+      height: 100%
+      object-fit: cover
+
+  .store-overlay
+    position: absolute
+    inset: 0
+    z-index: 1
+    background: linear-gradient(90deg, rgba(0, 0, 0, 0.95) 0%, rgba(0, 0, 0, 0.7) 50%, rgba(0, 0, 0, 0.3) 100%)
+
+  &.store-right .store-overlay
+    background: linear-gradient(-90deg, rgba(0, 0, 0, 0.95) 0%, rgba(0, 0, 0, 0.7) 50%, rgba(0, 0, 0, 0.3) 100%)
+
+  .store-content-wrap
+    position: relative
+    z-index: 2
+    width: 100%
+    max-width: 1200px
+    margin: 0 auto
+    padding: 0 40px
+    display: flex
+
+    @media (max-width: 768px)
+      padding: 0 20px
+
+  .store-text
+    max-width: 600px
+    position: relative
+
+    &.content-right
+      margin-left: auto
+      text-align: right
+
+      .detail-row
+        justify-content: flex-end
+
+  .huge-number
+    position: absolute
+    top: -120px
+    left: -40px
+    font-family: 'Oswald', sans-serif
+    font-size: 14rem
+    font-weight: 700
+    color: transparent
+    -webkit-text-stroke: 2px rgba(255, 255, 255, 0.08)
+    z-index: -1
+    line-height: 1
+    opacity: 0.6
+    pointer-events: none
+
+    @media (max-width: 768px)
+      font-size: 8rem
+      top: -60px
+      left: 0
+
+  .store-title
+    font-family: 'Oswald', sans-serif
+    font-size: clamp(2.5rem, 4vw, 4rem)
+    color: #fff
+    margin: 0 0 10px
+    line-height: 1.1
+    text-shadow: 0 10px 30px rgba(0, 0, 0, 0.5)
+
+    .highlight
+      color: #ff4d4d
+
+  .store-subtitle
+    font-size: 1.2rem
+    color: #ccc
+    margin: 0 0 40px
+    font-weight: 300
+    letter-spacing: 0.1em
+
+  .store-details
+    border-top: 1px solid rgba(255, 255, 255, 0.2)
+    padding-top: 20px
+    margin-bottom: 40px
+    display: flex
+    flex-direction: column
+    gap: 15px
+
+  .detail-row
+    display: flex
+    gap: 20px
+    align-items: baseline
+
+    .label
+      font-family: 'Oswald', sans-serif
+      color: #ff4d4d
+      font-size: 0.9rem
+      min-width: 80px
+
+    .value
+      font-size: 1rem
+      color: #fff
+
+  .cta-btn.outline-btn
+    display: inline-flex
+    align-items: center
+    gap: 10px
+    padding: 15px 40px
+    border: 1px solid rgba(255, 255, 255, 0.4)
+    color: #fff
+    text-decoration: none
+    font-family: 'Oswald', sans-serif
+    letter-spacing: 0.1em
+    transition: all 0.3s ease
+    background: rgba(0, 0, 0, 0.3)
+    backdrop-filter: blur(5px)
+    -webkit-backdrop-filter: blur(5px)
+
+    &:hover
+      background: #ff4d4d
+      border-color: #ff4d4d
+      color: #fff
+      transform: translateY(-5px)
+
+// GSAP Initial States (Prevent FOUC)
+.gsap-fade-up
+  opacity: 0
+  transform: translateY(30px)
+
+.gsap-stagger-group > *
+  opacity: 0
+  transform: translateY(20px)
+
+// ============================================
+// ROOMS PAGE SPECIFIC STYLES
+// ============================================
+.page-header-simple
+  padding: 140px 20px 60px
+  text-align: center
+  background: #020202
+  max-width: 800px
+  margin: 0 auto
+
+  .eyebrow
+    color: #ff4d4d
+    margin-bottom: 12px
+
+  h1
+    font-size: clamp(2.5rem, 5vw, 4rem)
+    color: #fff
+    margin: 0 0 24px
+    line-height: 1
+    font-family: 'Oswald', sans-serif
+    letter-spacing: 0.06em
+
+  .lead
+    color: #ccc
+    font-size: 1rem
+    line-height: 1.8
+
+.store-zone
+  padding: 80px 20px
+  max-width: 1200px
+  margin: 0 auto
+
+.section-divider
+  height: 1px
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent)
+  margin: 40px auto
+  max-width: 800px
+
+.zone-header
+  display: flex
+  align-items: center
+  gap: 20px
+  margin-bottom: 60px
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1)
+  padding-bottom: 20px
+
+  .zone-num
+    font-family: 'Oswald', sans-serif
+    font-size: 3rem
+    color: #ff4d4d
+    font-weight: 700
+    line-height: 1
+
+  h2
+    font-family: 'Oswald', sans-serif
+    font-size: 2rem
+    margin: 0
+    color: #fff
+    letter-spacing: 0.06em
+
+  p
+    margin-left: auto
+    font-family: 'Oswald', sans-serif
+    color: #888
+    letter-spacing: 0.1em
+    text-transform: uppercase
+
+  @media (max-width: 768px)
+    flex-direction: column
+    align-items: flex-start
+    gap: 10px
+
+    p
+      margin-left: 0
+
+.floor-group
+  margin-bottom: 60px
+
+  .floor-title
+    font-size: 1.2rem
+    color: rgba(255, 255, 255, 0.6)
+    margin-bottom: 30px
+    padding-left: 14px
+    border-left: 2px solid #ff4d4d
+    letter-spacing: 0.1em
+    text-transform: uppercase
+
+.rooms-grid
+  display: grid
+  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr))
+  gap: 30px
+
+  @media (max-width: 640px)
+    grid-template-columns: 1fr
+
+// --- Room Card Design ---
+.room-card
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.02), rgba(255, 255, 255, 0.04))
+  border: 1px solid rgba(255, 255, 255, 0.1)
+  border-radius: 14px
+  overflow: hidden
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease
+  display: flex
+  flex-direction: column
+  height: 100%
+  backdrop-filter: blur(18px) saturate(140%)
+  -webkit-backdrop-filter: blur(18px) saturate(140%)
+
+  &:hover
+    transform: translateY(-5px)
+    box-shadow: 0 18px 50px rgba(0, 0, 0, 0.6)
+    border-color: rgba(255, 77, 77, 0.5)
+
+    .room-img img
+      transform: scale(1.05)
+
+  &.highlight-card
+    border: 1px solid rgba(255, 77, 77, 0.4)
+    background: linear-gradient(180deg, rgba(20, 0, 0, 0.55), rgba(10, 10, 10, 0.7))
+    box-shadow: 0 0 0 1px rgba(255, 77, 77, 0.15) inset
+
+  .room-img
+    height: 220px
+    width: 100%
+    position: relative
+    overflow: hidden
+    background: #050505
+
+    img
+      width: 100%
+      height: 100%
+      object-fit: cover
+      transition: transform 0.5s ease
+
+    .spec-badge
+      position: absolute
+      top: 12px
+      right: 12px
+      padding: 4px 10px
+      font-family: 'Oswald', sans-serif
+      font-size: 0.8rem
+      font-weight: 600
+      border-radius: 6px
+      color: #fff
+      letter-spacing: 0.08em
+      text-transform: uppercase
+
+      &.high-spec
+        background: #ff4d4d
+
+      &.premium
+        background: linear-gradient(45deg, #ff4d4d, #a00000)
+        box-shadow: 0 0 12px rgba(255, 77, 77, 0.55)
+
+      &.standard
+        background: rgba(255, 255, 255, 0.18)
+        border: 1px solid rgba(255, 255, 255, 0.18)
+
+    // Badge group (dual GPU option)
+    .badge-group
+      position: absolute
+      top: 12px
+      right: 12px
+      display: flex
+      gap: 6px
+      z-index: 2
+
+      .spec-badge
+        position: relative
+        top: auto
+        right: auto
+        padding: 4px 10px
+
+    // Direct child absolute fallback (when not grouped)
+    > .spec-badge
+      position: absolute
+      top: 12px
+      right: 12px
+
+    .capacity-tag
+      position: absolute
+      bottom: 12px
+      left: 12px
+      background: rgba(0, 0, 0, 0.7)
+      backdrop-filter: blur(6px)
+      -webkit-backdrop-filter: blur(6px)
+      padding: 4px 10px
+      font-size: 0.75rem
+      border-radius: 6px
+      border: 1px solid rgba(255, 255, 255, 0.2)
+      color: rgba(255, 255, 255, 0.9)
+      letter-spacing: 0.06em
+
+    .availability-tag
+      position: absolute
+      bottom: 12px
+      right: 12px
+      background: rgba(0, 0, 0, 0.8)
+      border: 1px solid rgba(255, 255, 255, 0.3)
+      color: #fff
+      font-size: 0.75rem
+      padding: 4px 10px
+      border-radius: 6px
+      backdrop-filter: blur(6px)
+      -webkit-backdrop-filter: blur(6px)
+      letter-spacing: 0.06em
+
+      &.is-smoking
+        border-color: #ff4d4d
+        color: #ff4d4d
+
+  .room-info
+    padding: 24px
+    flex: 1
+    display: flex
+    flex-direction: column
+
+    .room-header-row
+      display: flex
+      justify-content: space-between
+      align-items: center
+      margin-bottom: 12px
+      gap: 12px
+
+      h4
+        margin: 0
+        font-family: 'Oswald', sans-serif
+        font-size: 1.35rem
+        color: #fff
+        letter-spacing: 0.06em
+
+      .floor-tag
+        font-size: 0.8rem
+        color: rgba(255, 255, 255, 0.6)
+        border: 1px solid rgba(255, 255, 255, 0.18)
+        padding: 2px 8px
+        border-radius: 999px
+        letter-spacing: 0.08em
+
+    .room-desc
+      color: rgba(255, 255, 255, 0.78)
+      font-size: 0.92rem
+      line-height: 1.6
+      margin: 0 0 20px
+      flex-grow: 1
+
+    .room-sub-spec
+      font-family: 'Oswald', sans-serif
+      color: #ff4d4d
+      font-size: 0.9rem
+      margin: 0 0 8px
+      letter-spacing: 0.05em
+      border-bottom: 1px solid rgba(255, 77, 77, 0.2)
+      padding-bottom: 8px
+      display: inline-block
+
+    .spec-list
+      list-style: none
+      padding: 16px 0 0
+      margin: 0
+      display: grid
+      gap: 8px
+      border-top: 1px solid rgba(255, 255, 255, 0.1)
+
+      li
+        display: flex
+        justify-content: space-between
+        gap: 14px
+        font-size: 0.9rem
+        color: rgba(255, 255, 255, 0.9)
+
+        .label
+          color: rgba(255, 255, 255, 0.45)
+          font-family: 'Oswald', sans-serif
+          text-transform: uppercase
+          letter-spacing: 0.12em

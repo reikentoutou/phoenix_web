@@ -29,13 +29,6 @@
       rel="stylesheet"
     />
 
-    <!-- Swiper 轮播图库的 CSS 文件 -->
-    <!-- 用于实现店内环境图片的轮播展示效果 -->
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"
-    />
-
     <!-- 主样式表，带版本号防止缓存 -->
     <link rel="stylesheet" href="css/style.css" />
   </head>
@@ -71,180 +64,106 @@
     <!-- 主要内容区域 -->
     <!-- ============================================ -->
     <main>
-      <!-- ============================================ -->
-      <!-- 店铺信息区域 (Store Section) -->
-      <!-- ============================================ -->
-      <!-- 展示两个店铺的详细信息和特色 -->
-      <section class="stores section-fade" id="stores">
-        <!-- 店铺区域标题 -->
-        <div class="stores-header reveal-on-scroll fade-in-up">
-          <p class="eyebrow">OUR STORES</p>
-          <h2>店舗情報</h2>
-          <div class="lead">
-            <p>
-              池袋に2店舗展開。どちらも駅近で24時間営業、最新設備を完備しています。
-            </p>
-            <p>
-              高性能PC、快適な個室、禁煙・喫煙エリアを完備し、eスポーツプレイヤーから作業利用まで幅広いニーズに対応。
-            </p>
-            <p>
-              最新のゲーミング環境と快適な空間で、最高の体験をお届けします。
-            </p>
-          </div>
-        </div>
+      <div class="access-page-header">
+        <p class="eyebrow gsap-fade-up">LOCATIONS</p>
+        <h1 class="gsap-fade-up" data-delay="0.1">OUR STORES</h1>
+      </div>
 
-        <!-- 店铺卡片容器 -->
-        <div class="stores-grid">
-          <!-- 1号店卡片 -->
-          <article class="store-card reveal-on-scroll">
-            <div class="store-card-header">
-              <span class="store-number">01</span>
-              <h3>eSPORTS CAFE PHOENIX 池袋1号店</h3>
-            </div>
-            <div class="store-card-image">
-              <img
-                src="images/store/图片_20241024214913.webp"
-                alt="1号店外観"
-                loading="lazy"
-              />
-            </div>
-            <div class="store-card-content">
-              <div class="store-info">
-                <div class="store-info-item">
-                  <span class="store-info-label">営業時間</span>
-                  <span class="store-info-value">24時間営業 / 無休</span>
-                </div>
-                <div class="store-info-item">
-                  <span class="store-info-label">住所</span>
-                  <span class="store-info-value">東京都豊島区池袋</span>
-                </div>
-                <div class="store-info-item">
-                  <span class="store-info-label">アクセス</span>
-                  <span class="store-info-value">JR池袋駅より徒歩5分</span>
-                </div>
-                <div class="store-info-item">
-                  <span class="store-info-label">特徴</span>
-                  <span class="store-info-value"
-                    >ホール全域禁煙、多彩な個室完備</span
-                  >
-                </div>
-              </div>
-              <div class="store-card-actions">
-                <a href="index.html#access" class="store-link"
-                  >アクセス詳細を見る</a
-                >
-                <a href="index.html#environment" class="store-link"
-                  >店内環境を見る</a
-                >
-              </div>
-            </div>
-          </article>
-
-          <!-- 2号店卡片 -->
-          <article class="store-card reveal-on-scroll">
-            <div class="store-card-header">
-              <span class="store-number">02</span>
-              <h3>eSPORTS CAFE PHOENIX 池袋2号店</h3>
-            </div>
-            <div class="store-card-image">
-              <img
-                src="images/store/store_2_exterior.webp"
-                alt="2号店外観"
-                loading="lazy"
-              />
-            </div>
-            <div class="store-card-content">
-              <div class="store-info">
-                <div class="store-info-item">
-                  <span class="store-info-label">営業時間</span>
-                  <span class="store-info-value">24時間営業 / 無休</span>
-                </div>
-                <div class="store-info-item">
-                  <span class="store-info-label">住所</span>
-                  <span class="store-info-value"
-                    >東京都豊島区東池袋1-22-304</span
-                  >
-                </div>
-                <div class="store-info-item">
-                  <span class="store-info-label">アクセス</span>
-                  <span class="store-info-value">JR池袋駅より徒歩5分</span>
-                </div>
-                <div class="store-info-item">
-                  <span class="store-info-label">特徴</span>
-                  <span class="store-info-value"
-                    >赤を基調とした最新設備、禁煙ホール</span
-                  >
-                </div>
-              </div>
-              <div class="store-card-actions">
-                <a href="index.html#access" class="store-link"
-                  >アクセス詳細を見る</a
-                >
-                <a href="index.html#environment" class="store-link"
-                  >店内環境を見る</a
-                >
-              </div>
-            </div>
-          </article>
+      <section class="immersive-store store-left" id="store-1">
+        <div class="store-bg-layer">
+          <img
+            src="images/store/图片_20241024214913.webp"
+            alt="PHOENIX 1号店"
+            class="parallax-img"
+            loading="lazy"
+          />
         </div>
-      </section>
+        <div class="store-overlay"></div>
+        <div class="store-content-wrap">
+          <div class="store-text">
+            <span class="huge-number" data-speed="0.5">01</span>
+            <h2 class="store-title gsap-fade-up">
+              PHOENIX <span class="highlight">IKEBUKURO</span> NO.1
+            </h2>
+            <p class="store-subtitle gsap-fade-up" data-delay="0.1">
+              池袋1号店 / MAIN STAGE
+            </p>
 
-      <!-- ============================================ -->
-      <!-- アクセス情報区域 (Access Section) -->
-      <!-- ============================================ -->
-      <section class="access section-fade" id="access">
-        <div class="access-header reveal-on-scroll fade-in-up">
-          <p class="eyebrow">ACCESS</p>
-          <h2>アクセス</h2>
-          <p class="lead">2店舗とも駅近で24時間営業です。</p>
-        </div>
-        <div class="access-grid">
-          <article class="access-card reveal-on-scroll">
-            <h3>eSPORTS CAFE PHOENIX 池袋1号店</h3>
-            <div class="access-map-frame">
-              <iframe
-                src="https://www.google.com/maps?q=ESPORTS%20CAFE%20PHOENIX%201%E5%8F%B7%E5%BA%97&hl=ja&z=17&output=embed"
-                allowfullscreen
-                loading="lazy"
-                referrerpolicy="no-referrer-when-downgrade"
-                title="PHOENIX 1号店の地図"
-              ></iframe>
+            <div class="store-details gsap-stagger-group">
+              <div class="detail-row">
+                <span class="label">OPEN</span
+                ><span class="value">24 Hours / 7 Days</span>
+              </div>
+              <div class="detail-row">
+                <span class="label">FEATURE</span
+                ><span class="value">全域禁煙 / ホールメイン</span>
+              </div>
+              <div class="detail-row">
+                <span class="label">ACCESS</span
+                ><span class="value">JR池袋駅より徒歩5分</span>
+              </div>
             </div>
-            <div class="button_solid012">
+
+            <div class="store-actions gsap-fade-up" data-delay="0.3">
               <a
-                class="access-link"
                 href="https://maps.app.goo.gl/ddYUsKAvwy8q5Gjy7"
                 target="_blank"
                 rel="noreferrer noopener"
+                class="cta-btn outline-btn"
               >
-                MAPを開く
-                <span class="btn-arrow">›</span>
+                OPEN GOOGLE MAP <span class="arrow">↗</span>
               </a>
             </div>
-          </article>
-          <article class="access-card reveal-on-scroll">
-            <h3>eSPORTS CAFE PHOENIX 池袋2号店</h3>
-            <div class="access-map-frame">
-              <iframe
-                src="https://www.google.com/maps?q=%22304%201%20Chome-22%20Higashiikebukuro%20Toshima%20City%20Tokyo%20170-0013%22&hl=ja&z=17&output=embed"
-                allowfullscreen
-                loading="lazy"
-                referrerpolicy="no-referrer-when-downgrade"
-                title="PHOENIX 2号店の地図"
-              ></iframe>
+          </div>
+        </div>
+      </section>
+
+      <section class="immersive-store store-right" id="store-2">
+        <div class="store-bg-layer">
+          <img
+            src="images/store/store_2_exterior.webp"
+            alt="PHOENIX 2号店"
+            class="parallax-img"
+            loading="lazy"
+          />
+        </div>
+        <div class="store-overlay"></div>
+        <div class="store-content-wrap">
+          <div class="store-text content-right">
+            <span class="huge-number" data-speed="0.5">02</span>
+            <h2 class="store-title gsap-fade-up">
+              PHOENIX <span class="highlight">IKEBUKURO</span> NO.2
+            </h2>
+            <p class="store-subtitle gsap-fade-up" data-delay="0.1">
+              池袋2号店 / RED FRONTIER
+            </p>
+
+            <div class="store-details gsap-stagger-group">
+              <div class="detail-row">
+                <span class="label">OPEN</span
+                ><span class="value">24 Hours / 7 Days</span>
+              </div>
+              <div class="detail-row">
+                <span class="label">FEATURE</span
+                ><span class="value">最新設備 / 多色な個室</span>
+              </div>
+              <div class="detail-row">
+                <span class="label">ACCESS</span
+                ><span class="value">JR池袋駅より徒歩5分</span>
+              </div>
             </div>
-            <div class="button_solid012">
+
+            <div class="store-actions gsap-fade-up" data-delay="0.3">
               <a
-                class="access-link"
                 href="https://www.google.com/maps/search/?api=1&query=%22304%201%20Chome-22%20Higashiikebukuro%20Toshima%20City%20Tokyo%20170-0013%22"
                 target="_blank"
                 rel="noreferrer noopener"
+                class="cta-btn outline-btn"
               >
-                MAPを開く
-                <span class="btn-arrow">›</span>
+                OPEN GOOGLE MAP <span class="arrow">↗</span>
               </a>
             </div>
-          </article>
+          </div>
         </div>
       </section>
     </main>
@@ -315,10 +234,7 @@
     <!-- GSAP 动画库 -->
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
-    <!-- Swiper 轮播图库 -->
-    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <!-- 主脚本 -->
     <script src="js/main.js"></script>
   </body>
 </html>
-

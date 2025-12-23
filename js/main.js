@@ -2,19 +2,28 @@
  * PHOENIX eSPORTS CAFE 网站主 JavaScript 文件
  *
  * 功能说明：
- * 1. 移动端导航菜单的展开/收起控制
- * 2. 页面滚动时的导航栏自动隐藏/显示
- * 3. Hero 区域的滚动进度动画效果
- * 4. 视差滚动效果（Parallax）
- * 5. 元素进入视口时的渐显动画
- * 6. 店内环境轮播图的初始化
+ * 1. Floating HUD + Mobile Overlay 菜单控制（含滚动自动隐藏）
+ * 2. Hero 堆叠进度（--stack-progress）
+ * 3. IntersectionObserver：reveal-on-scroll / section-fade 进入视口渐显
+ * 4. GSAP + ScrollTrigger：全站 gsap-fade-up / gsap-stagger-group + 首页 Hero 视差
+ * 5. Access 沉浸式门店 parallax
+ * 6. 店内环境 Swiper 初始化（仅首页存在时）
  */
 
-// FIX: Kill all ScrollTriggers before creating new ones to avoid DOM conflicts during reload
-// 在页面加载或热重载时，立即清理所有现有的 ScrollTrigger 实例
-if (typeof ScrollTrigger !== "undefined") {
-  ScrollTrigger.getAll().forEach((t) => t.kill());
+/**
+ * FIX: Kill all ScrollTriggers before creating new ones to avoid DOM conflicts during reload
+ * 在页面加载或热重载时，安全清理所有现有的 ScrollTrigger 实例
+ */
+function killAllScrollTriggers() {
+  if (typeof ScrollTrigger === "undefined") return;
+  try {
+    ScrollTrigger.getAll().forEach((t) => t.kill());
+  } catch (_) {
+    // ignore: hot-reload edge cases can throw during DOM teardown
+  }
 }
+
+killAllScrollTriggers();
 
 // 等待 DOM 内容加载完成后执行
 document.addEventListener("DOMContentLoaded", () => {
@@ -85,67 +94,76 @@ document.addEventListener("DOMContentLoaded", () => {
   if (hudHeader) {
     let lastScroll = 0;
 
-    window.addEventListener("scroll", () => {
-      // CRITICAL: Don't hide header if mobile menu is open
-      if (globalMenuState.isOpen) {
-        hudHeader.classList.remove("is-hidden");
-        return;
-      }
+    window.addEventListener(
+      "scroll",
+      () => {
+        // CRITICAL: Don't hide header if mobile menu is open
+        if (globalMenuState.isOpen) {
+          hudHeader.classList.remove("is-hidden");
+          return;
+        }
 
-      const current = window.scrollY;
-      if (current > lastScroll && current > 50) {
-        hudHeader.classList.add("is-hidden");
-      } else {
-        hudHeader.classList.remove("is-hidden");
-      }
-      lastScroll = current;
-    });
+        const current = window.scrollY;
+        if (current > lastScroll && current > 50) {
+          hudHeader.classList.add("is-hidden");
+        } else {
+          hudHeader.classList.remove("is-hidden");
+        }
+        lastScroll = current;
+      },
+      { passive: true }
+    );
   }
 
   // ============================================
   // 页面滚动相关功能
   // ============================================
-  let ticking = false; // 节流标志，防止滚动事件过于频繁触发
+  // Only bind hero progress tracking on pages that actually have a hero
+  if (heroSection) {
+    let ticking = false; // 节流标志，防止滚动事件过于频繁触发
 
-  /**
-   * 更新 Hero 区域的滚动进度动画
-   * 根据滚动位置计算进度值，更新 CSS 变量用于控制后续内容的堆叠效果
-   */
-  const updateHeroProgress = () => {
-    if (!heroSection) return; // 安全检查
+    /**
+     * 更新 Hero 区域的滚动进度动画
+     * 根据滚动位置计算进度值，更新 CSS 变量用于控制后续内容的堆叠效果
+     */
+    const updateHeroProgress = () => {
+      const heroHeight = Math.max(heroSection.offsetHeight, 1); // Hero 区域高度
+      // 计算滚动进度，范围 0-1
+      const progress = Math.min(Math.max(window.scrollY / heroHeight, 0), 1);
 
-    const heroHeight = Math.max(heroSection.offsetHeight, 1); // Hero 区域高度
-    // 计算滚动进度，范围 0-1
-    const progress = Math.min(Math.max(window.scrollY / heroHeight, 0), 1);
+      // 计算缓动后的堆叠进度值（使用幂函数实现缓动效果）
+      // 这个变量用于控制环境区域的堆叠效果，需要保留
+      const easedStack = Math.pow(progress, 0.75);
+      // 更新 CSS 变量，用于控制后续内容的动态堆叠效果
+      document.documentElement.style.setProperty(
+        "--stack-progress",
+        easedStack.toFixed(3)
+      );
+    };
 
-    // 计算缓动后的堆叠进度值（使用幂函数实现缓动效果）
-    // 这个变量用于控制环境区域的堆叠效果，需要保留
-    const easedStack = Math.pow(progress, 0.75);
-    // 更新 CSS 变量，用于控制后续内容的动态堆叠效果
-    document.documentElement.style.setProperty(
-      "--stack-progress",
-      easedStack.toFixed(3)
+    /**
+     * 处理滚动事件的主函数
+     * 更新 Hero 区域的滚动进度动画
+     */
+    const handleScroll = () => {
+      updateHeroProgress(); // 更新 Hero 动画
+      ticking = false; // 重置节流标志
+    };
+
+    // 监听滚动事件，使用 requestAnimationFrame 优化性能
+    window.addEventListener(
+      "scroll",
+      () => {
+        if (ticking) return; // 如果正在处理，跳过本次事件
+        ticking = true; // 设置处理标志
+        window.requestAnimationFrame(handleScroll); // 在下一帧执行处理函数
+      },
+      { passive: true }
     );
-  };
 
-  /**
-   * 处理滚动事件的主函数
-   * 更新 Hero 区域的滚动进度动画
-   */
-  const handleScroll = () => {
-    updateHeroProgress(); // 更新 Hero 动画
-    ticking = false; // 重置节流标志
-  };
-
-  // 监听滚动事件，使用 requestAnimationFrame 优化性能
-  window.addEventListener("scroll", () => {
-    if (ticking) return; // 如果正在处理，跳过本次事件
-    ticking = true; // 设置处理标志
-    window.requestAnimationFrame(handleScroll); // 在下一帧执行处理函数
-  });
-
-  // 初始化：页面加载时执行一次
-  updateHeroProgress();
+    // 初始化：页面加载时执行一次
+    updateHeroProgress();
+  }
 
   // ============================================
   // 元素进入视口时的渐显动画
@@ -199,10 +217,98 @@ document.addEventListener("DOMContentLoaded", () => {
   // ============================================
   if (typeof gsap !== "undefined" && typeof ScrollTrigger !== "undefined") {
     // 清理所有现有的 ScrollTrigger 实例（防止热重载时的 removeChild 错误）
-    ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
+    killAllScrollTriggers();
 
     // 注册 ScrollTrigger 插件
     gsap.registerPlugin(ScrollTrigger);
+
+    // ============================================
+    // Global GSAP Animation System (All Pages)
+    // ============================================
+    // Any element with .gsap-fade-up will float in when scrolled into view
+    const fadeElements = document.querySelectorAll(".gsap-fade-up");
+    if (fadeElements.length > 0) {
+      fadeElements.forEach((el) => {
+        if (!el) return;
+        const delay = Number(el.dataset.delay || 0) || 0;
+        gsap.to(el, {
+          y: 0,
+          opacity: 1,
+          duration: 1,
+          delay,
+          ease: "power3.out",
+          scrollTrigger: {
+            trigger: el,
+            start: "top 85%",
+            toggleActions: "play none none reverse",
+          },
+        });
+      });
+    }
+
+    // Staggered Groups: parent has .gsap-stagger-group
+    const staggerGroups = document.querySelectorAll(".gsap-stagger-group");
+    if (staggerGroups.length > 0) {
+      staggerGroups.forEach((group) => {
+        if (!group || !group.children || group.children.length === 0) return;
+        gsap.to(group.children, {
+          y: 0,
+          opacity: 1,
+          duration: 0.8,
+          stagger: 0.1,
+          ease: "power2.out",
+          scrollTrigger: {
+            trigger: group,
+            start: "top 85%",
+          },
+        });
+      });
+    }
+
+    // ============================================
+    // Access Page: Immersive Parallax System
+    // ============================================
+    const immersiveSections = document.querySelectorAll(".immersive-store");
+    if (immersiveSections.length > 0) {
+      immersiveSections.forEach((section) => {
+        if (!section) return;
+        const bgImg = section.querySelector(".parallax-img");
+        const bigNum = section.querySelector(".huge-number");
+
+        // Parallax Background
+        if (bgImg) {
+          gsap.fromTo(
+            bgImg,
+            { yPercent: -15 },
+            {
+              yPercent: 15,
+              ease: "none",
+              scrollTrigger: {
+                trigger: section,
+                start: "top bottom",
+                end: "bottom top",
+                scrub: true,
+              },
+            }
+          );
+        }
+
+        // Parallax Number (Creates depth)
+        if (bigNum) {
+          const speed = Number(bigNum.dataset.speed || 0.2) || 0.2;
+          gsap.to(bigNum, {
+            y: 100 * speed,
+            ease: "none",
+            scrollTrigger: {
+              trigger: section,
+              start: "top bottom",
+              end: "bottom top",
+              scrub: true,
+            },
+          });
+        }
+      });
+    }
 
     // 1. 背景图视差缩放 (Cinematic Parallax Zoom)
     const heroImg = document.querySelector(".hero-bg img");
@@ -222,8 +328,6 @@ document.addEventListener("DOMContentLoaded", () => {
           invalidateOnRefresh: true, // 刷新时重新计算
         },
       });
-    } else {
-      console.warn("Hero image or section not found for parallax effect");
     }
 
     // 页面加载完成后刷新 ScrollTrigger（确保所有元素都已渲染）
@@ -245,8 +349,6 @@ document.addEventListener("DOMContentLoaded", () => {
         duration: 1,
         delay: 0.5,
       });
-    } else {
-      console.warn("Hero label-box not found");
     }
 
     // 标题文字逐行浮现
@@ -270,8 +372,6 @@ document.addEventListener("DOMContentLoaded", () => {
         },
         "-=0.8"
       );
-    } else {
-      console.warn("Hero title lines not found");
     }
 
     // 底部内容浮现
@@ -280,8 +380,6 @@ document.addEventListener("DOMContentLoaded", () => {
       // 先设置初始状态
       gsap.set(bottomRow, { y: 30, autoAlpha: 0 });
       heroTimeline.to(bottomRow, { y: 0, autoAlpha: 1, duration: 1 }, "-=0.6");
-    } else {
-      console.warn("Hero bottom-row not found");
     }
   } else if (typeof gsap !== "undefined") {
     // Fallback: 如果没有 ScrollTrigger，使用基础 GSAP 动画
