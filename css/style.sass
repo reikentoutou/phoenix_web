@@ -2606,9 +2606,12 @@ header
     border-radius: 100px
     padding: 1px
     background: linear-gradient(135deg, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0.08))
+    // Standard mask property for compatibility
+    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)
+    mask-composite: exclude
+    // WebKit prefix for older browsers
     -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)
     -webkit-mask-composite: xor
-    mask-composite: exclude
     pointer-events: none
 
 .hud-logo img
