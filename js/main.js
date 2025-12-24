@@ -3,51 +3,62 @@
  *
  * 功能说明：
  * 1. Floating HUD + Mobile Overlay 菜单控制（含滚动自动隐藏）
- * 2. Hero 堆叠进度（--stack-progress）
- * 3. IntersectionObserver：reveal-on-scroll / section-fade 进入视口渐显
- * 4. GSAP + ScrollTrigger：全站 gsap-fade-up / gsap-stagger-group + 首页 Hero 视差
- * 5. Access 沉浸式门店 parallax
- * 6. 店内环境 Swiper 初始化（仅首页存在时）
+ * 2. IntersectionObserver：reveal-on-scroll / section-fade 进入视口渐显
+ * 3. GSAP + ScrollTrigger：全站 gsap-fade-up / gsap-stagger-group + 首页 Hero 视差
+ * 4. Access 沉浸式门店 parallax
+ * 5. Swiper 初始化（仅相关区块存在时）
  */
 
 /**
- * FIX: Kill all ScrollTriggers before creating new ones to avoid DOM conflicts during reload
- * 在页面加载或热重载时，安全清理所有现有的 ScrollTrigger 实例
+ * 修复：在创建新的 ScrollTrigger 前，先清理旧实例，避免热重载/局部刷新时出现 DOM 冲突
+ * 说明：某些开发环境下（例如热重载），旧的 ScrollTrigger 仍持有已卸载节点的引用，会导致报错或动画异常。
  */
 function killAllScrollTriggers() {
   if (typeof ScrollTrigger === "undefined") return;
   try {
     ScrollTrigger.getAll().forEach((t) => t.kill());
   } catch (_) {
-    // ignore: hot-reload edge cases can throw during DOM teardown
+    // 忽略：热重载边缘情况（DOM 正在销毁）可能抛错，这里不影响最终功能
   }
 }
-
-killAllScrollTriggers();
 
 // 等待 DOM 内容加载完成后执行
 document.addEventListener("DOMContentLoaded", () => {
   // ============================================
-  // NEW NAVIGATION SYSTEM: Floating HUD + Mobile Overlay
+  // 导航系统：悬浮 HUD + 全屏移动端遮罩菜单
   // ============================================
   const hudHeader = document.querySelector(".hud-header");
   const menuBtn = document.querySelector(".hud-menu-btn");
   const mobileOverlay = document.querySelector(".mobile-menu-overlay");
+  const mobileCloseBtn = document.querySelector(".mm-close-btn");
   const mobileLinks = document.querySelectorAll(".mm-link");
-  const heroSection = document.querySelector(".hero-section"); // Hero 区域
 
-  // Global menu state for header auto-hide logic
+  // 全局菜单状态：用于“滚动隐藏头部”逻辑判断（菜单打开时禁止隐藏）
   let globalMenuState = { isOpen: false };
+
+  const closeMobileMenu = () => {
+    if (!menuBtn || !mobileOverlay) return;
+    globalMenuState.isOpen = false;
+    menuBtn.classList.remove("is-active");
+    mobileOverlay.classList.remove("is-open");
+    document.body.style.overflow = "";
+
+    // 重置 GSAP 菜单动效初始状态（确保下次打开能正常播放）
+    if (typeof gsap !== "undefined" && mobileLinks.length > 0) {
+      gsap.set(mobileLinks, { y: "100%", opacity: 0 });
+    }
+  };
 
   if (menuBtn && mobileOverlay) {
     menuBtn.addEventListener("click", () => {
       globalMenuState.isOpen = !globalMenuState.isOpen;
       menuBtn.classList.toggle("is-active", globalMenuState.isOpen);
       mobileOverlay.classList.toggle("is-open", globalMenuState.isOpen);
-      document.body.style.overflow = globalMenuState.isOpen ? "hidden" : ""; // Lock scroll
+      // 打开菜单时锁定页面滚动；关闭时恢复（注意：这会影响 body 滚动，仅用于移动端全屏菜单）
+      document.body.style.overflow = globalMenuState.isOpen ? "hidden" : "";
 
       if (globalMenuState.isOpen) {
-        // GSAP Enter Animation: Staggered reveal
+        // GSAP 进入动画：菜单项逐个上移显示
         if (typeof gsap !== "undefined" && mobileLinks.length > 0) {
           gsap.to(mobileLinks, {
             y: 0,
@@ -59,7 +70,7 @@ document.addEventListener("DOMContentLoaded", () => {
           });
         }
       } else {
-        // GSAP Exit Animation
+        // GSAP 退出动画：菜单项下移隐藏
         if (typeof gsap !== "undefined" && mobileLinks.length > 0) {
           gsap.to(mobileLinks, {
             y: "100%",
@@ -71,33 +82,41 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     });
 
-    // Close on link click
+    // 点击菜单链接：立即关闭遮罩菜单（避免跳转后遮罩残留）
     if (mobileLinks.length > 0) {
       mobileLinks.forEach((link) => {
         link.addEventListener("click", () => {
-          globalMenuState.isOpen = false;
-          menuBtn.classList.remove("is-active");
-          mobileOverlay.classList.remove("is-open");
-          document.body.style.overflow = "";
-
-          // Reset GSAP animation state
-          if (typeof gsap !== "undefined") {
-            gsap.set(mobileLinks, { y: "100%", opacity: 0 });
-          }
+          closeMobileMenu();
         });
       });
     }
+
+    // 点击左上角 X：关闭遮罩菜单
+    if (mobileCloseBtn) {
+      mobileCloseBtn.addEventListener("click", closeMobileMenu);
+    }
+
+    // 点击背景遮罩：快速关闭（更符合移动端习惯）
+    const bg = mobileOverlay.querySelector(".mm-bg");
+    if (bg) {
+      bg.addEventListener("click", closeMobileMenu);
+    }
+
+    // ESC：关闭遮罩菜单（桌面端辅助）
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape") closeMobileMenu();
+    });
   }
 
-  // Auto-hide header on scroll down
-  // CRITICAL FIX: Do NOT hide header when mobile menu is open
+  // 向下滚动自动隐藏头部
+  // 关键：菜单打开时禁止隐藏头部（否则用户会“找不到关闭入口”）
   if (hudHeader) {
     let lastScroll = 0;
 
     window.addEventListener(
       "scroll",
       () => {
-        // CRITICAL: Don't hide header if mobile menu is open
+        // 关键：菜单打开时，强制显示头部
         if (globalMenuState.isOpen) {
           hudHeader.classList.remove("is-hidden");
           return;
@@ -113,56 +132,6 @@ document.addEventListener("DOMContentLoaded", () => {
       },
       { passive: true }
     );
-  }
-
-  // ============================================
-  // 页面滚动相关功能
-  // ============================================
-  // Only bind hero progress tracking on pages that actually have a hero
-  if (heroSection) {
-    let ticking = false; // 节流标志，防止滚动事件过于频繁触发
-
-    /**
-     * 更新 Hero 区域的滚动进度动画
-     * 根据滚动位置计算进度值，更新 CSS 变量用于控制后续内容的堆叠效果
-     */
-    const updateHeroProgress = () => {
-      const heroHeight = Math.max(heroSection.offsetHeight, 1); // Hero 区域高度
-      // 计算滚动进度，范围 0-1
-      const progress = Math.min(Math.max(window.scrollY / heroHeight, 0), 1);
-
-      // 计算缓动后的堆叠进度值（使用幂函数实现缓动效果）
-      // 这个变量用于控制环境区域的堆叠效果，需要保留
-      const easedStack = Math.pow(progress, 0.75);
-      // 更新 CSS 变量，用于控制后续内容的动态堆叠效果
-      document.documentElement.style.setProperty(
-        "--stack-progress",
-        easedStack.toFixed(3)
-      );
-    };
-
-    /**
-     * 处理滚动事件的主函数
-     * 更新 Hero 区域的滚动进度动画
-     */
-    const handleScroll = () => {
-      updateHeroProgress(); // 更新 Hero 动画
-      ticking = false; // 重置节流标志
-    };
-
-    // 监听滚动事件，使用 requestAnimationFrame 优化性能
-    window.addEventListener(
-      "scroll",
-      () => {
-        if (ticking) return; // 如果正在处理，跳过本次事件
-        ticking = true; // 设置处理标志
-        window.requestAnimationFrame(handleScroll); // 在下一帧执行处理函数
-      },
-      { passive: true }
-    );
-
-    // 初始化：页面加载时执行一次
-    updateHeroProgress();
   }
 
   // ============================================
@@ -213,19 +182,18 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   // ============================================
-  // New Cinematic Hero Animations
+  // GSAP 动画系统（全站）
   // ============================================
   if (typeof gsap !== "undefined" && typeof ScrollTrigger !== "undefined") {
-    // 清理所有现有的 ScrollTrigger 实例（防止热重载时的 removeChild 错误）
+    // 防止热重载：先清理旧 ScrollTrigger，避免 removeChild / 失效节点引用
     killAllScrollTriggers();
 
-    // 注册 ScrollTrigger 插件
+    // 注册 ScrollTrigger 插件（只在存在时执行）
     gsap.registerPlugin(ScrollTrigger);
 
     // ============================================
-    // Global GSAP Animation System (All Pages)
+    // 全站通用：.gsap-fade-up 进入视口浮现
     // ============================================
-    // Any element with .gsap-fade-up will float in when scrolled into view
     const fadeElements = document.querySelectorAll(".gsap-fade-up");
     if (fadeElements.length > 0) {
       fadeElements.forEach((el) => {
@@ -246,7 +214,7 @@ document.addEventListener("DOMContentLoaded", () => {
       });
     }
 
-    // Staggered Groups: parent has .gsap-stagger-group
+    // 分组渐入：父容器加 .gsap-stagger-group，子元素按顺序 stagger 出场
     const staggerGroups = document.querySelectorAll(".gsap-stagger-group");
     if (staggerGroups.length > 0) {
       staggerGroups.forEach((group) => {
@@ -266,7 +234,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     // ============================================
-    // Access Page: Immersive Parallax System
+    // Access 页：沉浸式视差（仅当页面存在 .immersive-store 时启用）
     // ============================================
     const immersiveSections = document.querySelectorAll(".immersive-store");
     if (immersiveSections.length > 0) {
@@ -275,7 +243,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const bgImg = section.querySelector(".parallax-img");
         const bigNum = section.querySelector(".huge-number");
 
-        // Parallax Background
+        // 背景图视差
         if (bgImg) {
           gsap.fromTo(
             bgImg,
@@ -293,7 +261,7 @@ document.addEventListener("DOMContentLoaded", () => {
           );
         }
 
-        // Parallax Number (Creates depth)
+        // 大数字视差（增强纵深层次）
         if (bigNum) {
           const speed = Number(bigNum.dataset.speed || 0.2) || 0.2;
           gsap.to(bigNum, {
@@ -310,7 +278,7 @@ document.addEventListener("DOMContentLoaded", () => {
       });
     }
 
-    // 1. 背景图视差缩放 (Cinematic Parallax Zoom)
+    // 首页 Hero：背景视差缩放（电影感“缓慢推镜”效果）
     const heroImg = document.querySelector(".hero-bg img");
     const heroSec = document.querySelector(".hero-section");
 
@@ -335,7 +303,7 @@ document.addEventListener("DOMContentLoaded", () => {
       ScrollTrigger.refresh();
     });
 
-    // 2. 文字进场动画 (使用 autoAlpha 防止消失 Bug)
+    // 首页 Hero：文字进场动画（使用 autoAlpha 避免闪烁/消失）
     const heroTimeline = gsap.timeline({ defaults: { ease: "power3.out" } });
 
     // 标签淡入
@@ -382,7 +350,7 @@ document.addEventListener("DOMContentLoaded", () => {
       heroTimeline.to(bottomRow, { y: 0, autoAlpha: 1, duration: 1 }, "-=0.6");
     }
   } else if (typeof gsap !== "undefined") {
-    // Fallback: 如果没有 ScrollTrigger，使用基础 GSAP 动画
+    // 降级：没有 ScrollTrigger 时，仅使用基础 GSAP 时间线（不做滚动驱动）
     const heroTimeline = gsap.timeline({ defaults: { ease: "power3.out" } });
 
     const labelBox = document.querySelector(".hero-section .label-box");
@@ -414,79 +382,93 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   // ============================================
-  // 店内环境轮播图初始化
+  // 首页：店内环境电影感 Swiper（仅存在 .cinematic-swiper 时初始化）
   // ============================================
-  /**
-   * 使用 Swiper 库初始化店内环境图片轮播
-   * 配置为淡入淡出效果，自动播放，带进度条和导航按钮
-   */
-  const envSwiperEl = document.querySelector(".environment-slider");
-  if (envSwiperEl && window.Swiper) {
-    // 检测是否为移动设备
-    const isMobile = window.innerWidth <= 640;
+  const cinematicSwiperEl = document.querySelector(".cinematic-swiper");
 
-    // Null safety: Check pagination and navigation elements exist
-    const paginationEl = document.querySelector(".env-pagination");
-    const nextBtn = document.querySelector(".env-next");
-    const prevBtn = document.querySelector(".env-prev");
+  if (cinematicSwiperEl && window.Swiper) {
+    const root =
+      cinematicSwiperEl.closest(".store-environment-cinematic") || document;
 
-    const swiper = new Swiper(envSwiperEl, {
-      effect: "fade", // 使用淡入淡出切换效果
-      fadeEffect: { crossFade: true }, // 启用交叉淡入淡出
-      speed: isMobile ? 600 : 1000, // 移动端更快切换
-      parallax: !isMobile, // 移动端禁用视差效果以提升性能
+    const fractionEl = root.querySelector(".swiper-pagination-fraction");
+    const nextEl = root.querySelector(".swiper-button-next");
+    const prevEl = root.querySelector(".swiper-button-prev");
+    const progressBar = root.querySelector(".progress-bar-track");
+
+    const isMobile = window.innerWidth <= 768;
+
+    new Swiper(cinematicSwiperEl, {
       slidesPerView: 1,
       spaceBetween: 0,
+      loop: true,
+      speed: 800,
+      effect: "fade",
+      fadeEffect: { crossFade: true },
       autoplay: {
-        delay: isMobile ? 4000 : 5000, // 移动端更快切换
-        disableOnInteraction: false, // 用户交互后不停止自动播放
-        pauseOnMouseEnter: !isMobile, // 移动端不暂停
+        delay: 5000,
+        disableOnInteraction: false,
+        pauseOnMouseEnter: !isMobile,
       },
-      pagination: paginationEl
+      pagination: fractionEl
         ? {
-            el: paginationEl, // 进度条容器
-            type: "progressbar", // 使用进度条样式
+            el: fractionEl,
+            type: "fraction",
+            formatFractionCurrent(number) {
+              return number < 10 ? "0" + number : number;
+            },
+            formatFractionTotal(number) {
+              return number < 10 ? "0" + number : number;
+            },
           }
         : false,
       navigation:
-        nextBtn && prevBtn
+        nextEl && prevEl
           ? {
-              nextEl: nextBtn, // 下一个按钮
-              prevEl: prevBtn, // 上一个按钮
+              nextEl,
+              prevEl,
             }
           : false,
-      // 移动端触摸设置
-      touchEventsTarget: "container",
-      touchRatio: 1,
-      touchAngle: 45,
-      grabCursor: true,
-      // 移动端优化
-      watchOverflow: true,
-      preventClicks: true,
-      preventClicksPropagation: true,
-      // Swiper 生命周期回调
       on: {
-        // 初始化时，为当前活动幻灯片添加 is-active 类
-        init(swiperInstance) {
-          swiperInstance.slides.forEach((slide, idx) =>
-            slide.classList.toggle(
-              "is-active",
-              idx === swiperInstance.activeIndex
-            )
-          );
+        autoplayTimeLeft(s, time, progress) {
+          if (!progressBar) return;
+          progressBar.style.width = (1 - progress) * 100 + "%";
         },
-        // 切换开始时，移除所有 is-active 类
-        slideChangeTransitionStart(swiperInstance) {
-          swiperInstance.slides.forEach((slide) =>
-            slide.classList.remove("is-active")
-          );
+        slideChangeTransitionStart() {
+          if (!progressBar) return;
+          progressBar.style.width = "0%";
         },
-        // 切换结束时，为新的活动幻灯片添加 is-active 类
-        slideChangeTransitionEnd(swiperInstance) {
-          swiperInstance.slides[swiperInstance.activeIndex]?.classList.add(
-            "is-active"
-          );
-        },
+      },
+    });
+  }
+
+  // ============================================
+  // 首页：Schedule 横向滑动 Swiper（移动端可手指横滑）
+  // ============================================
+  const scheduleSwiperEl = document.querySelector(".schedule-swiper");
+  if (scheduleSwiperEl && window.Swiper) {
+    const root = scheduleSwiperEl.closest(".schedule-visual") || document;
+    const scrollbarEl = root.querySelector(".schedule-scrollbar");
+
+    new Swiper(scheduleSwiperEl, {
+      slidesPerView: "auto",
+      spaceBetween: 24,
+      freeMode: true,
+      // 移动端：在“纵向滚动页面”里提升横向滑动的可用性/手感
+      allowTouchMove: true,
+      simulateTouch: true,
+      touchEventsTarget: "container",
+      touchStartPreventDefault: false,
+      touchAngle: 30,
+      scrollbar: scrollbarEl
+        ? {
+            el: scrollbarEl,
+            draggable: true,
+            hide: false,
+          }
+        : undefined,
+      breakpoints: {
+        320: { spaceBetween: 16 },
+        640: { spaceBetween: 24 },
       },
     });
   }

@@ -24,7 +24,7 @@
   </head>
   <body>
     <!-- ============================================ -->
-    <!-- Floating HUD Header (Desktop) + Mobile Menu -->
+    <!-- 悬浮 HUD 头部（桌面）+ 移动端菜单 -->
     <!-- ============================================ -->
     <header class="hud-header">
       <div class="hud-container">
@@ -50,311 +50,325 @@
       </div>
     </header>
 
-    <main>
-      <div class="page-header-simple">
-        <p class="eyebrow gsap-fade-up">SPACES</p>
-        <h1 class="gsap-fade-up" data-delay="0.1">ROOMS</h1>
-        <p class="lead gsap-fade-up" data-delay="0.2">
-          用途に合わせて選べる、多彩なゲーミング空間。<br />
-          プロ仕様のデバイスと快適なプライベート空間をご用意しました。
-        </p>
+    <main class="rooms-cinematic-container">
+      <div class="global-fixed-bg-layer">
+        <img
+          src="images/rooms/specs_background.webp"
+          alt="Global Rooms Background"
+        />
       </div>
 
-      <section class="store-zone" id="store-1">
-        <div class="zone-header gsap-fade-up">
-          <span class="zone-num">01</span>
-          <h2>IKEBUKURO NO.1</h2>
-          <p>3F - 5F / 24 HOURS</p>
-        </div>
-
-        <div class="floor-group">
-          <h3 class="floor-title gsap-fade-up">FLOOR 3F - 4F (OPEN HALL)</h3>
-          <div class="rooms-grid">
-            <article class="room-card gsap-fade-up">
-              <div class="room-img">
-                <img
-                  src="images/rooms/no1-3fhall.webp"
-                  alt="3F High Spec Hall"
-                />
-                <span class="spec-badge high-spec">HIGH SPEC</span>
-              </div>
-              <div class="room-info">
-                <div class="room-header-row">
-                  <h4>3F MAIN HALL</h4>
-                  <span class="floor-tag">3F</span>
-                </div>
-                <p class="room-desc">
-                  最新のハイスペックPCを完備したメインホール。競技シーンを想定した環境。
-                </p>
-                <ul class="spec-list">
-                  <li><span class="label">GPU</span> RTX 4070 / 4070Ti</li>
-                  <li><span class="label">Seat</span> Open Seat</li>
-                </ul>
-              </div>
-            </article>
-
-            <article class="room-card gsap-fade-up" data-delay="0.1">
-              <div class="room-img">
-                <img
-                  src="images/rooms/no1-4fhall.webp"
-                  alt="4F Standard Hall"
-                />
-                <span class="spec-badge standard">STANDARD</span>
-              </div>
-              <div class="room-info">
-                <div class="room-header-row">
-                  <h4>4F OPEN HALL</h4>
-                  <span class="floor-tag">4F</span>
-                </div>
-                <p class="room-desc">
-                  カジュアルに楽しめる標準スペックフロア。友達とのプレイに最適。
-                </p>
-                <ul class="spec-list">
-                  <li><span class="label">GPU</span> RTX 3060</li>
-                  <li><span class="label">Seat</span> Open Seat</li>
-                </ul>
-              </div>
-            </article>
+      <header class="room-zone zone-intro">
+        <div class="zone-content-wrapper">
+          <div class="page-header-simple">
+            <p class="eyebrow gsap-fade-up">SPACES</p>
+            <h1 class="gsap-fade-up" data-delay="0.1">ROOMS &amp; SPECS</h1>
+            <p class="lead gsap-fade-up" data-delay="0.2">
+              用途に合わせて選べる、多彩なゲーミング空間。<br />
+              プロ仕様のデバイスと快適なプライベート空間をご用意しました。
+            </p>
           </div>
         </div>
+      </header>
 
-        <div class="floor-group">
-          <h3 class="floor-title gsap-fade-up">FLOOR 5F (PRIVATE BOOTHS)</h3>
-          <div class="rooms-grid">
-            <article class="room-card gsap-fade-up">
-              <div class="room-img">
-                <img src="images/rooms/no1-trio.webp" alt="3 Person Room" />
-                <span class="spec-badge high-spec">HIGH SPEC</span>
-                <span class="capacity-tag">3名個室</span>
-              </div>
-              <div class="room-info">
-                <div class="room-header-row">
-                  <h4>TRIO SUITE</h4>
-                  <span class="floor-tag">5F</span>
-                </div>
-                <p class="room-desc">
-                  3名専用のハイスペック個室。チーム練習やVCに最適な防音空間。
-                </p>
-                <ul class="spec-list">
-                  <li><span class="label">GPU</span> RTX 4070Ti</li>
-                  <li><span class="label">Type</span> 完全個室</li>
-                </ul>
-              </div>
-            </article>
+      <section class="room-zone zone-store1" id="store-1">
+        <div class="zone-content-wrapper">
+          <div class="zone-header gsap-fade-up">
+            <span class="zone-num">01</span>
+            <h2>IKEBUKURO NO.1</h2>
+            <p>3F - 5F / PROFESSIONAL FOCUS</p>
+          </div>
 
-            <article class="room-card gsap-fade-up" data-delay="0.1">
-              <div class="room-img">
-                <img src="images/rooms/no1-squads.webp" alt="4 Person Room" />
-                <span class="spec-badge standard">STANDARD</span>
-                <span class="capacity-tag">4名個室</span>
-              </div>
-              <div class="room-info">
-                <div class="room-header-row">
-                  <h4>QUAD ROOM</h4>
-                  <span class="floor-tag">5F</span>
+          <div class="floor-group">
+            <h3 class="floor-title gsap-fade-up">FLOOR 3F - 4F (OPEN HALL)</h3>
+            <div class="rooms-grid gsap-stagger-group">
+              <article class="room-card">
+                <div class="room-img">
+                  <img
+                    src="images/rooms/store1_3f.webp"
+                    alt="3F High Spec Hall"
+                  />
+                  <span class="spec-badge high-spec">HIGH SPEC</span>
                 </div>
-                <p class="room-desc">
-                  4名まで利用可能な標準個室。グループでの長時間プレイも快適。
-                </p>
-                <ul class="spec-list">
-                  <li><span class="label">GPU</span> RTX 3060</li>
-                  <li><span class="label">Type</span> 完全個室</li>
-                </ul>
-              </div>
-            </article>
+                <div class="room-info">
+                  <div class="room-header-row">
+                    <h4>3F MAIN HALL</h4>
+                    <span class="floor-tag">3F</span>
+                  </div>
+                  <p class="room-desc">
+                    最新のハイスペックPCを完備したメインホール。競技シーンを想定した環境。
+                  </p>
+                  <ul class="spec-list">
+                    <li><span class="label">GPU</span> RTX 4080/4090</li>
+                    <li><span class="label">Monitor</span> 360Hz / 2546K</li>
+                  </ul>
+                </div>
+              </article>
+
+              <article class="room-card">
+                <div class="room-img">
+                  <img
+                    src="images/rooms/store1_4f.webp"
+                    alt="4F Standard Hall"
+                  />
+                  <span class="spec-badge standard">STANDARD</span>
+                </div>
+                <div class="room-info">
+                  <div class="room-header-row">
+                    <h4>4F OPEN HALL</h4>
+                    <span class="floor-tag">4F</span>
+                  </div>
+                  <p class="room-desc">
+                    カジュアルに楽しめる標準スペックフロア。友達とのプレイに最適。
+                  </p>
+                  <ul class="spec-list">
+                    <li><span class="label">GPU</span> RTX 3070/4060</li>
+                    <li><span class="label">Monitor</span> 240Hz</li>
+                  </ul>
+                </div>
+              </article>
+            </div>
+          </div>
+
+          <div class="floor-group">
+            <h3 class="floor-title gsap-fade-up">FLOOR 5F (PRIVATE BOOTHS)</h3>
+            <div class="rooms-grid gsap-stagger-group">
+              <article class="room-card">
+                <div class="room-img">
+                  <img
+                    src="images/rooms/store1_5f_3p.webp"
+                    alt="3 Person Room"
+                  />
+                  <span class="spec-badge high-spec">HIGH SPEC</span>
+                  <span class="capacity-tag">3名個室</span>
+                </div>
+                <div class="room-info">
+                  <div class="room-header-row">
+                    <h4>TRIO SUITE</h4>
+                    <span class="floor-tag">5F</span>
+                  </div>
+                  <p class="room-desc">
+                    3名専用のハイスペック個室。チーム練習やVCに最適な防音空間。
+                  </p>
+                  <ul class="spec-list">
+                    <li><span class="label">GPU</span> RTX 4080 Super</li>
+                    <li><span class="label">Type</span> 完全個室</li>
+                  </ul>
+                </div>
+              </article>
+
+              <article class="room-card">
+                <div class="room-img">
+                  <img
+                    src="images/rooms/store1_5f_4p.webp"
+                    alt="4 Person Room"
+                  />
+                  <span class="spec-badge standard">STANDARD</span>
+                  <span class="capacity-tag">4名個室</span>
+                </div>
+                <div class="room-info">
+                  <div class="room-header-row">
+                    <h4>QUAD ROOM</h4>
+                    <span class="floor-tag">5F</span>
+                  </div>
+                  <p class="room-desc">
+                    4名まで利用可能な標準個室。グループでの長時間プレイも快適。
+                  </p>
+                  <ul class="spec-list">
+                    <li><span class="label">GPU</span> RTX 3070 Ti</li>
+                    <li><span class="label">Type</span> 完全個室</li>
+                  </ul>
+                </div>
+              </article>
+            </div>
           </div>
         </div>
       </section>
 
-      <div class="section-divider"></div>
+      <section class="room-zone zone-store2" id="store-2">
+        <div class="zone-content-wrapper">
+          <div class="zone-header gsap-fade-up">
+            <span class="zone-num">02</span>
+            <h2>IKEBUKURO NO.2</h2>
+            <p>RTX 50 SERIES / NEXT GENERATION</p>
+          </div>
 
-      <section class="store-zone" id="store-2">
-        <div class="zone-header gsap-fade-up">
-          <span class="zone-num">02</span>
-          <h2>IKEBUKURO NO.2</h2>
-          <p>RTX 50 SERIES / NEXT GEN</p>
-        </div>
-
-        <div class="rooms-grid">
-          <!-- 1) Main Hall (Open Hall) -->
-          <article class="room-card gsap-fade-up">
-            <div class="room-img">
-              <img src="images/rooms/no2-hall.webp" alt="Store 2 Main Hall" />
-              <span class="spec-badge standard">RTX 5060</span>
-              <span class="capacity-tag">Open Seat</span>
-            </div>
-            <div class="room-info">
-              <div class="room-header-row">
-                <h4>MAIN HALL</h4>
-                <span class="floor-tag">OPEN</span>
+          <div class="rooms-grid gsap-stagger-group">
+            <article class="room-card">
+              <div class="room-img">
+                <img
+                  src="images/rooms/store2_hall.webp"
+                  alt="Store 2 Main Hall"
+                />
+                <span class="spec-badge standard">RTX 5060</span>
+                <span class="capacity-tag">Open Seat</span>
               </div>
-              <p class="room-desc">
-                最新のエントリーモデル RTX 5060 を搭載した開放的なメインホール。
-              </p>
-              <ul class="spec-list">
-                <li><span class="label">GPU</span> RTX 5060</li>
-                <li><span class="label">Type</span> オープン席 / 禁煙</li>
-              </ul>
-            </div>
-          </article>
+              <div class="room-info">
+                <div class="room-header-row">
+                  <h4>MAIN HALL</h4>
+                  <span class="floor-tag">OPEN</span>
+                </div>
+                <p class="room-desc">
+                  最新のエントリーモデル RTX 5060
+                  を搭載した開放的なメインホール。
+                </p>
+                <ul class="spec-list">
+                  <li><span class="label">GPU</span> RTX 5060</li>
+                  <li><span class="label">Type</span> オープン席 / 禁煙</li>
+                </ul>
+              </div>
+            </article>
 
-          <!-- 2) 4-Person Rooms (Private) -->
-          <article
-            class="room-card highlight-card gsap-fade-up"
-            data-delay="0.1"
-          >
-            <div class="room-img">
-              <img
-                src="images/rooms/no2-squads.webp"
-                alt="Store 2 4-Person Room"
-              />
-              <div class="badge-group">
-                <span class="spec-badge premium">RTX 5080</span>
+            <article class="room-card highlight-card">
+              <div class="room-img">
+                <img
+                  src="images/rooms/store2_4p.webp"
+                  alt="Store 2 4-Person Room"
+                />
+                <div class="badge-group">
+                  <span class="spec-badge premium">RTX 5080</span>
+                  <span class="spec-badge high-spec">RTX 5070</span>
+                </div>
+                <span class="capacity-tag">4名個室</span>
+                <span class="availability-tag">禁煙 / 喫煙</span>
+              </div>
+              <div class="room-info">
+                <div class="room-header-row">
+                  <h4>QUAD SUITE (4名)</h4>
+                  <span class="floor-tag">個室</span>
+                </div>
+                <p class="room-sub-spec">
+                  禁煙包廂 RTX 5080 / 吸煙包廂 RTX 5070
+                </p>
+                <p class="room-desc">
+                  4名グループ専用。禁煙(5080)と喫煙(5070)のお部屋を選べます。
+                </p>
+                <ul class="spec-list">
+                  <li><span class="label">Monitor</span> 540Hz / 360Hz</li>
+                  <li><span class="label">Select</span> 禁煙 / 喫煙</li>
+                </ul>
+              </div>
+            </article>
+
+            <article class="room-card">
+              <div class="room-img">
+                <img
+                  src="images/rooms/store2_3p.webp"
+                  alt="Store 2 3-Person Room"
+                />
+                <div class="badge-group">
+                  <span class="spec-badge premium">RTX 5080</span>
+                  <span class="spec-badge high-spec">RTX 5070</span>
+                </div>
+                <span class="capacity-tag">3名個室</span>
+                <span class="availability-tag">禁煙 / 喫煙</span>
+              </div>
+              <div class="room-info">
+                <div class="room-header-row">
+                  <h4>TRIO SUITE (3名)</h4>
+                  <span class="floor-tag">個室</span>
+                </div>
+                <p class="room-sub-spec">
+                  禁煙包廂 RTX 5080 / 吸煙包廂 RTX 5070
+                </p>
+                <p class="room-desc">
+                  3名で利用可能なプライベート空間。用途に合わせて喫煙・禁煙を選択可能。
+                </p>
+                <ul class="spec-list">
+                  <li><span class="label">Monitor</span> 540Hz / 360Hz</li>
+                  <li><span class="label">Select</span> 禁煙 / 喫煙</li>
+                </ul>
+              </div>
+            </article>
+
+            <article class="room-card">
+              <div class="room-img">
+                <img
+                  src="images/rooms/store2_2p.webp"
+                  alt="Store 2 2-Person Room"
+                />
+                <div class="badge-group">
+                  <span class="spec-badge premium">RTX 5080</span>
+                  <span class="spec-badge high-spec">RTX 5070</span>
+                </div>
+                <span class="capacity-tag">2名個室</span>
+                <span class="availability-tag">禁煙 / 喫煙</span>
+              </div>
+              <div class="room-info">
+                <div class="room-header-row">
+                  <h4>DUO SUITE (2名)</h4>
+                  <span class="floor-tag">個室</span>
+                </div>
+                <p class="room-sub-spec">
+                  禁煙包廂 RTX 5080 / 吸煙包廂 RTX 5070
+                </p>
+                <p class="room-desc">
+                  ペアでの利用に最適。最高スペックの5080(禁煙)も完備。
+                </p>
+                <ul class="spec-list">
+                  <li><span class="label">Monitor</span> 540Hz / 360Hz</li>
+                  <li><span class="label">Select</span> 禁煙 / 喫煙</li>
+                </ul>
+              </div>
+            </article>
+
+            <article class="room-card">
+              <div class="room-img">
+                <img
+                  src="images/rooms/store2_1p.webp"
+                  alt="Store 2 1-Person Room"
+                />
+                <div class="badge-group">
+                  <span class="spec-badge premium">RTX 5080</span>
+                  <span class="spec-badge high-spec">RTX 5070</span>
+                </div>
+                <span class="capacity-tag">1名個室</span>
+                <span class="availability-tag">禁煙 / 喫煙</span>
+              </div>
+              <div class="room-info">
+                <div class="room-header-row">
+                  <h4>SOLO POD (1名)</h4>
+                  <span class="floor-tag">個室</span>
+                </div>
+                <p class="room-sub-spec">
+                  禁煙包廂 RTX 5080 / 吸煙包廂 RTX 5070
+                </p>
+                <p class="room-desc">
+                  没入感を極める1名個室。プロ仕様の環境を独占。
+                </p>
+                <ul class="spec-list">
+                  <li><span class="label">Monitor</span> 540Hz / 360Hz</li>
+                  <li><span class="label">Select</span> 禁煙 / 喫煙</li>
+                </ul>
+              </div>
+            </article>
+
+            <article class="room-card">
+              <div class="room-img">
+                <img
+                  src="images/rooms/store2_sofa.webp"
+                  alt="Store 2 Sofa Booth"
+                />
                 <span class="spec-badge high-spec">RTX 5070</span>
+                <span class="capacity-tag">ソファ席</span>
+                <span class="availability-tag is-smoking">喫煙のみ</span>
               </div>
-              <span class="capacity-tag">4名個室</span>
-              <span class="availability-tag">禁煙 / 喫煙</span>
-            </div>
-            <div class="room-info">
-              <div class="room-header-row">
-                <h4>QUAD SUITE (4名)</h4>
-                <span class="floor-tag">個室</span>
+              <div class="room-info">
+                <div class="room-header-row">
+                  <h4>SOFA BOOTH</h4>
+                  <span class="floor-tag">喫煙</span>
+                </div>
+                <p class="room-sub-spec">吸煙ソファ包廂 RTX 5070</p>
+                <p class="room-desc">
+                  ゆったりくつろげるソファタイプの喫煙ブース。
+                </p>
+                <ul class="spec-list">
+                  <li><span class="label">GPU</span> RTX 5070</li>
+                  <li><span class="label">Style</span> Relax Sofa</li>
+                </ul>
               </div>
-              <p class="room-desc">
-                4名グループ専用。禁煙(5080)と喫煙(5070)のお部屋を選べます。
-              </p>
-              <ul class="spec-list">
-                <li>
-                  <span class="label">GPU</span> RTX 5080（禁煙） / RTX
-                  5070（喫煙）
-                </li>
-                <li><span class="label">Select</span> 禁煙 / 喫煙</li>
-              </ul>
-            </div>
-          </article>
-
-          <!-- 3) 3-Person Rooms (Private) -->
-          <article class="room-card gsap-fade-up" data-delay="0.2">
-            <div class="room-img">
-              <img
-                src="images/rooms/no2-trio.webp"
-                alt="Store 2 3-Person Room"
-              />
-              <div class="badge-group">
-                <span class="spec-badge premium">RTX 5080</span>
-                <span class="spec-badge high-spec">RTX 5070</span>
-              </div>
-              <span class="capacity-tag">3名個室</span>
-              <span class="availability-tag">禁煙 / 喫煙</span>
-            </div>
-            <div class="room-info">
-              <div class="room-header-row">
-                <h4>TRIO SUITE (3名)</h4>
-                <span class="floor-tag">個室</span>
-              </div>
-              <p class="room-desc">
-                3名で利用可能なプライベート空間。用途に合わせて喫煙・禁煙を選択可能。
-              </p>
-              <ul class="spec-list">
-                <li>
-                  <span class="label">GPU</span> RTX 5080（禁煙） / RTX
-                  5070（喫煙）
-                </li>
-                <li><span class="label">Select</span> 禁煙 / 喫煙</li>
-              </ul>
-            </div>
-          </article>
-
-          <!-- 4) 2-Person Rooms (Private) -->
-          <article class="room-card gsap-fade-up" data-delay="0.3">
-            <div class="room-img">
-              <img
-                src="images/rooms/no2-duo.webp"
-                alt="Store 2 2-Person Room"
-              />
-              <div class="badge-group">
-                <span class="spec-badge premium">RTX 5080</span>
-                <span class="spec-badge high-spec">RTX 5070</span>
-              </div>
-              <span class="capacity-tag">2名個室</span>
-              <span class="availability-tag">禁煙 / 喫煙</span>
-            </div>
-            <div class="room-info">
-              <div class="room-header-row">
-                <h4>DUO SUITE (2名)</h4>
-                <span class="floor-tag">個室</span>
-              </div>
-              <p class="room-desc">
-                ペアでの利用に最適。最高スペックの5080(禁煙)も完備。
-              </p>
-              <ul class="spec-list">
-                <li>
-                  <span class="label">GPU</span> RTX 5080（禁煙） / RTX
-                  5070（喫煙）
-                </li>
-                <li><span class="label">Select</span> 禁煙 / 喫煙</li>
-              </ul>
-            </div>
-          </article>
-
-          <!-- 5) 1-Person Rooms (Private) -->
-          <article class="room-card gsap-fade-up" data-delay="0.4">
-            <div class="room-img">
-              <img
-                src="images/rooms/no2-solo.webp"
-                alt="Store 2 1-Person Room"
-              />
-              <div class="badge-group">
-                <span class="spec-badge premium">RTX 5080</span>
-                <span class="spec-badge high-spec">RTX 5070</span>
-              </div>
-              <span class="capacity-tag">1名個室</span>
-              <span class="availability-tag">禁煙 / 喫煙</span>
-            </div>
-            <div class="room-info">
-              <div class="room-header-row">
-                <h4>SOLO POD (1名)</h4>
-                <span class="floor-tag">個室</span>
-              </div>
-              <p class="room-desc">
-                没入感を極める1名個室。プロ仕様の環境を独占。
-              </p>
-              <ul class="spec-list">
-                <li>
-                  <span class="label">GPU</span> RTX 5080（禁煙） / RTX
-                  5070（喫煙）
-                </li>
-                <li><span class="label">Select</span> 禁煙 / 喫煙</li>
-              </ul>
-            </div>
-          </article>
-
-          <!-- 6) Sofa Booths (Smoking Relax) -->
-          <article class="room-card gsap-fade-up" data-delay="0.5">
-            <div class="room-img">
-              <img
-                src="images/rooms/no2-sofaroom.webp"
-                alt="Store 2 Sofa Booth"
-              />
-              <span class="spec-badge high-spec">RTX 5070</span>
-              <span class="capacity-tag">ソファ席</span>
-              <span class="availability-tag is-smoking">喫煙のみ</span>
-            </div>
-            <div class="room-info">
-              <div class="room-header-row">
-                <h4>SOFA BOOTH</h4>
-                <span class="floor-tag">喫煙</span>
-              </div>
-              <p class="room-sub-spec">吸煙ソファ包廂 RTX 5070</p>
-              <p class="room-desc">
-                ゆったりくつろげるソファタイプの喫煙ブース。
-              </p>
-              <ul class="spec-list">
-                <li><span class="label">GPU</span> RTX 5070</li>
-                <li><span class="label">Style</span> Relax Sofa</li>
-              </ul>
-            </div>
-          </article>
+            </article>
+          </div>
         </div>
       </section>
     </main>
@@ -386,9 +400,12 @@
       </div>
     </footer>
 
-    <!-- Mobile Full Screen Menu Overlay -->
+    <!-- 移动端全屏菜单遮罩层 -->
     <div class="mobile-menu-overlay">
       <div class="mm-bg"></div>
+      <button class="mm-close-btn" type="button" aria-label="Close menu">
+        ×
+      </button>
       <div class="mm-container">
         <nav class="mm-nav">
           <div class="mm-item">

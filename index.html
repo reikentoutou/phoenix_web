@@ -43,7 +43,7 @@
   </head>
   <body>
     <!-- ============================================ -->
-    <!-- Floating HUD Header (Desktop) + Mobile Menu -->
+    <!-- 悬浮 HUD 头部（桌面）+ 移动端菜单 -->
     <!-- ============================================ -->
     <header class="hud-header">
       <div class="hud-container">
@@ -107,424 +107,474 @@
       </section>
 
       <div class="main-content-wrapper">
-        <section class="brand-concept reveal-on-scroll fade-in-up">
-          <div class="brand-inner">
-            <div class="brand-vertical">
-              <span class="brand-jp-copy">ここでは、あなたの世界である。</span>
+        <section class="brand-manifesto">
+          <div class="manifesto-bg">
+            <img
+              src="images/index/concept_bg.webp"
+              alt="Background Texture"
+              class="bg-texture"
+            />
+          </div>
+
+          <div class="manifesto-watermark">
+            <img
+              src="images/index/phoenixesports-logo.webp"
+              alt="Phoenix Logo Watermark"
+            />
+          </div>
+
+          <div class="manifesto-container">
+            <div class="manifesto-jp">
+              <div class="vertical-line gsap-fade-up"></div>
+              <h2 class="vertical-text gsap-fade-up" data-delay="0.1">
+                ここでは、<br />あなたの世界である。
+              </h2>
             </div>
-            <div class="brand-en">
-              <p class="brand-en-eyebrow">THE SANCTUARY FOR PRO GAMERS</p>
-              <span class="brand-divider" aria-hidden="true"></span>
-              <p class="brand-en-desc">
-                PHOENIXは、単なるネットカフェではない。<br />勝利のためだけに設計された、究極の没入空間。
+
+            <div class="manifesto-en">
+              <p class="eyebrow gsap-fade-up" data-delay="0.2">THE SANCTUARY</p>
+              <h3 class="manifesto-heading gsap-fade-up" data-delay="0.3">
+                FOR PRO <span class="outline-text">GAMERS</span>
+              </h3>
+              <p class="manifesto-desc gsap-fade-up" data-delay="0.4">
+                PHOENIXは、単なるネットカフェではない。<br />
+                勝利のためだけに設計された、究極の没入空間。<br />
+                <span class="highlight">觉醒せよ。</span>
               </p>
             </div>
           </div>
         </section>
-        <section class="product environment section-fade" id="environment">
-          <div class="env-header">
-            <p class="eyebrow">ENVIRONMENT</p>
-            <h2>店内環境</h2>
-            <p class="lead">
-              24時間営業。ハイスペックPC × 静音個室 ×
-              充実飲食。喫煙／禁煙を選べて、ホール全域は禁煙です。
-            </p>
+        <section class="schedule-visual" id="schedule">
+          <div class="schedule-bg-layer">
+            <img
+              src="images/index/environment_background.webp"
+              alt="Schedule BG"
+              class="bg-img"
+            />
           </div>
-          <div class="env-swiper-shell reveal-on-scroll fade-in-up">
-            <div class="swiper environment-slider">
+          <div class="schedule-overlay"></div>
+
+          <div class="schedule-container">
+            <div class="schedule-header">
+              <p class="eyebrow gsap-fade-up">MISSION LOG</p>
+              <h2 class="gsap-fade-up" data-delay="0.1">
+                EVENT <span class="outline-text">SCHEDULE</span>
+              </h2>
+            </div>
+
+            <div class="swiper schedule-swiper gsap-fade-up" data-delay="0.2">
               <div class="swiper-wrapper">
                 <div class="swiper-slide">
-                  <div class="env-slide-grid">
-                    <div class="env-slide-copy">
-                      <span
-                        class="env-tag-vertical"
-                        data-swiper-parallax-y="-60"
-                        >象限</span
+                  <article class="event-poster-card">
+                    <div class="card-bg">
+                      <img
+                        src="images/index/custmer_play_pc.webp"
+                        alt="Event BG"
+                      />
+                    </div>
+                    <div class="card-overlay"></div>
+
+                    <div class="card-top">
+                      <div class="date-badge">
+                        <span class="month">DEC</span>
+                        <span class="day">28</span>
+                      </div>
+                      <span class="tag tag-red">TOURNAMENT</span>
+                    </div>
+
+                    <div class="card-bottom">
+                      <p class="event-time">14:00 - 19:00</p>
+                      <h3 class="event-title">VALORANT PHOENIX CUP VOL.1</h3>
+                      <a href="#" class="card-btn"
+                        >JOIN <span class="arrow">→</span></a
                       >
-                      <div class="env-text-block">
-                        <p class="env-sub" data-swiper-parallax-y="-40">
-                          IMMERSION
-                        </p>
-                        <h3 data-swiper-parallax-y="-30">4名個室</h3>
-                        <p class="env-desc" data-swiper-parallax-y="-20">
-                          ハイスペックPCを4台完備。喫煙可ブースも用意し、仲間で静かに集中プレイ。
-                        </p>
-                      </div>
                     </div>
-                    <div class="env-slide-visual" data-swiper-parallax-x="-60">
-                      <div class="env-image-frame">
-                        <img
-                          src="images/index/room_for_four_people.webp"
-                          alt="4名個室"
-                        />
-                      </div>
-                    </div>
-                  </div>
+                  </article>
                 </div>
+
                 <div class="swiper-slide">
-                  <div class="env-slide-grid">
-                    <div class="env-slide-copy">
-                      <span
-                        class="env-tag-vertical"
-                        data-swiper-parallax-y="-60"
-                        >三元</span
+                  <article class="event-poster-card">
+                    <div class="card-bg">
+                      <img
+                        src="images/index/store_2_hall.webp"
+                        alt="Event BG"
+                      />
+                    </div>
+                    <div class="card-overlay"></div>
+
+                    <div class="card-top">
+                      <div class="date-badge">
+                        <span class="month">JAN</span>
+                        <span class="day">01</span>
+                      </div>
+                      <span class="tag tag-gold">CAMPAIGN</span>
+                    </div>
+
+                    <div class="card-bottom">
+                      <p class="event-time">ALL DAY</p>
+                      <h3 class="event-title">NEW YEAR LOGIN BONUS</h3>
+                      <a href="#" class="card-btn"
+                        >DETAILS <span class="arrow">→</span></a
                       >
-                      <div class="env-text-block">
-                        <p class="env-sub" data-swiper-parallax-y="-40">
-                          TRIO ROOM
-                        </p>
-                        <h3 data-swiper-parallax-y="-30">3名個室</h3>
-                        <p class="env-desc" data-swiper-parallax-y="-20">
-                          3人で使える防音個室。禁煙／喫煙を選べて、VC練習やクラン会議に最適。
-                        </p>
-                      </div>
                     </div>
-                    <div class="env-slide-visual" data-swiper-parallax-x="-60">
-                      <div class="env-image-frame">
-                        <img
-                          src="images/index/room_for_three.webp"
-                          alt="3名個室"
-                        />
-                      </div>
-                    </div>
-                  </div>
+                  </article>
                 </div>
+
                 <div class="swiper-slide">
-                  <div class="env-slide-grid">
-                    <div class="env-slide-copy">
-                      <span
-                        class="env-tag-vertical"
-                        data-swiper-parallax-y="-60"
-                        >対極</span
+                  <article class="event-poster-card">
+                    <div class="card-bg">
+                      <img
+                        src="images/index/store_1_front.webp"
+                        alt="Event BG"
+                      />
+                    </div>
+                    <div class="card-overlay"></div>
+
+                    <div class="card-top">
+                      <div class="date-badge">
+                        <span class="month">JAN</span>
+                        <span class="day">15</span>
+                      </div>
+                      <span class="tag tag-blue">COMMUNITY</span>
+                    </div>
+
+                    <div class="card-bottom">
+                      <p class="event-time">18:00 - 21:00</p>
+                      <h3 class="event-title">STREET FIGHTER 6 MEETUP</h3>
+                      <a href="#" class="card-btn"
+                        >JOIN <span class="arrow">→</span></a
                       >
-                      <div class="env-text-block">
-                        <p class="env-sub" data-swiper-parallax-y="-40">
-                          DUO SUITE
-                        </p>
-                        <h3 data-swiper-parallax-y="-30">2名個室</h3>
-                        <p class="env-desc" data-swiper-parallax-y="-20">
-                          デュオで快適に使える静かな個室。高性能PCで作業もゲームもストレスフリー。
-                        </p>
-                      </div>
                     </div>
-                    <div class="env-slide-visual" data-swiper-parallax-x="-60">
-                      <div class="env-image-frame">
-                        <img
-                          src="images/index/room_for_two.webp"
-                          alt="2名個室"
-                        />
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="swiper-slide">
-                  <div class="env-slide-grid">
-                    <div class="env-slide-copy">
-                      <span
-                        class="env-tag-vertical"
-                        data-swiper-parallax-y="-60"
-                        >頂点</span
-                      >
-                      <div class="env-text-block">
-                        <p class="env-sub" data-swiper-parallax-y="-40">
-                          SOLO POD
-                        </p>
-                        <h3 data-swiper-parallax-y="-30">1名個室</h3>
-                        <p class="env-desc" data-swiper-parallax-y="-20">
-                          最新GPU搭載のプライベートブース。静音設計で集中プレイや作業に最適。
-                        </p>
-                      </div>
-                    </div>
-                    <div class="env-slide-visual" data-swiper-parallax-x="-60">
-                      <div class="env-image-frame">
-                        <img
-                          src="images/index/room_for_one_people.webp"
-                          alt="1名個室"
-                        />
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="swiper-slide">
-                  <div class="env-slide-grid">
-                    <div class="env-slide-copy">
-                      <span
-                        class="env-tag-vertical"
-                        data-swiper-parallax-y="-60"
-                        >汎用</span
-                      >
-                      <div class="env-text-block">
-                        <p class="env-sub" data-swiper-parallax-y="-40">
-                          FLAGSHIP FLOOR
-                        </p>
-                        <h3 data-swiper-parallax-y="-30">2号店ホール</h3>
-                        <p class="env-desc" data-swiper-parallax-y="-20">
-                          最新設備と赤を基調にした空間。禁煙ホールでクリーンに集中できます。
-                        </p>
-                      </div>
-                    </div>
-                    <div class="env-slide-visual" data-swiper-parallax-x="-60">
-                      <div class="env-image-frame">
-                        <img
-                          src="images/index/store_2_hall.webp"
-                          alt="ホール（2号店）"
-                        />
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="swiper-slide">
-                  <div class="env-slide-grid">
-                    <div class="env-slide-copy">
-                      <span
-                        class="env-tag-vertical"
-                        data-swiper-parallax-y="-60"
-                        >端末</span
-                      >
-                      <div class="env-text-block">
-                        <p class="env-sub" data-swiper-parallax-y="-40">
-                          MAIN HALL
-                        </p>
-                        <h3 data-swiper-parallax-y="-30">1号店ホール</h3>
-                        <p class="env-desc" data-swiper-parallax-y="-20">
-                          ホール全域禁煙でクリーンな共用スペース。受付・サポートもすぐにアクセス可能。
-                        </p>
-                      </div>
-                    </div>
-                    <div class="env-slide-visual" data-swiper-parallax-x="-60">
-                      <div class="env-image-frame">
-                        <img
-                          src="images/index/store_1_hall.webp"
-                          alt="ホール（1号店）"
-                        />
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="swiper-slide">
-                  <div class="env-slide-grid">
-                    <div class="env-slide-copy">
-                      <span
-                        class="env-tag-vertical"
-                        data-swiper-parallax-y="-60"
-                        >補給</span
-                      >
-                      <div class="env-text-block">
-                        <p class="env-sub" data-swiper-parallax-y="-40">
-                          FUEL BAR
-                        </p>
-                        <h3 data-swiper-parallax-y="-30">フード＆ドリンク</h3>
-                        <p class="env-desc" data-swiper-parallax-y="-20">
-                          できたてのフードとドリンクを多数用意。長時間でも美味しく快適に過ごせます。
-                        </p>
-                      </div>
-                    </div>
-                    <div class="env-slide-visual" data-swiper-parallax-x="-60">
-                      <div class="env-image-frame">
-                        <img
-                          src="images/index/store_2_food.webp"
-                          alt="フード＆ドリンク"
-                        />
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="swiper-slide">
-                  <div class="env-slide-grid">
-                    <div class="env-slide-copy">
-                      <span
-                        class="env-tag-vertical"
-                        data-swiper-parallax-y="-60"
-                        >受付</span
-                      >
-                      <div class="env-text-block">
-                        <p class="env-sub" data-swiper-parallax-y="-40">
-                          FRONT DESK
-                        </p>
-                        <h3 data-swiper-parallax-y="-30">1号店フロント</h3>
-                        <p class="env-desc" data-swiper-parallax-y="-20">
-                          最新設備と多彩な個室をご案内。受付スタッフが24Hサポート。
-                        </p>
-                      </div>
-                    </div>
-                    <div class="env-slide-visual" data-swiper-parallax-x="-60">
-                      <div class="env-image-frame">
-                        <img
-                          src="images/index/store_1_front.webp"
-                          alt="フロント（1号店）"
-                        />
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="swiper-slide">
-                  <div class="env-slide-grid">
-                    <div class="env-slide-copy">
-                      <span
-                        class="env-tag-vertical"
-                        data-swiper-parallax-y="-60"
-                        >受付</span
-                      >
-                      <div class="env-text-block">
-                        <p class="env-sub" data-swiper-parallax-y="-40">
-                          FRONT DESK
-                        </p>
-                        <h3 data-swiper-parallax-y="-30">2号店フロント</h3>
-                        <p class="env-desc" data-swiper-parallax-y="-20">
-                          赤を基調とした最先端の受付エリア。チェックインもブース案内もスムーズ。
-                        </p>
-                      </div>
-                    </div>
-                    <div class="env-slide-visual" data-swiper-parallax-x="-60">
-                      <div class="env-image-frame">
-                        <img
-                          src="images/index/store_2_front.webp"
-                          alt="フロント（2号店）"
-                        />
-                      </div>
-                    </div>
-                  </div>
+                  </article>
                 </div>
               </div>
-              <div class="env-pagination swiper-pagination"></div>
-              <div class="env-nav">
-                <button
-                  class="env-nav-btn env-prev"
-                  type="button"
-                  aria-label="前のスライド"
-                >
-                  <span aria-hidden="true">‹</span>
-                </button>
-                <button
-                  class="env-nav-btn env-next"
-                  type="button"
-                  aria-label="次のスライド"
-                >
-                  <span aria-hidden="true">›</span>
-                </button>
+              <div class="swiper-scrollbar schedule-scrollbar"></div>
+            </div>
+          </div>
+        </section>
+        <section class="news-cinematic" id="news">
+          <div class="news-bg-layer">
+            <img
+              src="images/index/environment_background.webp"
+              alt="News Background"
+              class="bg-img"
+            />
+          </div>
+          <div class="news-overlay"></div>
+
+          <div class="news-container">
+            <div class="news-header">
+              <p class="eyebrow gsap-fade-up">LATEST INFO</p>
+              <h2 class="gsap-fade-up" data-delay="0.1">
+                HEAD<span class="outline-text">LINES</span>
+              </h2>
+            </div>
+
+            <div class="news-list gsap-stagger-group">
+              <a href="#" class="news-item">
+                <div class="news-meta">
+                  <span class="news-date">2025.12.24</span>
+                  <span class="news-cat cat-system">SYSTEM</span>
+                </div>
+                <h3 class="news-title">年末年始の営業時間についてのお知らせ</h3>
+                <div class="news-arrow">→</div>
+              </a>
+
+              <a href="#" class="news-item">
+                <div class="news-meta">
+                  <span class="news-date">2025.12.20</span>
+                  <span class="news-cat cat-maintenance">MAINTENANCE</span>
+                </div>
+                <h3 class="news-title">
+                  【1号店】定期サーバーメンテナンス完了のお知らせ
+                </h3>
+                <div class="news-arrow">→</div>
+              </a>
+
+              <a href="#" class="news-item">
+                <div class="news-meta">
+                  <span class="news-date">2025.12.15</span>
+                  <span class="news-cat cat-info">INFO</span>
+                </div>
+                <h3 class="news-title">
+                  新デバイス「ZOWIE XL2566X+」全席導入完了
+                </h3>
+                <div class="news-arrow">→</div>
+              </a>
+
+              <a href="#" class="news-item">
+                <div class="news-meta">
+                  <span class="news-date">2025.12.01</span>
+                  <span class="news-cat cat-campaign">CAMPAIGN</span>
+                </div>
+                <h3 class="news-title">
+                  冬の新規入会キャンペーン開始（入会金無料）
+                </h3>
+                <div class="news-arrow">→</div>
+              </a>
+            </div>
+
+            <div class="news-footer gsap-fade-up" data-delay="0.2">
+              <a href="#" class="view-all-link">VIEW ARCHIVE</a>
+            </div>
+          </div>
+        </section>
+        <section class="store-environment-cinematic" id="environment">
+          <div class="carousel-header-overlay">
+            <p class="eyebrow gsap-fade-up">THE BATTLEGROUNDS</p>
+            <h2 class="gsap-fade-up" data-delay="0.1">店内環境</h2>
+          </div>
+
+          <div class="swiper cinematic-swiper">
+            <div class="swiper-wrapper">
+              <div class="swiper-slide">
+                <div class="slide-bg-wrap">
+                  <img
+                    src="images/carousel/environment1.webp"
+                    alt="Main Gaming Hall"
+                    class="slide-bg-img"
+                  />
+                </div>
+                <div class="slide-content">
+                  <h3 class="slide-title">MAIN GAMING HALL</h3>
+                  <p class="slide-desc">
+                    最新デバイスと人体工学に基づいたチェアを完備した、熱気溢れるメインエリア。
+                  </p>
+                </div>
               </div>
+
+              <div class="swiper-slide">
+                <div class="slide-bg-wrap">
+                  <img
+                    src="images/carousel/environment2.webp"
+                    alt="VIP Private Rooms"
+                    class="slide-bg-img"
+                  />
+                </div>
+                <div class="slide-content">
+                  <h3 class="slide-title">VIP PRIVATE SUITES</h3>
+                  <p class="slide-desc">
+                    防音完備の完全個室。チーム練習や配信に最適な集中環境。
+                  </p>
+                </div>
+              </div>
+
+              <div class="swiper-slide">
+                <div class="slide-bg-wrap">
+                  <img
+                    src="images/carousel/environment3.webp"
+                    alt="Relax & Cafe Area"
+                    class="slide-bg-img"
+                  />
+                </div>
+                <div class="slide-content">
+                  <h3 class="slide-title">RELAX &amp; CAFE ZONE</h3>
+                  <p class="slide-desc">
+                    戦いの合間に休息を。充実したフード＆ドリンクメニュー。
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div class="cinematic-controls">
+              <div class="swiper-pagination-fraction" aria-hidden="true"></div>
+
+              <div
+                class="swiper-pagination-progressbar-fill"
+                aria-hidden="true"
+              >
+                <span class="progress-bar-track"></span>
+              </div>
+
+              <button
+                class="swiper-button-prev custom-arrow"
+                type="button"
+                aria-label="前のスライド"
+              >
+                ←
+              </button>
+              <button
+                class="swiper-button-next custom-arrow"
+                type="button"
+                aria-label="次のスライド"
+              >
+                →
+              </button>
             </div>
           </div>
         </section>
         <div class="specs-access-wrap">
-          <section class="specs section-fade" id="specs">
-            <div class="specs-header">
-              <p class="eyebrow">SPECIFICATIONS</p>
-              <h2>設備スペック</h2>
-              <p class="lead">
-                プロと同じ高性能構成で、どんなゲームも滑らかに。400Hzモニターと最新PCで、プロ水準の環境を常設。
-              </p>
+          <section class="specs-cinematic" id="specs">
+            <div class="specs-bg-layer">
+              <img
+                src="images/index/custmer_play_pc.webp"
+                alt="Gaming Setup Background"
+                class="bg-img"
+              />
             </div>
-            <div class="specs-grid">
-              <article class="spec-card reveal-on-scroll">
-                <h3>PC スペック</h3>
-                <div class="spec-line">
-                  <span class="spec-label">OS</span>
-                  <span class="spec-value">Windows 11 Pro</span>
+
+            <div class="specs-overlay"></div>
+
+            <div class="specs-watermark">
+              <img
+                src="images/index/phoenixesports-logo.webp"
+                alt="Phoenix Logo"
+              />
+            </div>
+
+            <div class="specs-container">
+              <div class="specs-header-cinematic">
+                <p class="eyebrow gsap-fade-up">HARDWARE</p>
+                <h2 class="gsap-fade-up" data-delay="0.1">
+                  PRO <span class="outline-text">GEAR</span>
+                </h2>
+                <p class="specs-lead gsap-fade-up" data-delay="0.2">
+                  勝敗を分けるのは、一瞬の差。<br />
+                  プロフェッショナル仕様の環境が、あなたのポテンシャルを解放する。
+                </p>
+              </div>
+
+              <div class="specs-grid-glass gsap-stagger-group">
+                <div class="spec-glass-card">
+                  <div class="card-icon">01</div>
+                  <h3>PC SYSTEM</h3>
+                  <div class="spec-row">
+                    <span class="label">OS</span>
+                    <span class="value">Windows 10</span>
+                  </div>
+                  <div class="spec-row">
+                    <span class="label">CPU</span>
+                    <span class="value">AMD Ryzen 7 9800X3D</span>
+                  </div>
+                  <div class="spec-row highlight">
+                    <span class="label">GPU</span>
+                    <span class="value">NVIDIA RTX 5080</span>
+                  </div>
+                  <div class="spec-row">
+                    <span class="label">RAM</span>
+                    <span class="value">32GB</span>
+                  </div>
                 </div>
-                <div class="spec-line">
-                  <span class="spec-label">CPU</span>
-                  <span class="spec-value">AMD Ryzen 7 9800X3D</span>
+
+                <div class="spec-glass-card">
+                  <div class="card-icon">02</div>
+                  <h3>MONITOR</h3>
+                  <div class="spec-row">
+                    <span class="label">MODEL</span>
+                    <span class="value">ZOWIE XL2566X+</span>
+                  </div>
+                  <div class="spec-row">
+                    <span class="label">SIZE</span>
+                    <span class="value">24.5 inch</span>
+                  </div>
+                  <div class="spec-row highlight">
+                    <span class="label">REFRESH</span>
+                    <span class="value">400Hz / DyAc 2</span>
+                  </div>
                 </div>
-                <div class="spec-line">
-                  <span class="spec-label">GPU</span>
-                  <span class="spec-value">NVIDIA RTX 5080</span>
+
+                <div class="spec-glass-card">
+                  <div class="card-icon">03</div>
+                  <h3>DEVICES</h3>
+                  <div class="spec-row">
+                    <span class="label">MOUSE</span>
+                    <span class="value">Logicool G PRO X SUPERLIGHT</span>
+                  </div>
+                  <div class="spec-row">
+                    <span class="label">HEADSET</span>
+                    <span class="value">HyperX Cloud III</span>
+                  </div>
+                  <div class="spec-row">
+                    <span class="label">KEYBOARD</span>
+                    <span class="value">Logicool G Series</span>
+                  </div>
+                  <div class="spec-row">
+                    <span class="label">MOUSEPAD</span>
+                    <span class="value">PHOENIX MOUSEPAD</span>
+                  </div>
                 </div>
-                <div class="spec-line">
-                  <span class="spec-label">Memory</span>
-                  <span class="spec-value">32GB</span>
-                </div>
-              </article>
-              <article class="spec-card reveal-on-scroll">
-                <h3>モニター</h3>
-                <div class="spec-line">
-                  <span class="spec-label">MODEL</span>
-                  <span class="spec-value">ZOWIE XL2566X+</span>
-                </div>
-                <div class="spec-line">
-                  <span class="spec-label">サイズ</span>
-                  <span class="spec-value">24.5インチ</span>
-                </div>
-                <div class="spec-line">
-                  <span class="spec-label">リフレッシュレート</span>
-                  <span class="spec-value">400Hz</span>
-                </div>
-              </article>
-              <article class="spec-card reveal-on-scroll">
-                <h3>設置デバイス</h3>
-                <div class="spec-line">
-                  <span class="spec-label">マウス</span>
-                  <span class="spec-value">Logicool G PRO X SUPERLIGHT</span>
-                </div>
-                <div class="spec-line">
-                  <span class="spec-label">ヘッドセット</span>
-                  <span class="spec-value">HyperX Cloud 3</span>
-                </div>
-                <div class="spec-line">
-                  <span class="spec-label">キーボード</span>
-                  <span class="spec-value">Logicool G ゲーミングモデル</span>
-                </div>
-                <div class="spec-line">
-                  <span class="spec-label">マウスパッド</span>
-                  <span class="spec-value">フェニックスマウスパッド</span>
-                </div>
-              </article>
+              </div>
             </div>
           </section>
           <div class="specs-access-divider"></div>
-          <section class="access section-fade" id="access">
-            <div class="access-header">
-              <p class="eyebrow">ACCESS</p>
-              <h2>アクセス</h2>
-              <p class="lead">2店舗とも駅近で24時間営業です。</p>
+          <section class="access-cinematic" id="access">
+            <div class="access-bg-layer">
+              <img
+                src="images/index/environment_background.webp"
+                alt="Location Background"
+                class="bg-img"
+              />
             </div>
-            <div class="access-grid">
-              <article class="access-card reveal-on-scroll">
-                <h3>eSPORTS CAFE PHOENIX 池袋1号店</h3>
-                <div class="access-map-frame">
-                  <iframe
-                    src="https://www.google.com/maps?q=ESPORTS%20CAFE%20PHOENIX%201%E5%8F%B7%E5%BA%97&hl=ja&z=17&output=embed"
-                    allowfullscreen
-                    loading="lazy"
-                    referrerpolicy="no-referrer-when-downgrade"
-                    title="PHOENIX 1号店の地図"
-                  ></iframe>
-                </div>
-                <div class="button_solid012">
-                  <a
-                    class="access-link"
-                    href="https://maps.app.goo.gl/ddYUsKAvwy8q5Gjy7"
-                    target="_blank"
-                    rel="noreferrer noopener"
-                  >
-                    MAPを開く
-                    <span class="btn-arrow">›</span>
+            <div class="access-overlay"></div>
+
+            <div class="access-watermark">
+              <img
+                src="images/index/phoenixesports-logo.webp"
+                alt="Phoenix Logo"
+              />
+            </div>
+
+            <div class="access-container">
+              <div class="access-header-cinematic">
+                <p class="eyebrow gsap-fade-up">HIGH RATED</p>
+                <h2 class="gsap-fade-up" data-delay="0.1">
+                  THE <span class="outline-text">LOCATION</span>
+                </h2>
+                <p class="access-lead gsap-fade-up" data-delay="0.2">
+                  Google Review 高評価獲得。<br />
+                  プレイヤーに選ばれ続ける、東京のeスポーツ拠点。
+                </p>
+              </div>
+
+              <div class="access-grid-glass gsap-stagger-group">
+                <article class="access-glass-card map-card">
+                  <div class="card-header-row">
+                    <div class="card-tag">NO.1</div>
+                    <h3 class="store-name-sm">IKEBUKURO 1st</h3>
+                  </div>
+
+                  <div class="map-frame-wrapper">
+                    <iframe
+                      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3238.8694037401165!2d139.7120786759487!3d35.72943022732455!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x60188dc4718637c9%3A0x1f72804c95cec273!2zZVNQT1JUUyBDQUZFIFBIT0VOSVgg5rGg6KKL5bqX!5e0!3m2!1sen!2sjp!4v1766611805935!5m2!1sen!2sjp"
+                      width="600"
+                      height="450"
+                      style="border: 0"
+                      allowfullscreen=""
+                      loading="lazy"
+                      referrerpolicy="no-referrer-when-downgrade"
+                      title="PHOENIX IKEBUKURO 1st - Google Map"
+                    ></iframe>
+                  </div>
+
+                  <a href="access.html" class="map-sub-link">
+                    行き方を見る (Access Guide) <span class="arrow">→</span>
                   </a>
-                </div>
-              </article>
-              <article class="access-card reveal-on-scroll">
-                <h3>eSPORTS CAFE PHOENIX 池袋2号店</h3>
-                <div class="access-map-frame">
-                  <iframe
-                    src="https://www.google.com/maps?q=%22304%201%20Chome-22%20Higashiikebukuro%20Toshima%20City%20Tokyo%20170-0013%22&hl=ja&z=17&output=embed"
-                    allowfullscreen
-                    loading="lazy"
-                    referrerpolicy="no-referrer-when-downgrade"
-                    title="PHOENIX 2号店の地図"
-                  ></iframe>
-                </div>
-                <div class="button_solid012">
-                  <a
-                    class="access-link"
-                    href="https://www.google.com/maps/search/?api=1&query=%22304%201%20Chome-22%20Higashiikebukuro%20Toshima%20City%20Tokyo%20170-0013%22"
-                    target="_blank"
-                    rel="noreferrer noopener"
-                  >
-                    MAPを開く
-                    <span class="btn-arrow">›</span>
+                </article>
+
+                <article class="access-glass-card map-card">
+                  <div class="card-header-row">
+                    <div class="card-tag">NO.2</div>
+                    <h3 class="store-name-sm">IKEBUKURO 2nd</h3>
+                  </div>
+
+                  <div class="map-frame-wrapper">
+                    <iframe
+                      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3238.8664718484633!2d139.71301627594872!3d35.72950232732048!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x60188d3801689253%3A0x803f6917af22112c!2zZVNQT1JUUyBDQUZFIFBIT0VOSVgg5rGg6KKLMuWPt-W6lw!5e0!3m2!1sen!2sjp!4v1766611700145!5m2!1sen!2sjp"
+                      width="600"
+                      height="450"
+                      style="border: 0"
+                      allowfullscreen=""
+                      loading="lazy"
+                      referrerpolicy="no-referrer-when-downgrade"
+                      title="PHOENIX IKEBUKURO 2nd - Google Map"
+                    ></iframe>
+                  </div>
+
+                  <a href="access.html" class="map-sub-link">
+                    行き方を見る (Access Guide) <span class="arrow">→</span>
                   </a>
-                </div>
-              </article>
+                </article>
+              </div>
             </div>
           </section>
         </div>
@@ -561,9 +611,12 @@
       </div>
     </main>
 
-    <!-- Mobile Full Screen Menu Overlay -->
+    <!-- 移动端全屏菜单遮罩层 -->
     <div class="mobile-menu-overlay">
       <div class="mm-bg"></div>
+      <button class="mm-close-btn" type="button" aria-label="Close menu">
+        ×
+      </button>
       <div class="mm-container">
         <nav class="mm-nav">
           <div class="mm-item">
