@@ -96,7 +96,7 @@ h1, h2, h3, h4, h5, h6,
 .cta-btn, .btn-primary, .store-link,
 .store-number, .pricing-item-price, .pricing-store-number,
 .spec-label, .spec-value
-// 说明：旧 env-* 选择器已下线，现由 `.store-environment-cinematic` 方案替代
+  // 说明：旧 env-* 选择器已下线，现由 `.store-environment-cinematic` 方案替代
   font-family: 'Oswald', sans-serif !important
   font-weight: 600 // 默认加粗，增加力量感
   letter-spacing: 0.04em // 关键：微宽字间距 = 高级感
@@ -919,17 +919,8 @@ h1
   flex-direction: column
   align-items: center
   gap: clamp(40px, 6vw, 80px)
-  background: linear-gradient(180deg, rgba(4, 4, 4, 0.5), rgba(4, 4, 4, 0.65)), url("../images/index/bg_1.webp") center/cover no-repeat
   position: relative
   overflow: hidden
-
-  // 背景遮罩层，确保文字可读性（降低不透明度让背景更明显）
-  &::before
-    content: ""
-    position: absolute
-    inset: 0
-    background: linear-gradient(180deg, rgba(4, 4, 4, 0.3), rgba(4, 4, 4, 0.5))
-    z-index: 0
 
   > *
     position: relative
@@ -941,13 +932,38 @@ h1
 
   .pricing-header
     text-align: center
-    max-width: 900px
-    margin: 0 auto
+    max-width: 100%
+    width: 100%
+    margin: 0
     padding: 60px 20px 40px
     position: relative
     display: flex
     flex-direction: column
     gap: 24px
+    background: linear-gradient(180deg, rgba(4, 4, 4, 0.6), rgba(4, 4, 4, 0.8)), url("../images/index/bg_1.webp") center/cover no-repeat
+    overflow: hidden
+
+    &::before
+      content: ""
+      position: absolute
+      top: 0
+      left: 50%
+      transform: translateX(-50%)
+      width: 120px
+      height: 1px
+      background: linear-gradient(90deg, transparent, rgba(255, 77, 77, 0.6), transparent)
+      box-shadow: 0 0 20px rgba(255, 77, 77, 0.4)
+
+    &::after
+      content: ""
+      position: absolute
+      bottom: 0
+      left: 50%
+      transform: translateX(-50%)
+      width: 200px
+      height: 1px
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), rgba(255, 77, 77, 0.3), rgba(255, 255, 255, 0.2), transparent)
+      animation: line-expand 3s ease-in-out infinite
 
     @media (max-width: 640px)
       padding: 50px 16px 30px
@@ -3006,3 +3022,383 @@ main.rooms-cinematic-container ~ .footer
           font-family: 'Oswald', sans-serif
           text-transform: uppercase
           letter-spacing: 0.12em
+
+// ============================================
+// SYSTEM 页面：价格表
+// ============================================
+.system-pricing-grid
+  margin-top: 10px
+  display: grid
+  grid-template-columns: 1fr
+  gap: 24px
+
+.system-pricing-card
+  .pricing-card-title
+    display: flex
+    flex-direction: column
+    gap: 6px
+
+  .pricing-card-subtitle
+    margin: 0
+    font-size: 0.85rem
+    letter-spacing: 0.12em
+    color: rgba(255, 255, 255, 0.7)
+    font-family: "Oswald", sans-serif
+
+.system-pricing-note
+  margin: 0 0 18px
+  font-size: 0.85rem
+  color: rgba(255, 255, 255, 0.7)
+  line-height: 1.6
+
+.system-pricing-scroll
+  overflow: visible
+
+.system-pricing-table
+  width: 100%
+  min-width: 0
+  border-radius: 18px
+  overflow: hidden
+  border: 1px solid rgba(255, 255, 255, 0.18)
+  background: linear-gradient(135deg, rgba(6, 6, 8, 0.96), rgba(12, 8, 12, 0.92))
+  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.45), 0 0 0 1px rgba(255, 77, 77, 0.12) inset
+
+.system-pricing-row
+  display: grid
+  grid-template-columns: 1fr 1fr repeat(4, 1.2fr)
+
+  > div
+    padding: 18px 12px
+    text-align: center
+    min-height: 84px
+    display: flex
+    flex-direction: column
+    justify-content: center
+    gap: 4px
+    border-right: 1px solid rgba(255, 255, 255, 0.12)
+    border-bottom: 1px solid rgba(255, 255, 255, 0.12)
+    font-size: 1rem
+    line-height: 1.35
+    font-variant-numeric: tabular-nums
+
+  > div:last-child
+    border-right: none
+
+  &:last-child > div
+    border-bottom: none
+
+.system-pricing-head
+  background: linear-gradient(135deg, rgba(255, 77, 77, 0.15), rgba(255, 255, 255, 0.06))
+
+  > div
+    font-family: "Oswald", sans-serif
+    font-size: 0.82rem
+    letter-spacing: 0.12em
+    text-transform: uppercase
+    color: #fff
+    text-shadow: 0 0 18px rgba(255, 77, 77, 0.35)
+
+.system-en,
+.system-spec,
+.system-rate
+  display: block
+  font-family: "Oswald", sans-serif
+  letter-spacing: 0.06em
+
+.system-en
+  font-size: 0.75rem
+  color: rgba(255, 255, 255, 0.65)
+
+.system-spec
+  font-size: 0.8rem
+  color: rgba(255, 255, 255, 0.8)
+
+.system-rate
+  font-size: 0.8rem
+  color: #ff4d4d
+
+.system-pricing-card.is-light
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.14), rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.08))
+
+  .pricing-card-header
+    background: linear-gradient(135deg, rgba(255, 77, 77, 0.1), rgba(255, 255, 255, 0.08), transparent)
+
+  .system-pricing-table
+    background: rgba(0, 0, 0, 0.25)
+
+@media (max-width: 768px)
+  .system-pricing-row
+    grid-template-columns: 1fr 1fr repeat(4, 1.1fr)
+
+  .system-pricing-row > div
+    padding: 14px 10px
+    font-size: 0.9rem
+    min-height: 74px
+
+  .system-pricing-head > div
+    font-size: 0.72rem
+
+@media (max-width: 640px)
+  .system-pricing-row
+    grid-template-columns: 1fr 1fr repeat(4, 1.05fr)
+
+  .system-pricing-row > div
+    padding: 12px 8px
+    font-size: 0.82rem
+    min-height: 68px
+
+// ============================================
+// SYSTEM 页面：支付方式
+// ============================================
+.payment
+  text-align: center
+
+.payment-content
+  display: flex
+  justify-content: center
+
+.payment-note
+  margin: 20px auto 0
+  padding: 18px 28px
+  border-radius: 999px
+  display: inline-flex
+  align-items: center
+  gap: 12px
+  font-family: "Oswald", sans-serif
+  letter-spacing: 0.12em
+  font-size: 0.95rem
+  color: rgba(255, 255, 255, 0.9)
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.03))
+  border: 1px solid rgba(255, 255, 255, 0.18)
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.35), 0 0 18px rgba(255, 77, 77, 0.2)
+
+@media (max-width: 640px)
+  .payment-note
+    font-size: 0.85rem
+    padding: 16px 20px
+    letter-spacing: 0.08em
+
+// ============================================
+// SYSTEM 页面：ナイトパック
+// ============================================
+.night-pack
+  margin-top: 40px
+
+.night-pack-header
+  text-align: center
+  margin-bottom: 24px
+
+.night-pack-notice
+  margin: 12px auto 0
+  max-width: 880px
+  padding: 16px 22px
+  text-align: center
+
+  .notice-title
+    margin: 0 0 10px
+    font-family: "Oswald", sans-serif
+    letter-spacing: 0.14em
+    color: rgba(255, 255, 255, 0.85)
+
+  .notice-list
+    list-style: none
+    padding: 0
+    margin: 0 0 12px
+    display: grid
+    gap: 8px
+
+  .notice-list li
+    font-size: 0.9rem
+    color: rgba(255, 255, 255, 0.8)
+    line-height: 1.6
+
+  .notice-list.notice-list-en
+    margin-bottom: 0
+
+@media (max-width: 640px)
+  .night-pack-notice
+    padding: 14px 16px
+
+    li
+      font-size: 0.82rem
+
+.night-pack-table
+  .system-pricing-row
+    grid-template-columns: 2.2fr repeat(2, 1fr)
+
+  &.is-2col
+    .system-pricing-row
+      grid-template-columns: 2.2fr 1fr
+
+@media (max-width: 768px)
+  .night-pack-table
+    .system-pricing-row
+      grid-template-columns: 1.8fr repeat(2, 1fr)
+
+    &.is-2col
+      .system-pricing-row
+        grid-template-columns: 1.8fr 1fr
+
+// ============================================
+// GUIDE 页面：导航下方首屏留白
+// ============================================
+.guide-main
+  padding-top: 140px
+
+  @media (max-width: 900px)
+    padding-top: 120px
+
+  @media (max-width: 640px)
+    padding-top: 110px
+
+// ============================================
+// GUIDE 页面：FAQ 卡片样式
+// ============================================
+.faq
+  padding: 80px 16px 60px
+
+.faq-header
+  display: flex
+  justify-content: center
+  margin-bottom: 24px
+
+.faq-title
+  font-size: clamp(3rem, 6vw, 5rem)
+  letter-spacing: 0.08em
+  font-family: "Oswald", sans-serif
+  color: #fff
+
+.faq-content
+  width: 100%
+  max-width: 1100px
+  margin: 0 auto
+
+.faq-list
+  display: grid
+  gap: 18px
+
+.faq-list.is-compact
+  gap: 14px
+
+.faq-item
+  padding: 22px 26px
+  border-radius: 18px
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.03))
+  border: 1px solid rgba(255, 255, 255, 0.14)
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.35)
+  transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease
+
+  &:hover
+    transform: translateY(-4px)
+    border-color: rgba(255, 77, 77, 0.4)
+    box-shadow: 0 24px 50px rgba(0, 0, 0, 0.45)
+
+.faq-item h3
+  margin: 0 0 12px
+  font-size: 1.15rem
+  letter-spacing: 0.04em
+  font-family: "Oswald", sans-serif
+  color: #fff
+
+.faq-answer
+  display: grid
+  gap: 10px
+  color: rgba(255, 255, 255, 0.8)
+  line-height: 1.7
+  font-size: 0.95rem
+
+  strong
+    color: #ff4d4d
+    font-weight: 600
+
+@media (max-width: 640px)
+  .faq
+    padding: 70px 14px 50px
+
+  .faq-item
+    padding: 18px 18px
+
+  .faq-item h3
+    font-size: 1.05rem
+
+  .faq-answer
+    font-size: 0.9rem
+
+// FAQ 分类折叠
+.faq-group
+  border: 1px solid rgba(255, 255, 255, 0.12)
+  border-radius: 18px
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.02))
+  overflow: hidden
+
+  &[open]
+    border-color: rgba(255, 77, 77, 0.35)
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.35)
+
+.faq-group summary
+  list-style: none
+  cursor: pointer
+  padding: 16px 20px
+  display: flex
+  align-items: center
+  justify-content: space-between
+  gap: 16px
+  background: rgba(0, 0, 0, 0.35)
+
+  &::-webkit-details-marker
+    display: none
+
+  &::after
+    content: "+"
+    font-family: "Oswald", sans-serif
+    font-size: 1.4rem
+    color: rgba(255, 255, 255, 0.7)
+    transition: transform 0.3s ease, color 0.3s ease
+
+.faq-group[open] summary::after
+  transform: rotate(45deg)
+  color: #ff4d4d
+
+.faq-group-title
+  font-family: "Oswald", sans-serif
+  letter-spacing: 0.1em
+  font-size: 1rem
+  color: #fff
+
+.faq-group-sub
+  font-size: 0.75rem
+  letter-spacing: 0.12em
+  color: rgba(255, 255, 255, 0.6)
+  font-family: "Oswald", sans-serif
+
+.faq-group-body
+  padding: 16px 18px 20px
+  display: grid
+  gap: 14px
+
+.faq-group .faq-item
+  padding: 16px 18px
+  border-radius: 14px
+  box-shadow: none
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.02))
+
+.faq-group .faq-item h3
+  font-size: 1rem
+  margin-bottom: 10px
+
+.faq-group .faq-answer
+  font-size: 0.9rem
+  gap: 8px
+
+@media (max-width: 640px)
+  .faq-group summary
+    padding: 14px 16px
+
+  .faq-group-title
+    font-size: 0.95rem
+
+  .faq-group-sub
+    font-size: 0.68rem
+
+  .faq-group-body
+    padding: 14px 14px 18px
