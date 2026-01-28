@@ -1,4 +1,14 @@
 @charset "UTF-8";
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
 html {
   width: 100%;
   height: auto;
@@ -17,6 +27,10 @@ body {
   margin: 0;
   padding: 0;
   -webkit-touch-callout: none;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
 }
 
 .main-content-wrapper {
@@ -54,10 +68,6 @@ img {
   display: block;
 }
 
-*, *::before, *::after {
-  box-sizing: border-box;
-}
-
 body {
   font-family: "Noto Sans JP", sans-serif;
   font-weight: 400;
@@ -79,8 +89,9 @@ h1, h2, h3, h4, h5, h6,
 .cta-btn, .btn-primary, .store-link,
 .store-number, .pricing-item-price, .pricing-store-number,
 .spec-label, .spec-value {
-  font-family: "Oswald", sans-serif !important;
+  font-family: "Oswald", sans-serif;
   font-weight: 600;
+  letter-spacing: 0.04em;
   letter-spacing: 0.04em;
 }
 
@@ -91,9 +102,12 @@ h1 {
 }
 
 .eyebrow, .spec-label, .store-info-label, .pricing-item-type {
-  letter-spacing: 0.15em !important;
-  text-transform: uppercase;
+  font-family: "Oswald", sans-serif;
   font-weight: 500;
+  letter-spacing: 0.04em;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: #ff4d4d;
 }
 
 .pricing-item-price, .store-number, .spec-value {
@@ -166,6 +180,11 @@ h1 {
   background: url("../images/index/concept_bg.webp") center/cover no-repeat;
   background-attachment: fixed;
 }
+@media (max-width: 768px), (hover: none) {
+  .brand-manifesto .manifesto-bg {
+    background-attachment: scroll;
+  }
+}
 .brand-manifesto .manifesto-bg .bg-texture {
   display: none;
 }
@@ -237,6 +256,8 @@ h1 {
 }
 .brand-manifesto .manifesto-en .eyebrow {
   font-family: "Oswald", sans-serif;
+  font-weight: 600;
+  letter-spacing: 0.04em;
   font-size: 1.2rem;
   letter-spacing: 0.3em;
   color: #888;
@@ -244,10 +265,11 @@ h1 {
 }
 .brand-manifesto .manifesto-en .manifesto-heading {
   font-family: "Oswald", sans-serif;
+  font-weight: 700;
+  letter-spacing: 0.04em;
   font-size: clamp(3rem, 6vw, 6rem);
   line-height: 0.9;
   margin: 0 0 30px;
-  font-weight: 700;
 }
 .brand-manifesto .manifesto-en .manifesto-heading .outline-text {
   color: transparent;
@@ -301,6 +323,11 @@ h1 {
   background: url("../images/index/environment_background.webp") center/cover no-repeat;
   background-attachment: fixed;
   filter: blur(10px) brightness(0.9) saturate(1.25) contrast(1.05);
+}
+@media (max-width: 768px), (hover: none) {
+  .schedule-visual .schedule-bg-layer {
+    background-attachment: scroll;
+  }
 }
 .schedule-visual .schedule-bg-layer .bg-img {
   display: none;
@@ -408,10 +435,11 @@ h1 {
   align-items: flex-start;
 }
 .schedule-visual .event-poster-card .card-top .date-badge {
-  background: rgba(0, 0, 0, 0.7);
-  backdrop-filter: blur(5px);
-  -webkit-backdrop-filter: blur(5px);
+  background: rgba(255, 255, 255, 0);
+  backdrop-filter: blur(10px) saturate(150%);
+  -webkit-backdrop-filter: blur(10px) saturate(150%);
   border: 1px solid rgba(255, 255, 255, 0.2);
+  background: rgba(0, 0, 0, 0.7);
   border-radius: 8px;
   padding: 8px 12px;
   text-align: center;
@@ -459,6 +487,8 @@ h1 {
   color: #ccc;
   margin: 0 0 6px;
   font-family: "Oswald", sans-serif;
+  font-weight: 600;
+  letter-spacing: 0.04em;
 }
 .schedule-visual .event-poster-card .card-bottom .event-title {
   font-size: 1.4rem;
@@ -468,20 +498,24 @@ h1 {
   text-transform: uppercase;
 }
 .schedule-visual .event-poster-card .card-bottom .card-btn {
+  font-family: "Oswald", sans-serif;
+  font-weight: 600;
+  letter-spacing: 0.04em;
   display: inline-flex;
   align-items: center;
-  gap: 8px;
+  gap: 10px;
+  padding: 15px 40px;
+  text-decoration: none;
+  border-radius: 4px;
+  transition: all 0.3s ease;
   padding: 10px 20px;
   border: 1px solid rgba(255, 255, 255, 0.3);
-  border-radius: 4px;
   color: #fff;
-  text-decoration: none;
   font-size: 0.9rem;
-  font-weight: 600;
-  transition: all 0.3s ease;
-  backdrop-filter: blur(5px);
-  -webkit-backdrop-filter: blur(5px);
-  background: rgba(0, 0, 0, 0.2);
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(10px) saturate(150%);
+  -webkit-backdrop-filter: blur(10px) saturate(150%);
+  border: 1px solid rgba(255, 255, 255, 0);
 }
 .schedule-visual .event-poster-card .card-bottom .card-btn .arrow {
   transition: transform 0.3s ease;
@@ -517,6 +551,11 @@ h1 {
   background-attachment: fixed;
   filter: grayscale(100%) brightness(0.3) hue-rotate(180deg);
 }
+@media (max-width: 768px), (hover: none) {
+  .news-cinematic .news-bg-layer {
+    background-attachment: scroll;
+  }
+}
 .news-cinematic .news-bg-layer .bg-img {
   display: none;
 }
@@ -541,9 +580,13 @@ h1 {
   letter-spacing: 0.3em;
   margin-bottom: 10px;
   font-family: "Oswald", sans-serif;
+  font-weight: 600;
+  letter-spacing: 0.04em;
 }
 .news-cinematic .news-header h2 {
   font-family: "Oswald", sans-serif;
+  font-weight: 600;
+  letter-spacing: 0.04em;
   font-size: clamp(2rem, 4vw, 3.5rem);
   line-height: 1;
   color: #fff;
@@ -586,12 +629,16 @@ h1 {
 }
 .news-cinematic .news-item .news-meta .news-date {
   font-family: "Oswald", sans-serif;
+  font-weight: 600;
+  letter-spacing: 0.04em;
   color: #888;
   font-size: 0.95rem;
   letter-spacing: 0.05em;
 }
 .news-cinematic .news-item .news-meta .news-cat {
   font-family: "Oswald", sans-serif;
+  font-weight: 600;
+  letter-spacing: 0.04em;
   font-size: 0.75rem;
   padding: 2px 8px;
   border: 1px solid rgba(255, 255, 255, 0.2);
@@ -627,6 +674,8 @@ h1 {
 }
 .news-cinematic .news-item .news-arrow {
   font-family: "Oswald", sans-serif;
+  font-weight: 600;
+  letter-spacing: 0.04em;
   color: #ff4d4d;
   opacity: 0;
   transform: translateX(-10px);
@@ -661,6 +710,8 @@ h1 {
 .news-cinematic .news-footer .view-all-link {
   color: #888;
   font-family: "Oswald", sans-serif;
+  font-weight: 600;
+  letter-spacing: 0.04em;
   font-size: 0.9rem;
   text-decoration: none;
   letter-spacing: 0.1em;
@@ -692,6 +743,8 @@ h1 {
   font-size: 1rem;
   margin-bottom: 10px;
   font-family: "Oswald", sans-serif;
+  font-weight: 600;
+  letter-spacing: 0.04em;
   letter-spacing: 0.2em;
 }
 .store-environment-cinematic .carousel-header-overlay h2 {
@@ -722,6 +775,8 @@ h1 {
 }
 .cinematic-swiper .swiper-slide .slide-content .slide-title {
   font-family: "Oswald", sans-serif;
+  font-weight: 700;
+  letter-spacing: 0.04em;
   font-size: clamp(2.5rem, 5vw, 4rem);
   color: #fff;
   margin: 0 0 15px;
@@ -773,6 +828,8 @@ h1 {
 }
 .cinematic-controls .swiper-pagination-fraction {
   font-family: "Oswald", sans-serif;
+  font-weight: 600;
+  letter-spacing: 0.04em;
   color: #fff;
   font-size: 1.2rem;
   letter-spacing: 0.1em;
@@ -809,9 +866,10 @@ h1 {
   justify-content: center;
   cursor: pointer;
   transition: all 0.3s ease;
-  -webkit-backdrop-filter: blur(5px);
-          backdrop-filter: blur(5px);
-  background: rgba(0, 0, 0, 0.3);
+  background: rgba(255, 255, 255, 0.3);
+  backdrop-filter: blur(10px) saturate(150%);
+  -webkit-backdrop-filter: blur(10px) saturate(150%);
+  border: 1px solid rgba(255, 255, 255, 0);
   font-family: sans-serif;
   font-weight: 300;
   position: static;
@@ -920,34 +978,16 @@ h1 {
     gap: 20px;
   }
 }
-.pricing .pricing-header::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 120px;
-  height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(255, 77, 77, 0.6), transparent);
-  box-shadow: 0 0 20px rgba(255, 77, 77, 0.4);
-}
-.pricing .pricing-header::after {
-  content: "";
-  position: absolute;
-  bottom: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 200px;
-  height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), rgba(255, 77, 77, 0.3), rgba(255, 255, 255, 0.2), transparent);
-  animation: line-expand 3s ease-in-out infinite;
-}
 .pricing .pricing-header .eyebrow {
+  font-family: "Oswald", sans-serif;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: #ff4d4d;
   letter-spacing: 0.25em;
   font-size: 0.75rem;
-  font-weight: 500;
   margin: 0;
-  text-transform: uppercase;
   position: relative;
   display: inline-block;
   align-self: center;
@@ -989,8 +1029,9 @@ h1 {
   letter-spacing: 0.15em;
   font-weight: 200;
   position: relative;
-  color: #ffffff;
+  color: #fff;
   text-shadow: 0 0 20px rgba(255, 77, 77, 0.3), 0 0 40px rgba(255, 77, 77, 0.2), 0 2px 4px rgba(0, 0, 0, 0.5), 0 4px 8px rgba(0, 0, 0, 0.3);
+  padding: 20px 0;
 }
 .pricing .pricing-header h2::before {
   content: "";
@@ -1125,8 +1166,6 @@ h1 {
   transform: translateY(-8px) scale(1.015);
   box-shadow: 0 24px 80px rgba(255, 77, 77, 0.2), 0 12px 32px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(255, 255, 255, 0.2) inset, 0 4px 16px rgba(0, 0, 0, 0.3) inset, 0 0 60px rgba(255, 77, 77, 0.15);
   border-color: rgba(255, 255, 255, 0.3);
-  backdrop-filter: blur(35px) saturate(200%);
-  -webkit-backdrop-filter: blur(35px) saturate(200%);
 }
 .pricing-card:hover::before {
   opacity: 0.9;
@@ -1147,8 +1186,10 @@ h1 {
   gap: 18px;
   border-bottom: 1px solid rgba(255, 255, 255, 0.15);
   background: linear-gradient(135deg, rgba(255, 77, 77, 0.12), rgba(255, 77, 77, 0.04), transparent);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(10px) saturate(150%);
+  -webkit-backdrop-filter: blur(10px) saturate(150%);
+  border: 1px solid rgba(255, 255, 255, 0.1);
   position: relative;
   z-index: 1;
   overflow: hidden;
@@ -1183,6 +1224,8 @@ h1 {
   color: #ff4d4d;
   letter-spacing: 0.1em;
   font-family: "Oswald", sans-serif;
+  font-weight: 600;
+  letter-spacing: 0.04em;
   min-width: 48px;
   text-shadow: 0 0 20px rgba(255, 77, 77, 0.5);
   position: relative;
@@ -1203,7 +1246,7 @@ h1 {
   margin: 0;
   font-size: 1.35rem;
   letter-spacing: 0.08em;
-  color: #f5f5f5;
+  color: #f5f5f0;
   font-weight: 400;
   flex: 1;
   text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
@@ -1223,10 +1266,11 @@ h1 {
   justify-content: space-between;
   align-items: center;
   padding: 18px 20px;
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.02), rgba(255, 255, 255, 0.04));
-  backdrop-filter: blur(15px) saturate(150%);
-  -webkit-backdrop-filter: blur(15px) saturate(150%);
+  background: rgba(255, 255, 255, 0.04);
+  backdrop-filter: blur(10px) saturate(150%);
+  -webkit-backdrop-filter: blur(10px) saturate(150%);
   border: 1px solid rgba(255, 255, 255, 0.12);
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.02), rgba(255, 255, 255, 0.04));
   border-radius: 16px;
   transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   position: relative;
@@ -1260,8 +1304,6 @@ h1 {
 }
 .pricing-card .pricing-item:hover {
   background: linear-gradient(135deg, rgba(255, 77, 77, 0.12), rgba(255, 77, 77, 0.05), rgba(255, 255, 255, 0.06));
-  backdrop-filter: blur(20px) saturate(180%);
-  -webkit-backdrop-filter: blur(20px) saturate(180%);
   border-color: rgba(255, 255, 255, 0.25);
   transform: translateX(6px) scale(1.02);
   box-shadow: 0 8px 32px rgba(255, 77, 77, 0.2), 0 4px 16px rgba(0, 0, 0, 0.3), 0 0 0 1px rgba(255, 255, 255, 0.15) inset, 0 2px 8px rgba(255, 255, 255, 0.15) inset;
@@ -1283,7 +1325,7 @@ h1 {
 }
 .pricing-card .pricing-item .pricing-item-name {
   font-size: 1.05rem;
-  color: #f5f5f5;
+  color: #f5f5f0;
   letter-spacing: 0.04em;
   font-weight: 500;
   text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
@@ -1295,6 +1337,7 @@ h1 {
   text-transform: uppercase;
   font-family: "Oswald", sans-serif;
   font-weight: 500;
+  letter-spacing: 0.04em;
 }
 .pricing-card .pricing-item .pricing-item-price {
   font-size: 1.6rem;
@@ -1302,6 +1345,8 @@ h1 {
   font-weight: 700;
   letter-spacing: 0.02em;
   font-family: "Oswald", sans-serif;
+  font-weight: 600;
+  letter-spacing: 0.04em;
   display: flex;
   align-items: baseline;
   gap: 2px;
@@ -1409,6 +1454,14 @@ h1 {
     opacity: 0.3;
   }
 }
+@keyframes liquid-line {
+  0%, 100% {
+    opacity: 0.6;
+  }
+  50% {
+    opacity: 1;
+  }
+}
 .specs-access-wrap {
   background: #040404;
   background-size: cover;
@@ -1447,6 +1500,11 @@ h1 {
   background: url("../images/index/custmer_play_pc.webp") center/cover no-repeat;
   background-attachment: fixed;
 }
+@media (max-width: 768px), (hover: none) {
+  .specs-cinematic .specs-bg-layer {
+    background-attachment: scroll;
+  }
+}
 .specs-cinematic .specs-bg-layer .bg-img {
   display: none;
 }
@@ -1454,8 +1512,10 @@ h1 {
   position: absolute;
   inset: 0;
   background: rgba(0, 0, 0, 0.75);
-  backdrop-filter: blur(3px);
-  -webkit-backdrop-filter: blur(3px);
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(3px) saturate(150%);
+  -webkit-backdrop-filter: blur(3px) saturate(150%);
+  border: 1px solid rgba(255, 255, 255, 0.1);
   z-index: 1;
 }
 .specs-cinematic .specs-watermark {
@@ -1495,9 +1555,13 @@ h1 {
   letter-spacing: 0.3em;
   margin-bottom: 10px;
   font-family: "Oswald", sans-serif;
+  font-weight: 600;
+  letter-spacing: 0.04em;
 }
 .specs-cinematic .specs-header-cinematic h2 {
   font-family: "Oswald", sans-serif;
+  font-weight: 600;
+  letter-spacing: 0.04em;
   font-size: clamp(3.5rem, 6vw, 6rem);
   line-height: 0.9;
   color: #fff;
@@ -1525,8 +1589,8 @@ h1 {
 }
 .specs-cinematic .spec-glass-card {
   background: rgba(255, 255, 255, 0.03);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
+  backdrop-filter: blur(20px) saturate(150%);
+  -webkit-backdrop-filter: blur(20px) saturate(150%);
   border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 16px;
   padding: 30px;
@@ -1552,6 +1616,8 @@ h1 {
 }
 .specs-cinematic .spec-glass-card .card-icon {
   font-family: "Oswald", sans-serif;
+  font-weight: 600;
+  letter-spacing: 0.04em;
   font-size: 1.5rem;
   color: rgba(255, 255, 255, 0.3);
   border: 1px solid rgba(255, 255, 255, 0.2);
@@ -1566,6 +1632,8 @@ h1 {
 }
 .specs-cinematic .spec-glass-card h3 {
   font-family: "Oswald", sans-serif;
+  font-weight: 600;
+  letter-spacing: 0.04em;
   font-size: 1.5rem;
   color: #fff;
   margin: 0 0 20px;
@@ -1585,6 +1653,8 @@ h1 {
 .specs-cinematic .spec-glass-card .spec-row .label {
   color: #888;
   font-family: "Oswald", sans-serif;
+  font-weight: 600;
+  letter-spacing: 0.04em;
   letter-spacing: 0.1em;
 }
 .specs-cinematic .spec-glass-card .spec-row .value {
@@ -1595,7 +1665,7 @@ h1 {
 .specs-cinematic .spec-glass-card .spec-row.highlight .value {
   color: #ff4d4d;
   font-weight: 700;
-  text-shadow: 0 0 10px rgba(255, 77, 77, 0.3);
+  text-shadow: 0 0 20px rgba(255, 77, 77, 0.4);
 }
 
 .access-cinematic {
@@ -1617,6 +1687,11 @@ h1 {
   background: url("../images/index/environment_background.webp") center/cover no-repeat;
   background-attachment: fixed;
   filter: brightness(0.4) contrast(1.1);
+}
+@media (max-width: 768px), (hover: none) {
+  .access-cinematic .access-bg-layer {
+    background-attachment: scroll;
+  }
 }
 .access-cinematic .access-bg-layer .bg-img {
   display: none;
@@ -1659,9 +1734,13 @@ h1 {
   letter-spacing: 0.3em;
   margin-bottom: 10px;
   font-family: "Oswald", sans-serif;
+  font-weight: 600;
+  letter-spacing: 0.04em;
 }
 .access-cinematic .access-header-cinematic h2 {
   font-family: "Oswald", sans-serif;
+  font-weight: 600;
+  letter-spacing: 0.04em;
   font-size: clamp(3.5rem, 6vw, 6rem);
   line-height: 0.9;
   color: #fff;
@@ -1689,8 +1768,8 @@ h1 {
 }
 .access-cinematic .access-glass-card {
   background: rgba(255, 255, 255, 0.03);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
+  backdrop-filter: blur(20px) saturate(150%);
+  -webkit-backdrop-filter: blur(20px) saturate(150%);
   border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 20px;
   padding: 40px;
@@ -1714,16 +1793,20 @@ h1 {
 }
 .access-cinematic .access-glass-card .card-tag {
   font-family: "Oswald", sans-serif;
+  font-weight: 600;
+  letter-spacing: 0.04em;
   font-size: 1.2rem;
   color: rgba(255, 255, 255, 0.5);
   border: 1px solid rgba(255, 255, 255, 0.2);
   padding: 5px 15px;
-  border-radius: 50px;
+  border-radius: 999px;
   margin-bottom: 24px;
   transition: all 0.3s ease;
 }
 .access-cinematic .access-glass-card .store-name {
   font-family: "Oswald", sans-serif;
+  font-weight: 600;
+  letter-spacing: 0.04em;
   font-size: 1.8rem;
   color: #fff;
   margin: 0 0 15px;
@@ -1750,18 +1833,19 @@ h1 {
   margin-right: 5px;
 }
 .access-cinematic .access-glass-card .map-btn {
+  font-family: "Oswald", sans-serif;
+  font-weight: 600;
+  letter-spacing: 0.04em;
   display: inline-flex;
   align-items: center;
   gap: 10px;
+  padding: 15px 40px;
+  text-decoration: none;
+  border-radius: 4px;
+  transition: all 0.3s ease;
   padding: 14px 30px;
   background: #fff;
   color: #000;
-  text-decoration: none;
-  font-family: "Oswald", sans-serif;
-  font-weight: 600;
-  letter-spacing: 0.05em;
-  border-radius: 4px;
-  transition: all 0.3s ease;
 }
 .access-cinematic .access-glass-card .map-btn:hover {
   background: #ff4d4d;
@@ -1794,6 +1878,8 @@ h1 {
 }
 .access-cinematic .access-glass-card.map-card .store-name-sm {
   font-family: "Oswald", sans-serif;
+  font-weight: 600;
+  letter-spacing: 0.04em;
   font-size: 1.4rem;
   color: #fff;
   margin: 0;
@@ -1912,7 +1998,7 @@ h1 {
   gap: 6px;
 }
 .footer .footer-nav a {
-  color: #f5f5f5;
+  color: #f5f5f0;
   text-decoration: none;
   transition: color 0.2s ease;
 }
@@ -2039,6 +2125,8 @@ h1 {
 }
 .hero-section .hero-content .label-box span {
   font-family: "Oswald", sans-serif;
+  font-weight: 600;
+  letter-spacing: 0.04em;
   font-size: 0.9rem;
   letter-spacing: 0.3em;
   text-transform: uppercase;
@@ -2047,6 +2135,7 @@ h1 {
 .hero-section .hero-content h1.hero-title {
   font-family: "Oswald", sans-serif;
   font-weight: 700;
+  letter-spacing: 0.04em;
   text-transform: uppercase;
   line-height: 0.85;
   margin-bottom: 40px;
@@ -2115,15 +2204,19 @@ h1 {
   font-family: "Noto Sans JP", sans-serif;
 }
 .hero-section .hero-content .bottom-row .cta-btn {
+  font-family: "Oswald", sans-serif;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 15px 40px;
+  text-decoration: none;
+  border-radius: 4px;
+  transition: all 0.3s ease;
   padding: 18px 40px;
   background: #fff;
   color: #000;
-  font-family: "Oswald", sans-serif;
-  font-weight: 600;
-  letter-spacing: 0.1em;
-  text-decoration: none;
-  border-radius: 4px;
-  transition: transform 0.3s ease, background 0.3s ease;
 }
 .hero-section .hero-content .bottom-row .cta-btn:hover {
   transform: translateY(-5px);
@@ -2154,13 +2247,13 @@ h1 {
   justify-content: space-between;
   box-sizing: border-box;
   pointer-events: auto;
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.12), rgba(255, 255, 255, 0.08)), rgba(50, 50, 50, 0.3);
-  backdrop-filter: blur(40px) saturate(180%);
-  -webkit-backdrop-filter: blur(40px) saturate(180%);
-  border: 1px solid rgba(255, 255, 255, 0.25);
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.5);
   border-radius: 18px;
   padding: 18px 40px;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.2), inset 0 -1px 0 rgba(255, 255, 255, 0.05);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.9);
 }
 .hud-container::before {
   content: "";
@@ -2183,9 +2276,11 @@ h1 {
   width: auto;
   display: block;
   transition: transform 0.3s ease;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.15));
 }
 .hud-logo img:hover {
   transform: scale(1.05);
+  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.2));
 }
 
 .hud-nav-desktop {
@@ -2195,14 +2290,15 @@ h1 {
 }
 .hud-nav-desktop .hud-link {
   font-family: "Oswald", sans-serif;
-  color: rgba(255, 255, 255, 0.8);
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  color: rgba(0, 0, 0, 0.75);
   text-decoration: none;
   font-size: 1.05rem;
   letter-spacing: 0.12em;
   position: relative;
   transition: color 0.3s ease, transform 0.2s ease;
   padding: 8px 0;
-  font-weight: 500;
 }
 .hud-nav-desktop .hud-link::after {
   content: "";
@@ -2211,12 +2307,12 @@ h1 {
   left: 0;
   width: 0;
   height: 2px;
-  background: linear-gradient(90deg, transparent, rgba(255, 77, 77, 0.8), transparent);
+  background: linear-gradient(90deg, transparent, #ff4d4d, transparent);
   transition: width 0.3s ease;
   box-shadow: 0 0 8px rgba(255, 77, 77, 0.6);
 }
 .hud-nav-desktop .hud-link:hover, .hud-nav-desktop .hud-link.active {
-  color: #fff;
+  color: #ff4d4d;
   transform: translateY(-2px);
 }
 .hud-nav-desktop .hud-link:hover::after, .hud-nav-desktop .hud-link.active::after {
@@ -2230,16 +2326,18 @@ h1 {
   background: transparent;
   border: none;
   cursor: pointer;
-  color: #fff;
+  color: rgba(0, 0, 0, 0.8);
   padding: 8px 0;
-  transition: transform 0.2s ease;
+  transition: transform 0.2s ease, color 0.2s ease;
 }
 .hud-menu-btn:hover {
   transform: translateY(-2px);
+  color: #ff4d4d;
 }
 .hud-menu-btn .btn-text {
   font-family: "Oswald", sans-serif;
   font-weight: 600;
+  letter-spacing: 0.04em;
   font-size: 1.05rem;
   letter-spacing: 0.12em;
 }
@@ -2255,7 +2353,7 @@ h1 {
   display: block;
   width: 100%;
   height: 2.5px;
-  background: #fff;
+  background: rgba(0, 0, 0, 0.8);
   border-radius: 2px;
   transition: 0.3s ease;
 }
@@ -2337,8 +2435,10 @@ h1 {
   line-height: 1;
   cursor: pointer;
   transition: transform 0.2s ease, background 0.2s ease, border-color 0.2s ease;
-  -webkit-backdrop-filter: blur(10px);
-  backdrop-filter: blur(10px);
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(10px) saturate(150%);
+  -webkit-backdrop-filter: blur(10px) saturate(150%);
+  border: 1px solid rgba(255, 255, 255, 0.1);
 }
 .mm-close-btn:hover {
   transform: translateY(-2px);
@@ -2393,16 +2493,19 @@ h1 {
 .mm-num {
   color: #ff4d4d;
   font-family: "Oswald", sans-serif;
+  font-weight: 600;
+  letter-spacing: 0.04em;
   font-size: 1rem;
 }
 
 .mm-link {
   font-family: "Oswald", sans-serif;
+  font-weight: 700;
+  letter-spacing: 0.04em;
   font-size: 3rem;
   line-height: 1;
   color: #fff;
   text-decoration: none;
-  font-weight: 700;
   text-transform: uppercase;
   transform: translateY(100%);
   opacity: 0;
@@ -2414,6 +2517,8 @@ h1 {
   text-align: center;
   color: rgba(255, 255, 255, 0.5);
   font-family: "Oswald", sans-serif;
+  font-weight: 600;
+  letter-spacing: 0.04em;
   font-size: 0.9rem;
   letter-spacing: 0.1em;
 }
@@ -2510,8 +2615,9 @@ h1 {
   top: -120px;
   left: -40px;
   font-family: "Oswald", sans-serif;
-  font-size: 14rem;
   font-weight: 700;
+  letter-spacing: 0.04em;
+  font-size: 14rem;
   color: transparent;
   -webkit-text-stroke: 2px rgba(255, 255, 255, 0.08);
   z-index: -1;
@@ -2528,6 +2634,8 @@ h1 {
 }
 .immersive-store .store-title {
   font-family: "Oswald", sans-serif;
+  font-weight: 600;
+  letter-spacing: 0.04em;
   font-size: clamp(2.5rem, 4vw, 4rem);
   color: #fff;
   margin: 0 0 10px;
@@ -2559,6 +2667,8 @@ h1 {
 }
 .immersive-store .detail-row .label {
   font-family: "Oswald", sans-serif;
+  font-weight: 600;
+  letter-spacing: 0.04em;
   color: #ff4d4d;
   font-size: 0.9rem;
   min-width: 80px;
@@ -2568,19 +2678,23 @@ h1 {
   color: #fff;
 }
 .immersive-store .cta-btn.outline-btn {
+  font-family: "Oswald", sans-serif;
+  font-weight: 600;
+  letter-spacing: 0.04em;
   display: inline-flex;
   align-items: center;
   gap: 10px;
   padding: 15px 40px;
+  text-decoration: none;
+  border-radius: 4px;
+  transition: all 0.3s ease;
   border: 1px solid rgba(255, 255, 255, 0.4);
   color: #fff;
-  text-decoration: none;
-  font-family: "Oswald", sans-serif;
-  letter-spacing: 0.1em;
-  transition: all 0.3s ease;
   background: rgba(0, 0, 0, 0.3);
-  backdrop-filter: blur(5px);
-  -webkit-backdrop-filter: blur(5px);
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(10px) saturate(150%);
+  -webkit-backdrop-filter: blur(10px) saturate(150%);
+  border: 1px solid rgba(255, 255, 255, 0.1);
 }
 .immersive-store .cta-btn.outline-btn:hover {
   background: #ff4d4d;
@@ -2625,7 +2739,7 @@ h1 {
   filter: blur(6px) brightness(0.72) contrast(1.08);
   transform: translateZ(0);
 }
-@media (max-width: 768px) {
+@media (max-width: 768px), (hover: none) {
   .room-zone::before {
     background-attachment: scroll;
   }
@@ -2637,8 +2751,10 @@ h1 {
   z-index: 1;
   pointer-events: none;
   transition: background 0.5s ease;
-  backdrop-filter: blur(2px);
-  -webkit-backdrop-filter: blur(2px);
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(2px) saturate(150%);
+  -webkit-backdrop-filter: blur(2px) saturate(150%);
+  border: 1px solid rgba(255, 255, 255, 0.1);
 }
 .room-zone > .zone-content-wrapper {
   position: relative;
@@ -2682,11 +2798,13 @@ h1 {
   margin: 0 auto 40px;
 }
 .page-header-simple .eyebrow {
+  font-family: "Oswald", sans-serif;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
   color: #ff4d4d;
   margin-bottom: 12px;
-  font-family: "Oswald", sans-serif;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
 }
 .page-header-simple h1 {
   font-size: clamp(3rem, 6vw, 5rem);
@@ -2694,6 +2812,8 @@ h1 {
   margin: 0 0 24px;
   line-height: 1;
   font-family: "Oswald", sans-serif;
+  font-weight: 600;
+  letter-spacing: 0.04em;
   letter-spacing: 0.08em;
 }
 .page-header-simple .lead {
@@ -2712,14 +2832,17 @@ h1 {
 }
 .zone-header .zone-num {
   font-family: "Oswald", sans-serif;
+  font-weight: 700;
+  letter-spacing: 0.04em;
   font-size: 4rem;
   color: #ff4d4d;
-  font-weight: 700;
   line-height: 0.8;
   opacity: 0.8;
 }
 .zone-header h2 {
   font-family: "Oswald", sans-serif;
+  font-weight: 600;
+  letter-spacing: 0.04em;
   font-size: clamp(2rem, 4vw, 3rem);
   margin: 0;
   color: #fff;
@@ -2728,6 +2851,8 @@ h1 {
 .zone-header p {
   margin-left: auto;
   font-family: "Oswald", sans-serif;
+  font-weight: 600;
+  letter-spacing: 0.04em;
   color: #aaa;
   letter-spacing: 0.1em;
   text-transform: uppercase;
@@ -2756,6 +2881,8 @@ h1 {
 .floor-group .floor-title {
   font-size: 1.3rem;
   font-family: "Oswald", sans-serif;
+  font-weight: 600;
+  letter-spacing: 0.04em;
   color: #fff;
   margin-bottom: 30px;
   padding-left: 16px;
@@ -2782,16 +2909,16 @@ main.rooms-cinematic-container ~ .footer {
 }
 
 .room-card {
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.02), rgba(255, 255, 255, 0.04));
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.03), rgba(255, 255, 255, 0.05));
+  backdrop-filter: blur(30px) saturate(180%);
+  -webkit-backdrop-filter: blur(30px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.18);
   border-radius: 14px;
   overflow: hidden;
   transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
   display: flex;
   flex-direction: column;
   height: 100%;
-  backdrop-filter: blur(18px) saturate(140%);
-  -webkit-backdrop-filter: blur(18px) saturate(140%);
 }
 .room-card:hover {
   transform: translateY(-5px);
@@ -2826,8 +2953,9 @@ main.rooms-cinematic-container ~ .footer {
   right: 12px;
   padding: 4px 10px;
   font-family: "Oswald", sans-serif;
-  font-size: 0.8rem;
   font-weight: 600;
+  letter-spacing: 0.04em;
+  font-size: 0.8rem;
   border-radius: 6px;
   color: #fff;
   letter-spacing: 0.08em;
@@ -2868,12 +2996,13 @@ main.rooms-cinematic-container ~ .footer {
   bottom: 12px;
   left: 12px;
   background: rgba(0, 0, 0, 0.7);
-  backdrop-filter: blur(6px);
-  -webkit-backdrop-filter: blur(6px);
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(6px) saturate(150%);
+  -webkit-backdrop-filter: blur(6px) saturate(150%);
+  border: 1px solid rgba(255, 255, 255, 0.1);
   padding: 4px 10px;
   font-size: 0.75rem;
   border-radius: 6px;
-  border: 1px solid rgba(255, 255, 255, 0.2);
   color: rgba(255, 255, 255, 0.9);
   letter-spacing: 0.06em;
 }
@@ -2887,8 +3016,10 @@ main.rooms-cinematic-container ~ .footer {
   font-size: 0.75rem;
   padding: 4px 10px;
   border-radius: 6px;
-  backdrop-filter: blur(6px);
-  -webkit-backdrop-filter: blur(6px);
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(6px) saturate(150%);
+  -webkit-backdrop-filter: blur(6px) saturate(150%);
+  border: 1px solid rgba(255, 255, 255, 0.1);
   letter-spacing: 0.06em;
 }
 .room-card .room-img .availability-tag.is-smoking {
@@ -2911,6 +3042,8 @@ main.rooms-cinematic-container ~ .footer {
 .room-card .room-info .room-header-row h4 {
   margin: 0;
   font-family: "Oswald", sans-serif;
+  font-weight: 600;
+  letter-spacing: 0.04em;
   font-size: 1.35rem;
   color: #fff;
   letter-spacing: 0.06em;
@@ -2932,6 +3065,8 @@ main.rooms-cinematic-container ~ .footer {
 }
 .room-card .room-info .room-sub-spec {
   font-family: "Oswald", sans-serif;
+  font-weight: 600;
+  letter-spacing: 0.04em;
   color: #ff4d4d;
   font-size: 0.9rem;
   margin: 0 0 8px;
@@ -2958,6 +3093,8 @@ main.rooms-cinematic-container ~ .footer {
 .room-card .room-info .spec-list li .label {
   color: rgba(255, 255, 255, 0.45);
   font-family: "Oswald", sans-serif;
+  font-weight: 600;
+  letter-spacing: 0.04em;
   text-transform: uppercase;
   letter-spacing: 0.12em;
 }
@@ -2980,6 +3117,8 @@ main.rooms-cinematic-container ~ .footer {
   letter-spacing: 0.12em;
   color: rgba(255, 255, 255, 0.7);
   font-family: "Oswald", sans-serif;
+  font-weight: 600;
+  letter-spacing: 0.04em;
 }
 
 .system-pricing-note {
@@ -3033,6 +3172,8 @@ main.rooms-cinematic-container ~ .footer {
 }
 .system-pricing-head > div {
   font-family: "Oswald", sans-serif;
+  font-weight: 600;
+  letter-spacing: 0.04em;
   font-size: 0.82rem;
   letter-spacing: 0.12em;
   text-transform: uppercase;
@@ -3045,6 +3186,8 @@ main.rooms-cinematic-container ~ .footer {
 .system-rate {
   display: block;
   font-family: "Oswald", sans-serif;
+  font-weight: 600;
+  letter-spacing: 0.04em;
   letter-spacing: 0.06em;
 }
 
@@ -3113,12 +3256,16 @@ main.rooms-cinematic-container ~ .footer {
   align-items: center;
   gap: 12px;
   font-family: "Oswald", sans-serif;
+  font-weight: 600;
+  letter-spacing: 0.04em;
   letter-spacing: 0.12em;
   font-size: 0.95rem;
   color: rgba(255, 255, 255, 0.9);
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.03));
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(20px) saturate(150%);
+  -webkit-backdrop-filter: blur(20px) saturate(150%);
   border: 1px solid rgba(255, 255, 255, 0.18);
-  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.35), 0 0 18px rgba(255, 77, 77, 0.2);
+  box-shadow: 0 18px 50px rgba(0, 0, 0, 0.4), 0 0 18px rgba(255, 77, 77, 0.2);
 }
 
 @media (max-width: 640px) {
@@ -3146,6 +3293,8 @@ main.rooms-cinematic-container ~ .footer {
 .night-pack-notice .notice-title {
   margin: 0 0 10px;
   font-family: "Oswald", sans-serif;
+  font-weight: 600;
+  letter-spacing: 0.04em;
   letter-spacing: 0.14em;
   color: rgba(255, 255, 255, 0.85);
 }
@@ -3216,6 +3365,8 @@ main.rooms-cinematic-container ~ .footer {
   font-size: clamp(3rem, 6vw, 5rem);
   letter-spacing: 0.08em;
   font-family: "Oswald", sans-serif;
+  font-weight: 600;
+  letter-spacing: 0.04em;
   color: #fff;
 }
 
@@ -3237,9 +3388,11 @@ main.rooms-cinematic-container ~ .footer {
 .faq-item {
   padding: 22px 26px;
   border-radius: 18px;
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.03));
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(20px) saturate(150%);
+  -webkit-backdrop-filter: blur(20px) saturate(150%);
   border: 1px solid rgba(255, 255, 255, 0.14);
-  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.35);
+  box-shadow: 0 18px 50px rgba(0, 0, 0, 0.4);
   transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
 }
 .faq-item:hover {
@@ -3253,6 +3406,8 @@ main.rooms-cinematic-container ~ .footer {
   font-size: 1.15rem;
   letter-spacing: 0.04em;
   font-family: "Oswald", sans-serif;
+  font-weight: 600;
+  letter-spacing: 0.04em;
   color: #fff;
 }
 
@@ -3285,7 +3440,10 @@ main.rooms-cinematic-container ~ .footer {
 .faq-group {
   border: 1px solid rgba(255, 255, 255, 0.12);
   border-radius: 18px;
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.02));
+  background: rgba(255, 255, 255, 0.04);
+  backdrop-filter: blur(20px) saturate(150%);
+  -webkit-backdrop-filter: blur(20px) saturate(150%);
+  border: 1px solid rgba(255, 255, 255, 0);
   overflow: hidden;
 }
 .faq-group[open] {
@@ -3309,6 +3467,8 @@ main.rooms-cinematic-container ~ .footer {
 .faq-group summary::after {
   content: "+";
   font-family: "Oswald", sans-serif;
+  font-weight: 600;
+  letter-spacing: 0.04em;
   font-size: 1.4rem;
   color: rgba(255, 255, 255, 0.7);
   transition: transform 0.3s ease, color 0.3s ease;
@@ -3321,6 +3481,8 @@ main.rooms-cinematic-container ~ .footer {
 
 .faq-group-title {
   font-family: "Oswald", sans-serif;
+  font-weight: 600;
+  letter-spacing: 0.04em;
   letter-spacing: 0.1em;
   font-size: 1rem;
   color: #fff;
@@ -3331,6 +3493,8 @@ main.rooms-cinematic-container ~ .footer {
   letter-spacing: 0.12em;
   color: rgba(255, 255, 255, 0.6);
   font-family: "Oswald", sans-serif;
+  font-weight: 600;
+  letter-spacing: 0.04em;
 }
 
 .faq-group-body {
@@ -3343,7 +3507,10 @@ main.rooms-cinematic-container ~ .footer {
   padding: 16px 18px;
   border-radius: 14px;
   box-shadow: none;
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.02));
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(10px) saturate(150%);
+  -webkit-backdrop-filter: blur(10px) saturate(150%);
+  border: 1px solid rgba(255, 255, 255, 0);
 }
 
 .faq-group .faq-item h3 {
