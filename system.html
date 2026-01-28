@@ -50,17 +50,39 @@
       </div>
     </header>
 
-    <main>
-      <!-- 价格表区域 -->
-      <section class="pricing section-fade" id="pricing">
-        <div class="pricing-header page-header-simple reveal-on-scroll fade-in-up">
-          <p class="eyebrow">PRICING</p>
-          <h2>料金表</h2>
-          <p class="lead">
-            各店舗・各エリアの料金をご確認ください。すべて税込価格です。
-          </p>
+    <main class="rooms-cinematic-container">
+      <!-- 全局固定背景 -->
+      <div class="global-fixed-bg-layer">
+        <img
+          src="images/rooms/specs_background.webp"
+          alt="System Background"
+        />
+      </div>
+
+      <!-- 页面标题区域 -->
+      <header class="room-zone zone-intro">
+        <div class="zone-content-wrapper">
+          <div class="page-header-simple">
+            <p class="eyebrow gsap-fade-up">PRICING</p>
+            <h1 class="gsap-fade-up" data-delay="0.1">
+              PRICE <span class="outline-text">LIST</span>
+            </h1>
+            <p class="lead gsap-fade-up" data-delay="0.2">
+              各店舗・各エリアの料金をご確認ください。すべて税込価格です。
+            </p>
+          </div>
         </div>
-        <div class="pricing-content">
+      </header>
+
+      <!-- 价格表区域 -->
+      <section class="room-zone zone-store1" id="pricing">
+        <div class="zone-content-wrapper">
+          <div class="zone-header gsap-fade-up">
+            <span class="zone-num">01</span>
+            <h2>CHARGE SYSTEM</h2>
+            <p>STORE PRICING</p>
+          </div>
+          <div class="pricing-content">
           <div class="pricing-grid system-pricing-grid">
             <article class="pricing-card system-pricing-card">
               <div class="pricing-card-header">
@@ -233,13 +255,19 @@
             </article>
           </div>
 
+        </div>
+      </section>
+
+      <!-- ナイトパック区域 -->
+      <section class="room-zone zone-store2" id="night-pack">
+        <div class="zone-content-wrapper">
+          <div class="zone-header gsap-fade-up">
+            <span class="zone-num">02</span>
+            <h2>NIGHT PACK</h2>
+            <p>LATE NIGHT PRICING</p>
+          </div>
+
           <div class="night-pack">
-            <div class="night-pack-header reveal-on-scroll fade-in-up">
-              <p class="eyebrow">NIGHT PACK</p>
-              <h3>ナイトパック</h3>
-              <p class="lead">夜間のお得なパック料金をご案内します。</p>
-              <p class="lead system-en">Night pack pricing for late hours.</p>
-            </div>
 
             <div class="pricing-grid system-pricing-grid">
               <article class="pricing-card system-pricing-card">
@@ -374,16 +402,18 @@
       </section>
 
       <!-- 支付方式区域 -->
-      <section class="payment section-fade" id="payment">
-        <div class="payment-header reveal-on-scroll fade-in-up">
-          <p class="eyebrow">PAYMENT</p>
-          <h2>お支払い方法</h2>
-          <p class="lead">各種お支払い方法をご利用いただけます。</p>
-        </div>
-        <div class="payment-content">
-          <p class="payment-note">
-            現金 / クレジットカード / iD / QUICPay / PayPay / WeChat Pay / Alipay
-          </p>
+      <section class="room-zone zone-store1" id="payment">
+        <div class="zone-content-wrapper">
+          <div class="zone-header gsap-fade-up">
+            <span class="zone-num">03</span>
+            <h2>PAYMENT</h2>
+            <p>ACCEPTED METHODS</p>
+          </div>
+          <div class="payment-content">
+            <p class="payment-note">
+              現金 / クレジットカード / iD / QUICPay / PayPay / WeChat Pay / Alipay
+            </p>
+          </div>
         </div>
       </section>
     </main>

@@ -53,8 +53,14 @@
     <main class="guide-main">
       <!-- 常见问题区域 -->
       <section class="faq section-fade" id="faq">
-        <div class="faq-header reveal-on-scroll fade-in-up">
-          <p class="eyebrow faq-title">FAQ</p>
+        <div class="faq-header">
+          <p class="eyebrow gsap-fade-up">FAQ</p>
+          <h2 class="faq-title gsap-fade-up" data-delay="0.1">
+            よくある<span class="outline-text">質問</span>
+          </h2>
+          <p class="lead gsap-fade-up" data-delay="0.2">
+            お客様からよくいただくご質問をまとめました。
+          </p>
         </div>
         <div class="faq-content">
           <div class="faq-list is-compact">
@@ -156,17 +162,67 @@
         </div>
       </section>
 
-      <!-- 品牌故事区域 -->
-      <section class="about section-fade" id="about">
-        <div class="about-header reveal-on-scroll fade-in-up">
-          <p class="eyebrow">ABOUT</p>
-          <h2>ブランドストーリー</h2>
-          <p class="lead">PHOENIX eSPORTS CAFE の物語をご紹介します。</p>
+      <!-- Contact 联系我们区块 -->
+      <section class="access-cinematic section-fade" id="contact">
+        <div class="access-bg-layer">
+          <img
+            src="images/index/environment_background.webp"
+            alt="Contact Background"
+            class="bg-img"
+          />
         </div>
-        <div class="about-content">
-          <p class="placeholder-text">ブランドストーリーの詳細コンテンツを追加予定</p>
+        <div class="access-overlay"></div>
+
+        <div class="access-watermark">
+          <img
+            src="images/index/phoenixesports-logo.webp"
+            alt="Phoenix Logo"
+          />
+        </div>
+
+        <div class="access-container">
+          <div class="access-header-cinematic">
+            <p class="eyebrow gsap-fade-up">GET IN TOUCH</p>
+            <h2 class="gsap-fade-up" data-delay="0.1">
+              <span class="outline-text">CONTACT</span> US
+            </h2>
+            <p class="access-lead gsap-fade-up" data-delay="0.2">
+              ご質問・ご予約・お問い合わせはこちらから。<br />
+              お気軽にご連絡ください。
+            </p>
+          </div>
+
+          <div class="access-grid-glass gsap-stagger-group">
+            <article class="access-glass-card">
+              <div class="card-tag">PHONE</div>
+              <h3 class="store-name">お電話でのお問い合わせ</h3>
+              <p class="store-address">
+                TEL: 000-0000-0000<br />
+                営業時間: 24時間対応
+              </p>
+            </article>
+
+            <article class="access-glass-card">
+              <div class="card-tag">EMAIL</div>
+              <h3 class="store-name">メールでのお問い合わせ</h3>
+              <p class="store-address">
+                info@phoenix.jp<br />
+                通常24時間以内にご返信いたします。
+              </p>
+            </article>
+
+            <article class="access-glass-card">
+              <div class="card-tag">SNS</div>
+              <h3 class="store-name">ソーシャルメディア</h3>
+              <p class="store-address">
+                最新情報やイベント情報は<br />
+                公式SNSをフォローしてください。
+              </p>
+            </article>
+          </div>
         </div>
       </section>
+
     </main>
 
     <footer class="footer section-fade">
