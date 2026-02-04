@@ -1766,6 +1766,20 @@ h1 {
     grid-template-columns: 1fr;
   }
 }
+.access-cinematic .access-grid-glass.contact-grid {
+  grid-template-columns: repeat(3, 1fr);
+}
+@media (max-width: 1024px) {
+  .access-cinematic .access-grid-glass.contact-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+}
+@media (max-width: 768px) {
+  .access-cinematic .access-grid-glass.contact-grid {
+    grid-template-columns: 1fr;
+  }
+}
 .access-cinematic .access-glass-card {
   background: rgba(255, 255, 255, 0.03);
   backdrop-filter: blur(20px) saturate(150%);
@@ -1857,6 +1871,34 @@ h1 {
 }
 .access-cinematic .access-glass-card .map-btn .arrow {
   transition: transform 0.3s ease;
+}
+.access-cinematic .access-glass-card .contact-btn {
+  font-family: "Oswald", sans-serif;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 15px 40px;
+  text-decoration: none;
+  border-radius: 4px;
+  transition: all 0.3s ease;
+  padding: 14px 30px;
+  margin-top: auto;
+  background: #fff;
+  color: #000;
+}
+.access-cinematic .access-glass-card .contact-btn .btn-icon {
+  font-size: 1.1rem;
+  transition: transform 0.3s ease;
+}
+.access-cinematic .access-glass-card .contact-btn:hover {
+  background: #ff4d4d;
+  color: #fff;
+  padding-right: 40px;
+}
+.access-cinematic .access-glass-card .contact-btn:hover .btn-icon {
+  transform: translateX(5px);
 }
 .access-cinematic .access-glass-card.map-card {
   padding: 30px;
@@ -2008,6 +2050,33 @@ h1 {
 .footer .footer-contact .footer-text {
   margin: 0;
   color: #dcdcdc;
+}
+.footer .footer-contact .footer-text a {
+  color: #dcdcdc;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+.footer .footer-contact .footer-text a:hover {
+  color: #ff4d4d;
+}
+.footer .footer-social {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.footer .footer-social .social-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: #dcdcdc;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+.footer .footer-social .social-link:hover {
+  color: #ff4d4d;
+}
+.footer .footer-social .social-link .social-icon {
+  font-size: 1.2rem;
 }
 .footer .footer-bottom {
   max-width: 1180px;

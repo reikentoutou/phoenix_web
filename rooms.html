@@ -84,11 +84,12 @@
           <div class="floor-group">
             <h3 class="floor-title gsap-fade-up">FLOOR 3F - 4F (OPEN HALL)</h3>
             <div class="rooms-grid gsap-stagger-group">
-              <article class="room-card">
+              <article class="room-card gsap-fade-up">
                 <div class="room-img">
                   <img
                     src="images/rooms/store1_3f.webp"
                     alt="3F High Spec Hall"
+                    loading="lazy"
                   />
                   <span class="spec-badge high-spec">HIGH SPEC</span>
                 </div>
@@ -107,7 +108,7 @@
                 </div>
               </article>
 
-              <article class="room-card">
+              <article class="room-card gsap-fade-up">
                 <div class="room-img">
                   <img
                     src="images/rooms/store1_4f.webp"
@@ -135,7 +136,7 @@
           <div class="floor-group">
             <h3 class="floor-title gsap-fade-up">FLOOR 5F (PRIVATE BOOTHS)</h3>
             <div class="rooms-grid gsap-stagger-group">
-              <article class="room-card">
+              <article class="room-card gsap-fade-up">
                 <div class="room-img">
                   <img
                     src="images/rooms/store1_5f_3p.webp"
@@ -159,7 +160,7 @@
                 </div>
               </article>
 
-              <article class="room-card">
+              <article class="room-card gsap-fade-up">
                 <div class="room-img">
                   <img
                     src="images/rooms/store1_5f_4p.webp"
@@ -196,7 +197,7 @@
           </div>
 
           <div class="rooms-grid gsap-stagger-group">
-            <article class="room-card">
+            <article class="room-card gsap-fade-up">
               <div class="room-img">
                 <img
                   src="images/rooms/store2_hall.webp"
@@ -240,7 +241,7 @@
                   <span class="floor-tag">個室</span>
                 </div>
                 <p class="room-sub-spec">
-                  禁煙包廂 RTX 5080 / 吸煙包廂 RTX 5070
+                  禁煙個室 RTX 5080 / 吸煙個室 RTX 5070
                 </p>
                 <p class="room-desc">
                   4名グループ専用。禁煙(5080)と喫煙(5070)のお部屋を選べます。
@@ -252,7 +253,7 @@
               </div>
             </article>
 
-            <article class="room-card">
+            <article class="room-card gsap-fade-up">
               <div class="room-img">
                 <img
                   src="images/rooms/store2_3p.webp"
@@ -271,7 +272,7 @@
                   <span class="floor-tag">個室</span>
                 </div>
                 <p class="room-sub-spec">
-                  禁煙包廂 RTX 5080 / 吸煙包廂 RTX 5070
+                  禁煙個室 RTX 5080 / 吸煙個室 RTX 5070
                 </p>
                 <p class="room-desc">
                   3名で利用可能なプライベート空間。用途に合わせて喫煙・禁煙を選択可能。
@@ -283,7 +284,7 @@
               </div>
             </article>
 
-            <article class="room-card">
+            <article class="room-card gsap-fade-up">
               <div class="room-img">
                 <img
                   src="images/rooms/store2_2p.webp"
@@ -302,7 +303,7 @@
                   <span class="floor-tag">個室</span>
                 </div>
                 <p class="room-sub-spec">
-                  禁煙包廂 RTX 5080 / 吸煙包廂 RTX 5070
+                  禁煙個室 RTX 5080 / 吸煙個室 RTX 5070
                 </p>
                 <p class="room-desc">
                   ペアでの利用に最適。最高スペックの5080(禁煙)も完備。
@@ -314,7 +315,7 @@
               </div>
             </article>
 
-            <article class="room-card">
+            <article class="room-card gsap-fade-up">
               <div class="room-img">
                 <img
                   src="images/rooms/store2_1p.webp"
@@ -333,7 +334,7 @@
                   <span class="floor-tag">個室</span>
                 </div>
                 <p class="room-sub-spec">
-                  禁煙包廂 RTX 5080 / 吸煙包廂 RTX 5070
+                  禁煙個室 RTX 5080 / 吸煙個室 RTX 5070
                 </p>
                 <p class="room-desc">
                   没入感を極める1名個室。プロ仕様の環境を独占。
@@ -345,7 +346,7 @@
               </div>
             </article>
 
-            <article class="room-card">
+            <article class="room-card gsap-fade-up">
               <div class="room-img">
                 <img
                   src="images/rooms/store2_sofa.webp"
@@ -360,7 +361,7 @@
                   <h4>SOFA BOOTH</h4>
                   <span class="floor-tag">喫煙</span>
                 </div>
-                <p class="room-sub-spec">吸煙ソファ包廂 RTX 5070</p>
+                <p class="room-sub-spec">吸煙ソファ個室 RTX 5070</p>
                 <p class="room-desc">
                   ゆったりくつろげるソファタイプの喫煙ブース。
                 </p>
@@ -376,13 +377,13 @@
     </main>
 
     <footer class="footer section-fade">
-      <div class="footer-inner">
-        <div class="footer-brand">
+      <div class="footer-inner gsap-stagger-group">
+        <div class="footer-brand gsap-fade-up">
           <img src="images/index/phoenixesports-logo.webp" alt="PHOENIX logo" />
           <p class="footer-copy">ESPORTS CAFE PHOENIX</p>
           <p class="footer-hours">24時間営業 / 無休</p>
         </div>
-        <div class="footer-nav">
+        <div class="footer-nav gsap-fade-up" data-delay="0.1">
           <p class="footer-title">SITE</p>
           <a href="index.html">Home</a>
           <a href="access.html">Access</a>
@@ -390,15 +391,34 @@
           <a href="system.html">System</a>
           <a href="guide.html">Guide</a>
         </div>
-        <div class="footer-contact">
+        <div class="footer-contact gsap-fade-up" data-delay="0.2">
           <p class="footer-title">CONTACT</p>
-          <p class="footer-text">TEL: 000-0000-0000</p>
-          <p class="footer-text">Mail: info@phoenix.jp</p>
-          <p class="footer-text">東京都豊島区池袋</p>
+          <p class="footer-text">
+            <a href="tel:03-5906-9044">TEL: 03-5906-9044</a>
+          </p>
+          <p class="footer-text">
+            <a href="mailto:phoenixesports315@gmail.com"
+              >Mail: phoenixesports315@gmail.com</a
+            >
+          </p>
+          <p class="footer-text">
+            〒170-0013 東京都豊島区東池袋1-12-14 ハヤカワビル3F~5F
+          </p>
+        </div>
+        <div class="footer-social gsap-fade-up" data-delay="0.3">
+          <p class="footer-title">FOLLOW US</p>
+          <a
+            href="https://x.com/phoenixe315/"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="social-link"
+          >
+            <span class="social-icon">𝕏</span> Twitter / X
+          </a>
         </div>
       </div>
       <div class="footer-bottom">
-        <p>© 2024 ESports Cafe PHOENIX</p>
+        <p>© 2025 ESports Cafe PHOENIX. All Rights Reserved.</p>
       </div>
     </footer>
 

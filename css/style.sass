@@ -1740,6 +1740,17 @@ h1
     @media (max-width: 768px)
       grid-template-columns: 1fr
 
+    // Contact 区块三列并排
+    &.contact-grid
+      grid-template-columns: repeat(3, 1fr)
+
+      @media (max-width: 1024px)
+        grid-template-columns: repeat(3, 1fr)
+        gap: 20px
+
+      @media (max-width: 768px)
+        grid-template-columns: 1fr
+
   .access-glass-card
     +glass-effect($blur-md)
     border-radius: 20px
@@ -1815,6 +1826,26 @@ h1
 
       .arrow
         transition: transform $transition-normal
+
+    // Contact 按钮样式（与 map-btn 统一）
+    .contact-btn
+      +button-base
+      padding: 14px 30px
+      margin-top: auto
+      background: $color-text-light
+      color: #000
+
+      .btn-icon
+        font-size: 1.1rem
+        transition: transform $transition-normal
+
+      &:hover
+        background: $color-primary
+        color: $color-text-light
+        padding-right: 40px
+
+        .btn-icon
+          transform: translateX(5px)
 
   .access-glass-card.map-card
     padding: 30px
@@ -1965,6 +1996,33 @@ h1
     .footer-text
       margin: 0
       color: #dcdcdc
+
+      a
+        color: #dcdcdc
+        text-decoration: none
+        transition: color $transition-fast
+
+        &:hover
+          color: $color-primary
+
+  .footer-social
+    display: flex
+    flex-direction: column
+    gap: 10px
+
+    .social-link
+      display: inline-flex
+      align-items: center
+      gap: 8px
+      color: #dcdcdc
+      text-decoration: none
+      transition: color $transition-fast
+
+      &:hover
+        color: $color-primary
+
+      .social-icon
+        font-size: 1.2rem
 
   .footer-bottom
     max-width: 1180px
@@ -2744,9 +2802,9 @@ h1
     grid-template-columns: 1fr
 
 main.rooms-cinematic-container ~ .footer
-  position: relative
-  z-index: 1
-  background: linear-gradient(135deg, rgb(100, 20, 20), rgb(60, 10, 10))
+    position: relative
+    z-index: 1
+    background: linear-gradient(135deg, rgb(100, 20, 20), rgb(60, 10, 10))
 
 .room-card
   +glass-gradient

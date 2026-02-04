@@ -19,24 +19,39 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 
-    <!-- 引入字体库 -->
-    <!-- Oswald: 粗体显示字体，用于英文/数字/标题（替代 Clash Display，避免 CORS 问题） -->
+    <!-- 预加载关键资源 -->
     <link
-      href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&display=swap"
+      rel="preload"
+      href="images/index/begin_background.webp"
+      as="image"
+      fetchpriority="high"
+    />
+    <link rel="preload" href="css/style.css" as="style" />
+
+    <!-- 引入字体库（优化：减少字重数量） -->
+    <!-- Oswald: 粗体显示字体，用于英文/数字/标题 -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;600;700&display=swap"
       rel="stylesheet"
     />
-    <!-- Noto Sans JP: 日文正文字体 -->
+    <!-- Noto Sans JP: 日文正文字体（优化：只加载必需字重） -->
     <link
-      href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&display=swap"
       rel="stylesheet"
     />
 
-    <!-- Swiper 轮播图库的 CSS 文件 -->
-    <!-- 用于实现店内环境图片的轮播展示效果 -->
+    <!-- Swiper 轮播图库的 CSS 文件（延迟加载，非首屏内容） -->
     <link
-      rel="stylesheet"
+      rel="preload"
       href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"
+      as="style"
+      onload="this.onload=null;this.rel='stylesheet'"
     />
+    <noscript
+      ><link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"
+    /></noscript>
 
     <!-- 主样式表，带版本号防止缓存 -->
     <link rel="stylesheet" href="css/style.css" />
@@ -48,7 +63,12 @@
     <header class="hud-header">
       <div class="hud-container">
         <a href="#home" class="hud-logo">
-          <img src="images/index/phoenixesports-logo.webp" alt="PHOENIX" />
+          <img
+            src="images/index/phoenixesports-logo.webp"
+            alt="PHOENIX"
+            width="150"
+            height="40"
+          />
         </a>
 
         <nav class="hud-nav-desktop">
@@ -82,12 +102,15 @@
             alt="Background"
             class="parallax-img"
             loading="eager"
+            fetchpriority="high"
+            width="1886"
+            height="3767"
           />
         </div>
         <div class="hero-content">
           <div class="label-box fade-up">
             <div class="line"></div>
-            <span>Tokyo • Esports • CAFE</span>
+            <span>Ikebukuro • Esports • CAFE</span>
           </div>
           <h1 class="hero-title">
             <span class="line solid reveal-text">PHOENIX</span>
@@ -98,7 +121,7 @@
           </h1>
           <div class="bottom-row fade-up">
             <p>
-              東京の中心で、最先端のeスポーツ体験を。<br />
+              池袋の中心で、最先端のeスポーツ体験を。<br />
               プロ仕様の環境が、あなたの潜在能力を覚醒させる。
             </p>
             <a href="access.html" class="cta-btn">EXPLORE SPACE</a>
@@ -113,6 +136,9 @@
               src="images/index/concept_bg.webp"
               alt="Background Texture"
               class="bg-texture"
+              loading="lazy"
+              width="1920"
+              height="1080"
             />
           </div>
 
@@ -120,6 +146,9 @@
             <img
               src="images/index/phoenixesports-logo.webp"
               alt="Phoenix Logo Watermark"
+              loading="lazy"
+              width="300"
+              height="80"
             />
           </div>
 
@@ -127,7 +156,7 @@
             <div class="manifesto-jp">
               <div class="vertical-line gsap-fade-up"></div>
               <h2 class="vertical-text gsap-fade-up" data-delay="0.1">
-                ここでは、<br />あなたの世界である。
+                ここは、<br />あなたの第三空間。
               </h2>
             </div>
 
@@ -150,6 +179,9 @@
               src="images/index/environment_background.webp"
               alt="Schedule BG"
               class="bg-img"
+              loading="lazy"
+              width="1920"
+              height="1080"
             />
           </div>
           <div class="schedule-overlay"></div>
@@ -170,6 +202,9 @@
                       <img
                         src="images/index/custmer_play_pc.webp"
                         alt="Event BG"
+                        loading="lazy"
+                        width="992"
+                        height="662"
                       />
                     </div>
                     <div class="card-overlay"></div>
@@ -198,6 +233,9 @@
                       <img
                         src="images/index/store_2_hall.webp"
                         alt="Event BG"
+                        loading="lazy"
+                        width="992"
+                        height="662"
                       />
                     </div>
                     <div class="card-overlay"></div>
@@ -226,6 +264,9 @@
                       <img
                         src="images/index/store_1_front.webp"
                         alt="Event BG"
+                        loading="lazy"
+                        width="992"
+                        height="662"
                       />
                     </div>
                     <div class="card-overlay"></div>
@@ -258,6 +299,9 @@
               src="images/index/environment_background.webp"
               alt="News Background"
               class="bg-img"
+              loading="lazy"
+              width="1920"
+              height="1080"
             />
           </div>
           <div class="news-overlay"></div>
@@ -333,6 +377,9 @@
                     src="images/carousel/environment1.webp"
                     alt="Main Gaming Hall"
                     class="slide-bg-img"
+                    loading="lazy"
+                    width="1200"
+                    height="1800"
                   />
                 </div>
                 <div class="slide-content">
@@ -349,6 +396,9 @@
                     src="images/carousel/environment2.webp"
                     alt="VIP Private Rooms"
                     class="slide-bg-img"
+                    loading="lazy"
+                    width="1200"
+                    height="1800"
                   />
                 </div>
                 <div class="slide-content">
@@ -365,6 +415,9 @@
                     src="images/carousel/environment3.webp"
                     alt="Relax & Cafe Area"
                     class="slide-bg-img"
+                    loading="lazy"
+                    width="1600"
+                    height="1067"
                   />
                 </div>
                 <div class="slide-content">
@@ -410,6 +463,9 @@
                 src="images/index/custmer_play_pc.webp"
                 alt="Gaming Setup Background"
                 class="bg-img"
+                loading="lazy"
+                width="1200"
+                height="800"
               />
             </div>
 
@@ -419,6 +475,9 @@
               <img
                 src="images/index/phoenixesports-logo.webp"
                 alt="Phoenix Logo"
+                loading="lazy"
+                width="300"
+                height="80"
               />
             </div>
 
@@ -504,6 +563,9 @@
                 src="images/index/environment_background.webp"
                 alt="About Background"
                 class="bg-img"
+                loading="lazy"
+                width="1920"
+                height="1080"
               />
             </div>
             <div class="access-overlay"></div>
@@ -512,6 +574,9 @@
               <img
                 src="images/index/phoenixesports-logo.webp"
                 alt="Phoenix Logo"
+                loading="lazy"
+                width="300"
+                height="80"
               />
             </div>
 
@@ -533,7 +598,8 @@
                   <h3 class="store-name">私たちのビジョン</h3>
                   <p class="store-address">
                     「ゲームだけでなく、あなたの"第三空間"」<br /><br />
-                    PHOENIX eSPORTS CAFEは、ただのゲームスペースでなく、それ以上の価値を提供することによって、人々が集い、交流し、成長する場でもあります。テクノロジーの最前線で、ゲームだけでなく、文化的な交流の場としても機能し、世界中の人々にインスピレーションを与えれる環境の提供を目指しております。
+                    PHOENIX eSPORTS
+                    CAFEは、ただのゲームスペースでなく、それ以上の価値を提供することによって、人々が集い、交流し、成長する場でもあります。テクノロジーの最前線で、ゲームだけでなく、文化的な交流の場としても機能し、世界中の人々にインスピレーションを与えれる環境の提供を目指しております。
                   </p>
                 </article>
 
@@ -542,7 +608,8 @@
                   <h3 class="store-name">私たちの使命</h3>
                   <p class="store-address">
                     「最高のゲーミング技術と心地よい空間を提供し、すべてのお客様に卓越したエンターテイメント体験を実現」<br /><br />
-                    私たちPHOENIX eSPORTS CAFEは、単なるゲームスペースではありません。それ以上の価値を提供することで、人々が集い、交流し、共に成長できる場を目指しています。テクノロジーの最前線に位置しながら、ゲームの枠を超えて、文化的な交流の場としても機能。世界中の人々にインスピレーションを与える空間の創出を目指しています。
+                    私たちPHOENIX eSPORTS
+                    CAFEは、単なるゲームスペースではありません。それ以上の価値を提供することで、人々が集い、交流し、共に成長できる場を目指しています。テクノロジーの最前線に位置しながら、ゲームの枠を超えて、文化的な交流の場としても機能。世界中の人々にインスピレーションを与える空間の創出を目指しています。
                   </p>
                 </article>
               </div>
@@ -551,16 +618,19 @@
         </div>
 
         <footer class="footer section-fade">
-          <div class="footer-inner">
-            <div class="footer-brand">
+          <div class="footer-inner gsap-stagger-group">
+            <div class="footer-brand gsap-fade-up">
               <img
                 src="images/index/phoenixesports-logo.webp"
                 alt="PHOENIX logo"
+                loading="lazy"
+                width="200"
+                height="53"
               />
               <p class="footer-copy">ESPORTS CAFE PHOENIX</p>
               <p class="footer-hours">24時間営業 / 無休</p>
             </div>
-            <div class="footer-nav">
+            <div class="footer-nav gsap-fade-up" data-delay="0.1">
               <p class="footer-title">SITE</p>
               <a href="index.html">Home</a>
               <a href="access.html">Access</a>
@@ -568,15 +638,34 @@
               <a href="system.html">System</a>
               <a href="guide.html">Guide</a>
             </div>
-            <div class="footer-contact">
+            <div class="footer-contact gsap-fade-up" data-delay="0.2">
               <p class="footer-title">CONTACT</p>
-              <p class="footer-text">TEL: 000-0000-0000</p>
-              <p class="footer-text">Mail: info@phoenix.jp</p>
-              <p class="footer-text">東京都豊島区池袋</p>
+              <p class="footer-text">
+                <a href="tel:03-5906-9044">TEL: 03-5906-9044</a>
+              </p>
+              <p class="footer-text">
+                <a href="mailto:phoenixesports315@gmail.com"
+                  >Mail: phoenixesports315@gmail.com</a
+                >
+              </p>
+              <p class="footer-text">
+                〒170-0013 東京都豊島区東池袋1-12-14 ハヤカワビル3F~5F
+              </p>
+            </div>
+            <div class="footer-social gsap-fade-up" data-delay="0.3">
+              <p class="footer-title">FOLLOW US</p>
+              <a
+                href="https://x.com/phoenixe315/"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="social-link"
+              >
+                <span class="social-icon">𝕏</span> Twitter / X
+              </a>
             </div>
           </div>
           <div class="footer-bottom">
-            <p>© 2024 ESports Cafe PHOENIX</p>
+            <p>© 2025 ESports Cafe PHOENIX. All Rights Reserved.</p>
           </div>
         </footer>
       </div>
